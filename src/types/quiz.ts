@@ -40,7 +40,15 @@ export interface QuizState {
   themeMode: 'stage' | 'transparent';
 }
 
-export type SoundEffectType = 'applause' | 'intro' | 'stop_music' | 'correct' | 'buzzer' | 'woosh';
+export type SoundEffectType =
+  | 'applause'
+  | 'intro'
+  | 'stop_music'
+  | 'correct'
+  | 'buzzer'
+  | 'woosh'
+  | 'swoosh'
+  | 'reveal_all';
 
 export type WSMessage =
   | { type: 'STATE_SNAPSHOT'; state: QuizState; categories: QuizCategory[] }

@@ -85,7 +85,9 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
     };
   }, []);
 
-  // Listen for broadcasted sounds (applause, intro, woosh, etc.)
+  const lastRevealAllTimeRef = useRef<number>(0);
+
+  // Listen for broadcasted sounds (applause, intro, woosh, swoosh, reveal_all, etc.)
   useEffect(() => {
     const unsubscribeSound = socketClient.subscribeSound((sound) => {
       switch (sound) {
@@ -107,6 +109,13 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
         case 'woosh':
           audioService.playWooshSound();
           break;
+        case 'swoosh':
+          audioService.playSwooshSound();
+          break;
+        case 'reveal_all':
+          lastRevealAllTimeRef.current = Date.now();
+          audioService.playRevealAllSound();
+          break;
       }
     });
 
@@ -115,11 +124,18 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
     };
   }, []);
 
-  // Answer reveal chime
+  // Answer reveal chime (guarantees only 1 reveal sound on reveal_all)
   const prevRevealedCountRef = useRef(revealedCount);
   useEffect(() => {
     if (revealedCount > prevRevealedCountRef.current) {
-      audioService.playCorrectSound();
+      if (Date.now() - lastRevealAllTimeRef.current > 500) {
+        if (revealedCount - prevRevealedCountRef.current > 1) {
+          // Multiple opened at once -> swoosh layered with single reveal chime
+          audioService.playRevealAllSound();
+        } else {
+          audioService.playCorrectSound();
+        }
+      }
     }
     prevRevealedCountRef.current = revealedCount;
   }, [revealedCount]);

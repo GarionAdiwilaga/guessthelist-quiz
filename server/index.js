@@ -156,6 +156,7 @@ export function startServer(preferredPort = 3001) {
           case 'HIDE_ITEM': {
             currentState.revealedItemIds = currentState.revealedItemIds.filter((id) => id !== msg.itemId);
             broadcastState();
+            broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             break;
           }
           case 'REVEAL_ALL': {
@@ -163,17 +164,20 @@ export function startServer(preferredPort = 3001) {
             if (currentCat) {
               currentState.revealedItemIds = currentCat.items.map((i) => i.id);
               broadcastState();
+              broadcast({ type: 'PLAY_SOUND', sound: 'reveal_all' });
             }
             break;
           }
           case 'HIDE_ALL': {
             currentState.revealedItemIds = [];
             broadcastState();
+            broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             break;
           }
           case 'TOGGLE_CLUE': {
             currentState.showClue = msg.showClue !== undefined ? msg.showClue : !currentState.showClue;
             broadcastState();
+            broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             break;
           }
           case 'SET_STRIKES': {
@@ -182,6 +186,9 @@ export function startServer(preferredPort = 3001) {
             if (newStrikes > currentState.currentStrikes) {
               // Manually adding strike concurrently triggers buzzer popup & sound
               currentState.quickBuzzerTriggerTime = Date.now();
+            } else if (newStrikes < currentState.currentStrikes) {
+              // Reducing or resetting strikes plays swoosh SFX
+              broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             }
             currentState.currentStrikes = newStrikes;
             broadcastState();
@@ -234,6 +241,7 @@ export function startServer(preferredPort = 3001) {
             if (msg.mode === 'stage' || msg.mode === 'transparent') {
               currentState.themeMode = msg.mode;
               broadcastState();
+              broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             }
             break;
           }
@@ -242,6 +250,7 @@ export function startServer(preferredPort = 3001) {
             currentState.currentStrikes = 0;
             currentState.quickBuzzerTriggerTime = null;
             broadcastState();
+            broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             break;
           }
         }

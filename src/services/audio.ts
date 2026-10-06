@@ -113,6 +113,18 @@ class AudioService {
     this.playAudioFile('/audio/woosh.mp3', 0.85);
   }
 
+  public playSwooshSound(): void {
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+    this.playAudioFile('/audio/swoosh.mp3', 0.85);
+  }
+
+  public playRevealAllSound(): void {
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+    // Layer swoosh.mp3 with single reveal sound (correct.mp3)
+    this.playSwooshSound();
+    this.playCorrectSound();
+  }
+
   public playApplauseSound(): void {
     if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
     this.playAudioFile('/audio/applause.wav', 0.9);

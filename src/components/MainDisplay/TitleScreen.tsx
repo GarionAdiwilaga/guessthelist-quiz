@@ -20,10 +20,18 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
       {/* Decorative Orbs */}
       {!isTransparent && (
         <>
-          <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] rounded-full bg-[#00F0FF]/15 blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-[#FF2E93]/20 blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] rounded-full bg-[#00F0FF]/15 blur-[120px] pointer-events-none z-0" />
+          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-[#FF2E93]/20 blur-[120px] pointer-events-none z-0" />
         </>
       )}
+
+      {/* osu! Main Menu Style Concentric Expanding Background Ripple Circles */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0">
+        <div className="absolute w-[320px] h-[320px] sm:w-[460px] sm:h-[460px] rounded-full border-2 border-[#00F0FF] animate-osu-ripple-1 pointer-events-none" />
+        <div className="absolute w-[320px] h-[320px] sm:w-[460px] sm:h-[460px] rounded-full border-2 border-[#FF2E93] animate-osu-ripple-2 pointer-events-none" />
+        <div className="absolute w-[320px] h-[320px] sm:w-[460px] sm:h-[460px] rounded-full border-2 border-[#9D00FF] animate-osu-ripple-3 pointer-events-none" />
+        <div className="absolute w-[320px] h-[320px] sm:w-[460px] sm:h-[460px] rounded-full border-2 border-[#00F0FF] animate-osu-ripple-4 pointer-events-none" />
+      </div>
 
       {/* Top Banner Tag */}
       <div className="z-10 flex items-center space-x-2 px-4 sm:px-5 py-1.5 rounded-full bg-gradient-to-r from-[#FF2E93] via-[#9D00FF] to-[#00F0FF] shadow-[0_0_20px_rgba(255,46,147,0.5)] animate-pulse">
@@ -32,10 +40,10 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
         </span>
       </div>
 
-      {/* Center Hero Title */}
+      {/* Center Hero Title with Smooth Slow Pulsing */}
       <div className="z-10 flex-1 flex flex-col items-center justify-center text-center my-4">
         {titleLogoUrl ? (
-          <div className="animate-pop-in max-w-xl px-4">
+          <div className="animate-slow-pulse max-w-xl px-4 flex items-center justify-center">
             <img
               src={titleLogoUrl}
               alt="Game Title Logo"
@@ -43,7 +51,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
             />
           </div>
         ) : (
-          <div className="flex flex-col items-center animate-pop-in">
+          <div className="flex flex-col items-center animate-slow-pulse">
             {/* Upper Badge */}
             <div className="px-5 py-1 rounded-xl bg-[#090D2A]/90 border border-[#FFD600] text-[#FFD600] font-black text-xs sm:text-sm tracking-wider uppercase shadow-[0_0_15px_rgba(255,214,0,0.4)] mb-2.5">
               MiniGames
@@ -62,14 +70,6 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
             </p>
           </div>
         )}
-
-        {/* Ready / Waiting Badge */}
-        <div className="mt-6 px-5 py-1.5 rounded-full bg-[#0C1236]/90 border-2 border-[#00F0FF]/60 shadow-[0_0_20px_rgba(0,240,255,0.4)] flex items-center space-x-2">
-          <div className="w-2 h-2 rounded-full bg-[#00F0FF] animate-ping" />
-          <span className="text-xs sm:text-sm font-bold text-gray-200 tracking-wider uppercase font-['Outfit',sans-serif]">
-            MENUNGGU KATEGORI DIMULAI...
-          </span>
-        </div>
       </div>
     </div>
   );
