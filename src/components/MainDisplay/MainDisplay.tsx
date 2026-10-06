@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { QuizState, QuizCategory } from '../../types/quiz';
 import { HeaderBanner } from './HeaderBanner';
 import { GameBoard } from './GameBoard';
+import { StrikeSlots } from './StrikeSlots';
+import { BuzzerOverlay } from './BuzzerOverlay';
+import { audioService } from '../../services/audio';
 
 interface MainDisplayProps {
   state: QuizState;
@@ -13,6 +16,50 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
   const items = currentCategory?.items || [];
   const revealedCount = state.revealedItemIds.length;
   const isTransparent = state.themeMode === 'transparent';
+
+  // Audio settings sync
+  useEffect(() => {
+    audioService.updateSettings({
+      soundEnabled: state.soundEnabled,
+      soundVolume: state.soundVolume,
+      customAudio: state.customAudio
+    });
+  }, [state.soundEnabled, state.soundVolume, state.customAudio]);
+
+  // Track previous reveals to play chime only when new item is revealed
+  const prevRevealedCountRef = useRef(revealedCount);
+  useEffect(() => {
+    if (revealedCount > prevRevealedCountRef.current) {
+      audioService.playCorrectSound();
+    }
+    prevRevealedCountRef.current = revealedCount;
+  }, [revealedCount]);
+
+  // Track quick buzzer triggers
+  const prevBuzzerTimeRef = useRef(state.quickBuzzerTriggerTime);
+  useEffect(() => {
+    if (
+      state.quickBuzzerTriggerTime &&
+      state.quickBuzzerTriggerTime !== prevBuzzerTimeRef.current
+    ) {
+      audioService.playBuzzerSound();
+    }
+    prevBuzzerTimeRef.current = state.quickBuzzerTriggerTime;
+  }, [state.quickBuzzerTriggerTime]);
+
+  // Track strike increments to trigger buzzer and overlay
+  const prevStrikesRef = useRef(state.currentStrikes);
+  const [strikeOverlayTime, setStrikeOverlayTime] = React.useState<number | null>(null);
+
+  useEffect(() => {
+    if (state.currentStrikes > prevStrikesRef.current) {
+      audioService.playBuzzerSound();
+      setStrikeOverlayTime(Date.now());
+    }
+    prevStrikesRef.current = state.currentStrikes;
+  }, [state.currentStrikes]);
+
+  const activeBuzzerTime = state.quickBuzzerTriggerTime || strikeOverlayTime;
 
   return (
     <div
@@ -40,10 +87,19 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
           showClue={state.showClue}
         />
 
+        <StrikeSlots
+          enabled={state.strikeSlotsEnabled}
+          maxSlots={state.maxStrikeSlots}
+          currentStrikes={state.currentStrikes}
+        />
+
         <GameBoard items={items} revealedItemIds={state.revealedItemIds} />
       </div>
 
-      {/* Bottom Subtle Stage Footer */}
+      {/* Fullscreen Buzzer Overlay */}
+      <BuzzerOverlay triggerTimestamp={activeBuzzerTime} />
+
+      {/* Bottom Stage Footer */}
       <footer className="w-full text-center py-2 z-10">
         <span className="text-xs text-[#00F0FF]/40 tracking-wider font-semibold uppercase">
           Wibu Gameshow Screen • Plaza Cosplay Day
