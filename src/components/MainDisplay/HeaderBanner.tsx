@@ -11,16 +11,16 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = ({
   showClue
 }) => {
   return (
-    <header className="w-full flex flex-col items-center select-none mb-3 sm:mb-4">
-      {/* Top Brand Tag */}
-      <div className="flex items-center space-x-2 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#FF2E93] to-[#00F0FF] shadow-[0_0_12px_rgba(255,46,147,0.4)] mb-2">
+    <header className="w-full flex flex-col items-center select-none mb-2 sm:mb-3">
+      {/* Top Brand Tag with Sub-brand */}
+      <div className="flex items-center space-x-2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-[#FF2E93] via-[#7B00FF] to-[#00F0FF] shadow-[0_0_12px_rgba(255,46,147,0.4)] mb-1.5">
         <span className="text-[10px] sm:text-xs font-black text-white tracking-widest uppercase font-['Outfit',sans-serif]">
-          MiniGames • Family Wibu 100
+          MiniGames • Family Wibu 100 • Plaza Cosplay Day
         </span>
       </div>
 
       {/* Main Header Container (Full Title, No Truncation, No Counter Pill) */}
-      <div className="relative w-full max-w-5xl px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#121744] via-[#1B2362] to-[#121744] border-2 border-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.3)] flex flex-col items-center text-center">
+      <div className="relative w-full max-w-4xl px-5 py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-[#121744] via-[#1B2362] to-[#121744] border-2 border-[#00F0FF] shadow-[0_0_20px_rgba(0,240,255,0.3)] flex flex-col items-center text-center">
         {/* Category Emoji + Full Title */}
         <div className="flex items-center justify-center space-x-3 w-full">
           {category?.emoji && (

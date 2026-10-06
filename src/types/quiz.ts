@@ -40,6 +40,8 @@ export interface QuizState {
   themeMode: 'stage' | 'transparent';
 }
 
+export type SoundEffectType = 'applause' | 'intro' | 'stop_music' | 'correct' | 'buzzer' | 'woosh';
+
 export type WSMessage =
   | { type: 'STATE_SNAPSHOT'; state: QuizState; categories: QuizCategory[] }
   | { type: 'CLIENT_HELLO' }
@@ -47,6 +49,7 @@ export type WSMessage =
   | { type: 'SET_SHOW_TITLE_SCREEN'; show: boolean }
   | { type: 'UPDATE_TITLE_LOGO'; logoUrl: string | null }
   | { type: 'TRIGGER_WIPE' }
+  | { type: 'PLAY_SOUND'; sound: SoundEffectType }
   | { type: 'REVEAL_ITEM'; itemId: number }
   | { type: 'HIDE_ITEM'; itemId: number }
   | { type: 'REVEAL_ALL' }

@@ -19,7 +19,7 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
 }) => {
   return (
     <div
-      className={`relative rounded-xl p-3 md:p-3.5 border transition-all duration-200 flex flex-col justify-between ${
+      className={`relative rounded-xl p-2.5 sm:p-3 border transition-all duration-200 flex flex-col justify-between ${
         isHighlighted
           ? 'border-[#FFD600] bg-[#2E2814] shadow-[0_0_18px_rgba(255,214,0,0.45)] ring-2 ring-[#FFD600]/80'
           : isRevealed
@@ -28,26 +28,30 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
       }`}
     >
       {/* Top Header */}
-      <div className="flex items-start justify-between gap-3">
-        {/* Left: Star / Question badge */}
-        <div className="flex items-start space-x-3 min-w-0">
+      <div className="flex items-start justify-between gap-2.5">
+        {/* Left: Slot number badge & Answer */}
+        <div className="flex items-start space-x-2.5 min-w-0">
           <div
-            className={`w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0 flex items-center justify-center font-black font-['Fredoka',sans-serif] text-sm md:text-base border ${
+            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg shrink-0 flex items-center justify-center font-black font-['Fredoka',sans-serif] text-xs sm:text-sm border ${
               isRevealed
                 ? 'bg-[#00F0FF] text-[#0A0D26] border-white/60 shadow-[0_0_8px_rgba(0,240,255,0.7)]'
                 : 'bg-[#1C2554] text-[#FFD600] border-[#2B3878]'
             }`}
+            title={`Slot #${index + 1} di Game Board`}
           >
-            {isRevealed ? '★' : '?'}
+            {isRevealed ? `#${index + 1}` : `?`}
           </div>
 
           <div className="min-w-0">
-            <div className="flex items-center space-x-2 flex-wrap">
-              <span className="text-sm md:text-base font-bold text-white tracking-wide font-['Outfit',sans-serif]">
+            <div className="flex items-center space-x-1.5 flex-wrap">
+              <span className="text-[10px] font-bold text-[#FFD600]/70 font-mono">
+                #{index + 1}
+              </span>
+              <span className="text-sm font-bold text-white tracking-wide font-['Outfit',sans-serif]">
                 {item.answer}
               </span>
               {item.anime && (
-                <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/40 font-medium">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/40 font-medium">
                   {item.anime}
                 </span>
               )}

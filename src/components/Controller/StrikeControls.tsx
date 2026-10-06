@@ -8,6 +8,8 @@ interface StrikeControlsProps {
   onSetStrikes: (strikes: number) => void;
   onTriggerQuickBuzzer: () => void;
   onOpenSettings: () => void;
+  onPlaySound?: (sound: 'applause' | 'intro' | 'stop_music') => void;
+  isIntroPlaying?: boolean;
 }
 
 export const StrikeControls: React.FC<StrikeControlsProps> = ({
@@ -16,7 +18,9 @@ export const StrikeControls: React.FC<StrikeControlsProps> = ({
   currentStrikes,
   onSetStrikes,
   onTriggerQuickBuzzer,
-  onOpenSettings
+  onOpenSettings,
+  onPlaySound,
+  isIntroPlaying = false
 }) => {
   const handleAddStrike = () => {
     if (currentStrikes < maxStrikeSlots) {
@@ -35,15 +39,44 @@ export const StrikeControls: React.FC<StrikeControlsProps> = ({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between p-4 rounded-xl bg-[#0E143C] border border-[#232F6E] gap-4 select-none">
-      {/* Quick Buzzer (Instant X Popup) */}
-      <div className="flex items-center space-x-3">
+    <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between p-3.5 sm:p-4 rounded-xl bg-[#0E143C] border border-[#232F6E] gap-3.5 select-none">
+      {/* Left: Buzzer + Soundboard Triggers */}
+      <div className="flex flex-wrap items-center gap-2.5">
+        {/* Quick Buzzer (Instant X Popup) */}
         <button
           onClick={onTriggerQuickBuzzer}
-          className="flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF2E93] to-[#D6005D] text-white font-black text-sm tracking-wide shadow-[0_0_20px_rgba(255,46,147,0.5)] hover:from-[#FF45A1] hover:to-[#E80065] active:scale-95 transition-all cursor-pointer"
+          className="flex items-center justify-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF2E93] to-[#D6005D] text-white font-black text-xs sm:text-sm tracking-wide shadow-[0_0_16px_rgba(255,46,147,0.5)] hover:from-[#FF45A1] hover:to-[#E80065] active:scale-95 transition-all cursor-pointer"
         >
-          <VolumeX className="w-5 h-5" />
-          <span>BUZZER SALAH (✕)</span>
+          <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span>BUZZER (✕)</span>
+        </button>
+
+        {/* Soundboard Button: Clap (applause.wav) */}
+        <button
+          onClick={() => onPlaySound && onPlaySound('applause')}
+          className="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-[#1C2555] hover:bg-[#2A377D] border border-[#304192] text-xs font-bold text-yellow-300 transition-all cursor-pointer shadow-md active:scale-95"
+          title="Putar Efek Tepuk Tangan (applause.wav)"
+        >
+          <span className="text-base leading-none">👏</span>
+          <span className="hidden sm:inline">Tepuk Tangan</span>
+        </button>
+
+        {/* Soundboard Button: Intro Music (intro.mp3 toggle) */}
+        <button
+          onClick={() => {
+            if (onPlaySound) {
+              onPlaySound(isIntroPlaying ? 'stop_music' : 'intro');
+            }
+          }}
+          className={`flex items-center space-x-1.5 px-3 py-2 rounded-xl border text-xs font-bold transition-all cursor-pointer shadow-md active:scale-95 ${
+            isIntroPlaying
+              ? 'bg-[#FF2E93] text-white border-[#FF2E93] animate-pulse shadow-[0_0_12px_rgba(255,46,147,0.7)]'
+              : 'bg-[#1C2555] hover:bg-[#2A377D] text-[#00F0FF] border-[#304192]'
+          }`}
+          title={isIntroPlaying ? 'Hentikan Musik Intro' : 'Putar Musik Intro (intro.mp3)'}
+        >
+          <span className="text-base leading-none">🎵</span>
+          <span>{isIntroPlaying ? 'Stop Musik' : 'Musik Intro'}</span>
         </button>
       </div>
 

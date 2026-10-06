@@ -18,11 +18,14 @@ class AudioService {
   };
 
   private ctx: AudioContext | null = null;
+  private introAudio: HTMLAudioElement | null = null;
 
   private getAudioContext(): AudioContext | null {
     if (typeof window === 'undefined') return null;
     if (!this.ctx) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (AudioCtx) {
         this.ctx = new AudioCtx();
       }
@@ -36,9 +39,15 @@ class AudioService {
   public updateSettings(partial: Partial<AudioSettings>): void {
     if (partial.soundEnabled !== undefined) {
       this.settings.soundEnabled = partial.soundEnabled;
+      if (!this.settings.soundEnabled) {
+        this.stopIntroMusic();
+      }
     }
     if (partial.soundVolume !== undefined) {
       this.settings.soundVolume = Math.max(0, Math.min(partial.soundVolume, 1));
+      if (this.introAudio) {
+        this.introAudio.volume = this.settings.soundVolume;
+      }
     }
     if (partial.customAudio) {
       this.settings.customAudio = {
@@ -55,16 +64,96 @@ class AudioService {
     };
   }
 
+  private playAudioFile(url: string, volumeScale = 1.0): Promise<void> {
+    if (typeof window === 'undefined') return Promise.resolve();
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return Promise.resolve();
+
+    try {
+      const audio = new Audio(url);
+      audio.volume = Math.max(0, Math.min(this.settings.soundVolume * volumeScale, 1));
+      return audio.play().catch((err) => {
+        console.warn(`Audio play failed for ${url}:`, err);
+      });
+    } catch (err) {
+      console.warn(`Audio create failed for ${url}:`, err);
+      return Promise.resolve();
+    }
+  }
+
   public playCorrectSound(): void {
     if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
 
-    // Check custom audio
     if (this.settings.customAudio.useCustomSound && this.settings.customAudio.correctAudioDataUrl) {
-      this.playCustomAudio(this.settings.customAudio.correctAudioDataUrl);
+      this.playAudioFile(this.settings.customAudio.correctAudioDataUrl);
       return;
     }
 
-    // Synthesized Chime (Family Feud correct bell: uplifting F#5 -> B5 chord)
+    // Default audio file: /audio/correct.mp3
+    this.playAudioFile('/audio/correct.mp3').catch(() => {
+      this.playSynthesizedChime();
+    });
+  }
+
+  public playBuzzerSound(): void {
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+
+    if (this.settings.customAudio.useCustomSound && this.settings.customAudio.wrongAudioDataUrl) {
+      this.playAudioFile(this.settings.customAudio.wrongAudioDataUrl);
+      return;
+    }
+
+    // Default audio file: /audio/buzzer.mp3
+    this.playAudioFile('/audio/buzzer.mp3').catch(() => {
+      this.playSynthesizedBuzzer();
+    });
+  }
+
+  public playWooshSound(): void {
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+    this.playAudioFile('/audio/woosh.mp3', 0.85);
+  }
+
+  public playApplauseSound(): void {
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+    this.playAudioFile('/audio/applause.wav', 0.9);
+  }
+
+  public playIntroMusic(): void {
+    if (typeof window === 'undefined') return;
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+
+    try {
+      if (!this.introAudio) {
+        this.introAudio = new Audio('/audio/intro.mp3');
+        this.introAudio.loop = true;
+      }
+      this.introAudio.volume = this.settings.soundVolume;
+      this.introAudio.currentTime = 0;
+      this.introAudio.play().catch((err) => {
+        console.warn('Intro music play failed:', err);
+      });
+    } catch (err) {
+      console.warn('Error starting intro music:', err);
+    }
+  }
+
+  public stopIntroMusic(): void {
+    if (this.introAudio) {
+      try {
+        this.introAudio.pause();
+        this.introAudio.currentTime = 0;
+      } catch {
+        // no-op
+      }
+    }
+  }
+
+  public isIntroPlaying(): boolean {
+    return Boolean(this.introAudio && !this.introAudio.paused);
+  }
+
+  // Synthesized Fallbacks if audio files cannot be loaded
+  private playSynthesizedChime(): void {
     const ctx = this.getAudioContext();
     if (!ctx) return;
 
@@ -73,7 +162,6 @@ class AudioService {
     masterGain.gain.setValueAtTime(this.settings.soundVolume * 0.7, now);
     masterGain.connect(ctx.destination);
 
-    // Note 1: 587.33 Hz (F#5)
     const osc1 = ctx.createOscillator();
     const gain1 = ctx.createGain();
     osc1.type = 'sine';
@@ -85,44 +173,9 @@ class AudioService {
     gain1.connect(masterGain);
     osc1.start(now);
     osc1.stop(now + 0.9);
-
-    // Note 2: 987.77 Hz (B5), offset by 0.1s
-    const osc2 = ctx.createOscillator();
-    const gain2 = ctx.createGain();
-    osc2.type = 'sine';
-    osc2.frequency.setValueAtTime(987.77, now + 0.1);
-    gain2.gain.setValueAtTime(0.01, now + 0.1);
-    gain2.gain.linearRampToValueAtTime(1.0, now + 0.14);
-    gain2.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
-    osc2.connect(gain2);
-    gain2.connect(masterGain);
-    osc2.start(now + 0.1);
-    osc2.stop(now + 1.2);
-
-    // Subtle harmonic shimmer: 1975.5 Hz
-    const osc3 = ctx.createOscillator();
-    const gain3 = ctx.createGain();
-    osc3.type = 'triangle';
-    osc3.frequency.setValueAtTime(1975.5, now + 0.1);
-    gain3.gain.setValueAtTime(0.01, now + 0.1);
-    gain3.gain.linearRampToValueAtTime(0.3, now + 0.14);
-    gain3.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-    osc3.connect(gain3);
-    gain3.connect(masterGain);
-    osc3.start(now + 0.1);
-    osc3.stop(now + 0.8);
   }
 
-  public playBuzzerSound(): void {
-    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
-
-    // Check custom audio
-    if (this.settings.customAudio.useCustomSound && this.settings.customAudio.wrongAudioDataUrl) {
-      this.playCustomAudio(this.settings.customAudio.wrongAudioDataUrl);
-      return;
-    }
-
-    // Synthesized Buzzer (Family Feud harsh dissonant buzzer: 120Hz + 128Hz sawtooth with lowpass filter)
+  private playSynthesizedBuzzer(): void {
     const ctx = this.getAudioContext();
     if (!ctx) return;
 
@@ -137,41 +190,18 @@ class AudioService {
     filter.frequency.exponentialRampToValueAtTime(800, now + 0.6);
     filter.connect(masterGain);
 
-    // Dual dissonant sawtooth oscillators
     const osc1 = ctx.createOscillator();
-    const osc2 = ctx.createOscillator();
     osc1.type = 'sawtooth';
-    osc2.type = 'sawtooth';
     osc1.frequency.setValueAtTime(120, now);
-    osc2.frequency.setValueAtTime(129, now); // creates 9 Hz discord beat
-
     const gainNode = ctx.createGain();
     gainNode.gain.setValueAtTime(0.01, now);
     gainNode.gain.linearRampToValueAtTime(1.0, now + 0.03);
     gainNode.gain.setValueAtTime(0.9, now + 0.45);
     gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
-
     osc1.connect(gainNode);
-    osc2.connect(gainNode);
     gainNode.connect(filter);
-
     osc1.start(now);
-    osc2.start(now);
     osc1.stop(now + 0.7);
-    osc2.stop(now + 0.7);
-  }
-
-  private playCustomAudio(dataUrl: string): void {
-    if (typeof window === 'undefined') return;
-    try {
-      const audio = new Audio(dataUrl);
-      audio.volume = this.settings.soundVolume;
-      audio.play().catch((err) => {
-        console.warn('Custom audio playback was prevented or failed:', err);
-      });
-    } catch (err) {
-      console.warn('Error loading custom audio:', err);
-    }
   }
 }
 

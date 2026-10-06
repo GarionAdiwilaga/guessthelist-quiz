@@ -14,9 +14,9 @@ export const GameBoard: React.FC<GameBoardProps> = ({ items, revealedItemIds }) 
   const rightCol = sortedItems.slice(5, 10);
 
   return (
-    <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3 lg:gap-4 px-2 sm:px-4">
+    <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-2.5 lg:gap-3 px-2 sm:px-4">
       {/* Left Column (Slots 1 - 5) */}
-      <div className="flex flex-col space-y-2 sm:space-y-2.5 lg:space-y-3">
+      <div className="flex flex-col space-y-1.5 sm:space-y-2">
         {leftCol.map((item, index) => {
           const isRevealed = revealedItemIds.includes(item.id);
           return (
@@ -31,7 +31,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({ items, revealedItemIds }) 
       </div>
 
       {/* Right Column (Slots 6 - 10) */}
-      <div className="flex flex-col space-y-2 sm:space-y-2.5 lg:space-y-3">
+      <div className="flex flex-col space-y-1.5 sm:space-y-2">
         {rightCol.map((item, index) => {
           const isRevealed = revealedItemIds.includes(item.id);
           return (

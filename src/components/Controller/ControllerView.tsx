@@ -18,6 +18,16 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
   sendMessage
 }) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isIntroPlaying, setIsIntroPlaying] = useState(false);
+
+  const handlePlaySound = (sound: 'applause' | 'intro' | 'stop_music') => {
+    sendMessage({ type: 'PLAY_SOUND', sound });
+    if (sound === 'intro') {
+      setIsIntroPlaying(true);
+    } else if (sound === 'stop_music') {
+      setIsIntroPlaying(false);
+    }
+  };
 
   const currentCategory =
     categories.find((c) => c.id === state.categoryId) || categories[0];
@@ -120,6 +130,8 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         onSetStrikes={handleSetStrikes}
         onTriggerQuickBuzzer={handleTriggerQuickBuzzer}
         onOpenSettings={() => setIsSettingsOpen(true)}
+        onPlaySound={handlePlaySound}
+        isIntroPlaying={isIntroPlaying}
       />
 
       {/* Board Utility Actions Bar (Includes Title Screen Toggle) */}

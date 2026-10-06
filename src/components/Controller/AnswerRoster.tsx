@@ -22,12 +22,15 @@ export const AnswerRoster: React.FC<AnswerRosterProps> = ({
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
 
+  const leftCol = sortedItems.slice(0, 5);
+  const rightCol = sortedItems.slice(5, 10);
+
   return (
     <div className="w-full flex flex-col space-y-3">
       {/* Search Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <label className="text-xs font-bold text-[#FFD600] tracking-wider uppercase">
-          DAFTAR 10 JAWABAN (UN-RANKED LIST):
+          DAFTAR 10 JAWABAN (LAYOUT SESUAI DISPLAY UTAMA):
         </label>
 
         {/* Live Search Input */}
@@ -51,28 +54,64 @@ export const AnswerRoster: React.FC<AnswerRosterProps> = ({
         </div>
       </div>
 
-      {/* Answer Cards Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        {sortedItems.map((item, index) => {
-          const isRevealed = revealedItemIds.includes(item.id);
-          const isHighlighted =
-            normalizedQuery.length > 0 &&
-            (item.answer.toLowerCase().includes(normalizedQuery) ||
-              (item.anime && item.anime.toLowerCase().includes(normalizedQuery)) ||
-              (item.aliases &&
-                item.aliases.some((a) => a.toLowerCase().includes(normalizedQuery))));
+      {/* Answer Cards 2-Column Grid Directly Mirroring Main Display */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        {/* Left Column (Slots 1 - 5) */}
+        <div className="flex flex-col space-y-2">
+          <div className="text-[11px] font-black tracking-wider text-[#00F0FF]/80 uppercase px-1 flex items-center justify-between">
+            <span>Kolom Kiri (Slot 1 – 5)</span>
+            <span className="text-[10px] text-gray-500 font-mono">1 2 3 4 5 ↓</span>
+          </div>
+          {leftCol.map((item, index) => {
+            const isRevealed = revealedItemIds.includes(item.id);
+            const isHighlighted =
+              normalizedQuery.length > 0 &&
+              (item.answer.toLowerCase().includes(normalizedQuery) ||
+                (item.anime && item.anime.toLowerCase().includes(normalizedQuery)) ||
+                (item.aliases &&
+                  item.aliases.some((a) => a.toLowerCase().includes(normalizedQuery))));
 
-          return (
-            <AnswerCard
-              key={item.id}
-              item={item}
-              index={index}
-              isRevealed={isRevealed}
-              isHighlighted={isHighlighted}
-              onToggleReveal={onToggleReveal}
-            />
-          );
-        })}
+            return (
+              <AnswerCard
+                key={item.id}
+                item={item}
+                index={index}
+                isRevealed={isRevealed}
+                isHighlighted={isHighlighted}
+                onToggleReveal={onToggleReveal}
+              />
+            );
+          })}
+        </div>
+
+        {/* Right Column (Slots 6 - 10) */}
+        <div className="flex flex-col space-y-2">
+          <div className="text-[11px] font-black tracking-wider text-[#00F0FF]/80 uppercase px-1 flex items-center justify-between">
+            <span>Kolom Kanan (Slot 6 – 10)</span>
+            <span className="text-[10px] text-gray-500 font-mono">6 7 8 9 10 ↓</span>
+          </div>
+          {rightCol.map((item, index) => {
+            const slotIndex = index + 5;
+            const isRevealed = revealedItemIds.includes(item.id);
+            const isHighlighted =
+              normalizedQuery.length > 0 &&
+              (item.answer.toLowerCase().includes(normalizedQuery) ||
+                (item.anime && item.anime.toLowerCase().includes(normalizedQuery)) ||
+                (item.aliases &&
+                  item.aliases.some((a) => a.toLowerCase().includes(normalizedQuery))));
+
+            return (
+              <AnswerCard
+                key={item.id}
+                item={item}
+                index={slotIndex}
+                isRevealed={isRevealed}
+                isHighlighted={isHighlighted}
+                onToggleReveal={onToggleReveal}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

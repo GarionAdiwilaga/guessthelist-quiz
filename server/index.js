@@ -18,7 +18,7 @@ const categories = database.categories;
 function createInitialState() {
   return {
     categoryId: categories[0]?.id ?? 1,
-    showTitleScreen: true, // Show title screen before category is selected
+    showTitleScreen: true,
     titleLogoUrl: null,
     transitionWipeTimestamp: null,
     revealedItemIds: [],
@@ -53,6 +53,13 @@ export function startServer(preferredPort = 3001) {
     res.json(categories);
   });
 
+  // Serve audio files from public/audio and root
+  const publicPath = path.resolve(rootDir, 'public');
+  if (fs.existsSync(publicPath)) {
+    app.use(express.static(publicPath));
+  }
+  app.use('/audio', express.static(path.resolve(rootDir, 'public/audio')));
+
   // Serve static dist in production
   const distPath = path.resolve(rootDir, 'dist');
   if (fs.existsSync(distPath)) {
@@ -65,17 +72,21 @@ export function startServer(preferredPort = 3001) {
   const server = http.createServer(app);
   const wss = new WebSocketServer({ server, path: '/ws' });
 
+  function broadcast(data) {
+    const raw = typeof data === 'string' ? data : JSON.stringify(data);
+    for (const client of wss.clients) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(raw);
+      }
+    }
+  }
+
   function broadcastState() {
-    const snapshot = JSON.stringify({
+    broadcast({
       type: 'STATE_SNAPSHOT',
       state: currentState,
       categories
     });
-    for (const client of wss.clients) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(snapshot);
-      }
-    }
   }
 
   wss.on('connection', (ws) => {
@@ -100,6 +111,7 @@ export function startServer(preferredPort = 3001) {
           }
           case 'SET_SHOW_TITLE_SCREEN': {
             currentState.showTitleScreen = Boolean(msg.show);
+            currentState.quickBuzzerTriggerTime = null;
             currentState.transitionWipeTimestamp = Date.now();
             broadcastState();
             break;
@@ -112,6 +124,13 @@ export function startServer(preferredPort = 3001) {
           case 'TRIGGER_WIPE': {
             currentState.transitionWipeTimestamp = Date.now();
             broadcastState();
+            break;
+          }
+          case 'PLAY_SOUND': {
+            broadcast({
+              type: 'PLAY_SOUND',
+              sound: msg.sound
+            });
             break;
           }
           case 'SELECT_CATEGORY': {
@@ -159,12 +178,24 @@ export function startServer(preferredPort = 3001) {
           }
           case 'SET_STRIKES': {
             const max = currentState.maxStrikeSlots || 3;
-            currentState.currentStrikes = Math.max(0, Math.min(msg.strikes, max));
+            const newStrikes = Math.max(0, Math.min(msg.strikes, max));
+            if (newStrikes > currentState.currentStrikes) {
+              // Manually adding strike concurrently triggers buzzer popup & sound
+              currentState.quickBuzzerTriggerTime = Date.now();
+            }
+            currentState.currentStrikes = newStrikes;
             broadcastState();
             break;
           }
           case 'TRIGGER_QUICK_BUZZER': {
             currentState.quickBuzzerTriggerTime = Date.now();
+            // When strike slots are enabled: increment strike counter concurrently
+            if (currentState.strikeSlotsEnabled) {
+              const max = currentState.maxStrikeSlots || 3;
+              if (currentState.currentStrikes < max) {
+                currentState.currentStrikes += 1;
+              }
+            }
             broadcastState();
             break;
           }

@@ -1,22 +1,24 @@
-import { QuizState, QuizCategory, WSMessage } from '../types/quiz';
+import { QuizState, QuizCategory, WSMessage, SoundEffectType } from '../types/quiz';
 
 type SnapshotCallback = (snapshot: {
   state: QuizState;
   categories: QuizCategory[];
 }) => void;
 
+type SoundCallback = (sound: SoundEffectType) => void;
+
 class SocketClient {
   private ws: WebSocket | null = null;
   private listeners: Set<SnapshotCallback> = new Set();
+  private soundListeners: Set<SoundCallback> = new Set();
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
   private isConnecting: boolean = false;
 
   private getSocketUrl(): string {
-    if (typeof window === 'undefined') return 'ws://localhost:3000/ws';
+    if (typeof window === 'undefined') return 'ws://localhost:3001/ws';
     const loc = window.location;
-    // If running on Vite dev server port 5173, connect to backend port 3000
     if (loc.port === '5173') {
-      return `ws://${loc.hostname}:3000/ws`;
+      return `ws://${loc.hostname}:3001/ws`;
     }
     const protocol = loc.protocol === 'https:' ? 'wss:' : 'ws:';
     return `${protocol}//${loc.host}/ws`;
@@ -35,7 +37,6 @@ class SocketClient {
 
       this.ws.onopen = () => {
         this.isConnecting = false;
-        console.log('[QuizWS] Connected to server');
         if (this.reconnectTimer) {
           clearTimeout(this.reconnectTimer);
           this.reconnectTimer = null;
@@ -49,6 +50,10 @@ class SocketClient {
             for (const listener of this.listeners) {
               listener({ state: data.state, categories: data.categories });
             }
+          } else if (data.type === 'PLAY_SOUND') {
+            for (const listener of this.soundListeners) {
+              listener(data.sound);
+            }
           }
         } catch (err) {
           console.error('[QuizWS] Message parse error:', err);
@@ -58,7 +63,6 @@ class SocketClient {
       this.ws.onclose = () => {
         this.isConnecting = false;
         this.ws = null;
-        console.warn('[QuizWS] Disconnected, reconnecting in 2s...');
         this.scheduleReconnect();
       };
 
@@ -86,6 +90,15 @@ class SocketClient {
 
     return () => {
       this.listeners.delete(callback);
+    };
+  }
+
+  public subscribeSound(callback: SoundCallback): () => void {
+    this.soundListeners.add(callback);
+    this.connect();
+
+    return () => {
+      this.soundListeners.delete(callback);
     };
   }
 
