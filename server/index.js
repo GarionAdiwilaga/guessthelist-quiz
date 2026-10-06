@@ -37,7 +37,7 @@ function createInitialState() {
 
 let currentState = createInitialState();
 
-export function startServer(port = 3000) {
+export function startServer(preferredPort = 3001) {
   const app = express();
   app.use(express.json({ limit: '15mb' }));
 
@@ -200,24 +200,41 @@ export function startServer(port = 3000) {
     });
   });
 
-  return new Promise((resolve) => {
-    server.listen(port, () => {
-      console.log(`[Quiz Server] running on http://localhost:${port} (WS on /ws)`);
-      resolve({
-        server,
-        wss,
-        close: () =>
-          new Promise((res) => {
-            wss.close(() => {
-              server.close(res);
-            });
-          })
+  return new Promise((resolve, reject) => {
+    let port = preferredPort;
+
+    function tryListen() {
+      server.listen(port, () => {
+        console.log(`[Quiz Server] running on http://localhost:${port} (WS on /ws)`);
+        resolve({
+          server,
+          wss,
+          port,
+          close: () =>
+            new Promise((res) => {
+              wss.close(() => {
+                server.close(res);
+              });
+            })
+        });
       });
+    }
+
+    server.once('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        console.warn(`[Quiz Server] Port ${port} is in use, trying port ${port + 1}...`);
+        port += 1;
+        tryListen();
+      } else {
+        reject(err);
+      }
     });
+
+    tryListen();
   });
 }
 
 // Auto-run if executed directly
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
-  startServer(process.env.PORT ? Number(process.env.PORT) : 3000);
+  startServer(process.env.PORT ? Number(process.env.PORT) : 3001);
 }
