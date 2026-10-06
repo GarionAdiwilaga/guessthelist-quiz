@@ -1,0 +1,1184 @@
+{
+  "quizType": "whos-in-the-list",
+  "title": "Siapa Saja yang Ada di Daftar Ini?",
+  "language": "id",
+  "instructions": "Tebak semua item yang masuk ke dalam kategori ini. Jawaban dicocokkan berdasarkan teks (tidak peka huruf besar/kecil).",
+  "categories": [
+    {
+      "id": 1,
+      "category": "Waifu Sejuta Umat: Karakter yang Sering Diklaim \"Bini Gue\"",
+      "emoji": "👰‍♀️💍",
+      "clue": "Karakter perempuan idaman komunitas anime lintas generasi yang fotonya paling sering dijadikan wallpaper, poster kamar, atau foto profil media sosial.",
+      "answerType": "character",
+      "items": [
+        {
+          "id": 109,
+          "answer": "Rem",
+          "anime": "Re:Zero",
+          "aliases": [
+            "Rem (Re:Zero)"
+          ],
+          "reason": "Pelayan oni yang mencuri perhatian lebih dari heroine utama; 'Rem best girl' menjadi salah satu perdebatan waifu paling legendaris di fandom.",
+          "rank": 1,
+          "difficulty": "Mudah",
+          "anilistRank": 4,
+          "rankShift": -2,
+          "score": 0.25,
+          "scoreAniList": 0.567,
+          "scoreIndonesia": -0.067,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Re:Zero populer di Bstation ID; 'Rem best girl' perdebatan waifu klasik."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 5,
+          "rankStable": false,
+          "reranked": true
+        },
+        {
+          "id": 112,
+          "answer": "Mai Sakurajima",
+          "anime": "Rascal Does Not Dream of Bunny Girl Senpai",
+          "aliases": [
+            "Mai Sakurajima (Bunny Girl Senpai)"
+          ],
+          "reason": "Heroine Bunny Girl Senpai yang jadi ikon 'perfect girl' sekaligus salah satu karakter perempuan paling disukai di era 2018-2020-an.",
+          "rank": 2,
+          "difficulty": "Mudah",
+          "anilistRank": 2,
+          "rankShift": -1,
+          "score": 0.628,
+          "scoreAniList": 1.322,
+          "scoreIndonesia": -0.067,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Bunny Girl Senpai populer di komunitas anime Indonesia."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 9,
+          "rankStable": false,
+          "reranked": true
+        },
+        {
+          "id": 105,
+          "answer": "Emilia",
+          "anime": "Re:Zero",
+          "aliases": [
+            "Emilia (Re:Zero)"
+          ],
+          "reason": "Heroine utama Re:Zero yang jadi pusat perhatian lewat perjalanan Subaru; selalu masuk jajaran karakter perempuan terpopuler tiap musimnya tayang.",
+          "rank": 3,
+          "difficulty": "Mudah",
+          "anilistRank": 1,
+          "rankShift": 0,
+          "score": 1.138,
+          "scoreAniList": 2.343,
+          "scoreIndonesia": -0.067,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Re:Zero tayang di Bstation ID; Emilia & Rem jadi perdebatan waifu utama."
+          },
+          "rankVolatility": 4,
+          "rankStable": false,
+          "reranked": true
+        },
+        {
+          "id": 113,
+          "answer": "Zero Two",
+          "anime": "Darling in the Franxx",
+          "aliases": [
+            "02",
+            "Zero Two (Darling in the Franxx)"
+          ],
+          "reason": "Dirancang khusus sebagai ikon flagship Darling in the Franxx; tetap jadi salah satu karakter perempuan paling dikenal meski animenya sudah lama tamat.",
+          "rank": 4,
+          "difficulty": "Sedang",
+          "anilistRank": 5,
+          "rankShift": -2,
+          "score": 0.121,
+          "scoreAniList": 0.31,
+          "scoreIndonesia": -0.067,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Darling in the Franxx viral di Indonesia via meme/dance edit; ikon waifu era 2018."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 7,
+          "rankStable": false,
+          "reranked": true
+        },
+        {
+          "id": 108,
+          "answer": "Marin Kitagawa",
+          "anime": "Sono Bisque Doll wa Koi wo Suru",
+          "reason": "Gyaru cosplayer yang viral lewat musim keduanya; cosplay Shizuku Kuroe miliknya jadi salah satu momen paling dibahas di komunitas anime.",
+          "rank": 5,
+          "difficulty": "Sedang",
+          "anilistRank": 3,
+          "rankShift": -1,
+          "score": 0.328,
+          "scoreAniList": 0.722,
+          "scoreIndonesia": -0.067,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Sono Bisque Doll peringkat #5 anime terpopuler 2025 di Indonesia (GEM Partners x MAL)."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 5,
+          "rankStable": false,
+          "reranked": true
+        },
+        {
+          "id": 103,
+          "answer": "Asuna Yuuki",
+          "anime": "Sword Art Online",
+          "aliases": [
+            "Asuna"
+          ],
+          "reason": "Heroine utama SAO yang jadi ikon 'waifu' era 2010-an dan salah satu karakter perempuan paling populer di anime modern.",
+          "rank": 6,
+          "difficulty": "Sedang",
+          "anilistRank": 8,
+          "rankShift": 3,
+          "score": 0.289,
+          "scoreAniList": -0.399,
+          "scoreIndonesia": 0.976,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "SAO populer di Indonesia; Asuna rutin masuk daftar waifu favorit wibu Indonesia (Hipwee/KINCIR)."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 6,
+          "rankStable": false,
+          "reranked": true
+        },
+        {
+          "id": 107,
+          "answer": "Yor Forger",
+          "anime": "Spy x Family",
+          "aliases": [
+            "Yor Briar"
+          ],
+          "reason": "Ibu rumah tangga sekaligus pembunuh bayaran dengan nama sandi Thorn Princess; salah satu karakter perempuan paling viral di media sosial Indonesia berkat versi dubbing-nya.",
+          "rank": 7,
+          "difficulty": "Sedang",
+          "anilistRank": 6,
+          "rankShift": -2,
+          "score": 0.096,
+          "scoreAniList": 0.259,
+          "scoreIndonesia": -0.067,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Spy x Family versi dubbing Indonesia jadi pendorong utama Muse Indonesia tembus 10 juta subscriber."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 2,
+          "rankStable": true,
+          "reranked": true
+        },
+        {
+          "id": 102,
+          "answer": "Tokisaki Kurumi",
+          "anime": "Date A Live",
+          "aliases": [
+            "Kurumi Tokisaki"
+          ],
+          "reason": "Sosok yandere ikonis Date A Live yang bertahan sebagai favorit lintas generasi berkat desain gothic-gothic dan kepribadiannya yang ambigu.",
+          "rank": 8,
+          "difficulty": "Sulit",
+          "anilistRank": 11,
+          "rankShift": -1,
+          "score": -0.396,
+          "scoreAniList": -0.725,
+          "scoreIndonesia": -0.067,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Date A Live; Kurumi disebut #1 waifu di thread KASKUS 'Waifu Sejuta Umat'."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 9,
+          "rankStable": false,
+          "reranked": true
+        },
+        {
+          "id": 101,
+          "answer": "Kaoruko Waguri",
+          "anime": "Kaoru Hana wa Rin to Saku",
+          "reason": "Peringkat 3 jajak pendapat heroine Magapoke 2022 dan finalis ISML 2025; karakter perempuan paling ramai dijadikan fan-art sejak anime-nya tayang Summer 2025.",
+          "rank": 9,
+          "difficulty": "Sulit",
+          "anilistRank": 14,
+          "rankShift": 1,
+          "score": -0.979,
+          "scoreAniList": -1.056,
+          "scoreIndonesia": -0.901,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 0,
+            "niche": 0,
+            "evidence": "Anime Summer 2025, Bstation ID; peringkat #4 popularitas anime 2025 di Indonesia (GEM Partners x MAL)."
+          },
+          "adjustmentReason": "penyesuaian sinyal Indonesia",
+          "rankVolatility": 1,
+          "rankStable": true,
+          "reranked": true
+        },
+        {
+          "id": 114,
+          "answer": "Rias Gremory",
+          "anime": "High School DxD",
+          "aliases": [
+            "Rias Gremory (High School DxD)"
+          ],
+          "reason": "Heroine utama High School DxD yang jadi salah satu ikon 'onee-san' dan paling sering muncul di fan-art lintas komunitas.",
+          "rank": 10,
+          "difficulty": "Sulit",
+          "anilistRank": 12,
+          "rankShift": -2,
+          "score": -1.517,
+          "scoreAniList": -0.985,
+          "scoreIndonesia": -2.049,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 0,
+            "franchise": 1,
+            "niche": 1,
+            "evidence": "High School DxD populer di kalangan terbatas; tidak pernah tayang TV ID."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia; terbukti niche di Indonesia",
+          "rankVolatility": 2,
+          "rankStable": true,
+          "reranked": true
+        }
+      ],
+      "ranking": {
+        "metric": "character_favourites",
+        "blend": {
+          "anilist": 0.5,
+          "indonesia": 0.5
+        },
+        "itemCount": 10,
+        "note": "Diurutkan dari skor gabungan AniList + heuristik Indonesia, dihitung di dalam kategori ini saja.",
+        "meanVolatility": 5.2,
+        "stableItems": 4,
+        "volatilityNote": "Seberapa jauh posisi item bergeser bila bobot gabungan diubah (0=pure heuristik Indonesia, 1=pure AniList). 0 = tidak bergeser; angka besar = posisi tidak stabil.",
+        "tierCut": "3 Mudah / 4 Sedang / 3 Sulit (dipotong ulang untuk pool 10 item)"
+      }
+    },
+    {
+      "id": 2,
+      "category": "Anime Iyashikei: Tontonan Santuy dengan Slow Pacing & Cozy Vibes",
+      "emoji": "🍵✨",
+      "clue": "Serial penyembuh jiwa (healing) yang ritmenya tenang, visualnya menyejukkan, minim konflik berat, dan nyaman dinikmati saat beristirahat.",
+      "answerType": "anime",
+      "items": [
+        {
+          "id": 210,
+          "answer": "Sousou no Frieren",
+          "reason": "Khusus episode perjalanan santai dan ujian sihir awal",
+          "rank": 1,
+          "difficulty": "Mudah",
+          "anilistRank": 1,
+          "rankShift": 0,
+          "score": 2.323,
+          "scoreAniList": 3.123,
+          "scoreIndonesia": 1.523,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Frieren pemuncak chart; manga diterbitkan di Indonesia; fan-art Comifuro masif."
+          },
+          "rankVolatility": 1,
+          "rankStable": true
+        },
+        {
+          "id": 209,
+          "answer": "Natsume Yuujinchou",
+          "reason": "Interaksi lembut dan damai dengan roh halus",
+          "rank": 2,
+          "difficulty": "Mudah",
+          "anilistRank": 7,
+          "rankShift": 5,
+          "score": 0.684,
+          "scoreAniList": -0.155,
+          "scoreIndonesia": 1.523,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Manga diterbitkan resmi dalam bahasa Indonesia oleh Elex Media; id.wikipedia mencatat popularitasnya termasuk di Indonesia."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 6,
+          "rankStable": false
+        },
+        {
+          "id": 207,
+          "answer": "Mushishi",
+          "reason": "Perjalanan hening mengamati makhluk gaib alami",
+          "rank": 3,
+          "difficulty": "Mudah",
+          "anilistRank": 2,
+          "rankShift": -1,
+          "score": 0.573,
+          "scoreAniList": 0.457,
+          "scoreIndonesia": 0.69,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Mushishi dianggap klasik iyashikei; sering muncul di daftar rekomendasi Indonesia."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 3,
+          "rankStable": false
+        },
+        {
+          "id": 203,
+          "answer": "Spice and Wolf (Ookami to Koushinryou)",
+          "reason": "Perjalanan santai pedagang keliling dan dewi serigala",
+          "rank": 4,
+          "difficulty": "Sedang",
+          "anilistRank": 3,
+          "rankShift": -1,
+          "score": 0.516,
+          "scoreAniList": 0.342,
+          "scoreIndonesia": 0.69,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Waralaba klasik; remake 2024 menambah visibilitas di Indonesia."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 1,
+          "rankStable": true
+        },
+        {
+          "id": 205,
+          "answer": "Yuru Camp (Laid-Back Camp)",
+          "reason": "Aktivitas berkemah santai di alam terbuka",
+          "rank": 5,
+          "difficulty": "Sedang",
+          "anilistRank": 4,
+          "rankShift": -1,
+          "score": 0.444,
+          "scoreAniList": 0.197,
+          "scoreIndonesia": 0.69,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Yuru Camp rutin masuk daftar 'anime iyashikei terbaik' media Indonesia (duniaku.idntimes, ggwp.id, Suara Merdeka)."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 1,
+          "rankStable": true
+        },
+        {
+          "id": 208,
+          "answer": "Barakamon",
+          "reason": "Penenangan diri ahli kaligrafi di pulau pedesaan",
+          "rank": 6,
+          "difficulty": "Sedang",
+          "anilistRank": 5,
+          "rankShift": -1,
+          "score": 0.05,
+          "scoreAniList": 0.076,
+          "scoreIndonesia": 0.024,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 0,
+            "niche": 0,
+            "evidence": "Populer di komunitas slice of life Indonesia."
+          },
+          "adjustmentReason": "penyesuaian sinyal Indonesia",
+          "rankVolatility": 4,
+          "rankStable": false
+        },
+        {
+          "id": 201,
+          "answer": "Tamako Market",
+          "reason": "Keseharian hangat distrik perbelanjaan Usagiyama",
+          "rank": 7,
+          "difficulty": "Sedang",
+          "anilistRank": 6,
+          "rankShift": -1,
+          "score": -0.062,
+          "scoreAniList": -0.147,
+          "scoreIndonesia": 0.024,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 0,
+            "niche": 0,
+            "evidence": "Kyoto Animation; tersedia via platform legal ID."
+          },
+          "adjustmentReason": "penyesuaian sinyal Indonesia",
+          "rankVolatility": 1,
+          "rankStable": true
+        },
+        {
+          "id": 202,
+          "answer": "Tanaka-kun wa Itsumo Kedaruge",
+          "reason": "Keseharian murid SMA yang super mager dan santuy",
+          "rank": 8,
+          "difficulty": "Sulit",
+          "anilistRank": 8,
+          "rankShift": 0,
+          "score": -0.074,
+          "scoreAniList": -0.171,
+          "scoreIndonesia": 0.024,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 0,
+            "niche": 0,
+            "evidence": "Slice of life populer di komunitas; tersedia sub Indo."
+          },
+          "rankVolatility": 1,
+          "rankStable": true
+        },
+        {
+          "id": 213,
+          "answer": "Gakuen Babysitters",
+          "reason": "Keseharian mengasuh balita yang hangat dan menggemaskan",
+          "rank": 9,
+          "difficulty": "Sulit",
+          "anilistRank": 10,
+          "rankShift": 1,
+          "score": -0.181,
+          "scoreAniList": -0.386,
+          "scoreIndonesia": 0.024,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 0,
+            "niche": 0,
+            "evidence": "Populer di kalangan penggemar shoujo/slice of life Indonesia."
+          },
+          "adjustmentReason": "penyesuaian sinyal Indonesia",
+          "rankVolatility": 1,
+          "rankStable": true
+        },
+        {
+          "id": 204,
+          "answer": "Amaama to Inazuma (Sweetness and Lightning)",
+          "reason": "Kisah memasak dan keluarga yang manis penuh kehangatan",
+          "rank": 10,
+          "difficulty": "Sulit",
+          "anilistRank": 11,
+          "rankShift": 1,
+          "score": -0.26,
+          "scoreAniList": -0.544,
+          "scoreIndonesia": 0.024,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 0,
+            "niche": 0,
+            "evidence": "Iyashikei kuliner; tersedia sub Indo."
+          },
+          "adjustmentReason": "penyesuaian sinyal Indonesia",
+          "rankVolatility": 3,
+          "rankStable": false
+        }
+      ],
+      "ranking": {
+        "metric": "anime_popularity",
+        "blend": {
+          "anilist": 0.5,
+          "indonesia": 0.5
+        },
+        "itemCount": 10,
+        "note": "Diurutkan dari skor gabungan AniList + heuristik Indonesia, dihitung di dalam kategori ini saja.",
+        "meanVolatility": 1.7,
+        "stableItems": 10,
+        "volatilityNote": "Seberapa jauh posisi item bergeser bila bobot gabungan diubah (0=pure heuristik Indonesia, 1=pure AniList). 0 = tidak bergeser; angka besar = posisi tidak stabil.",
+        "tierCut": "3 Mudah / 4 Sedang / 3 Sulit (dipotong ulang untuk pool 10 item)"
+      }
+    },
+    {
+      "id": 3,
+      "category": "Sensei Idaman tapi Kelakuan Sengklek",
+      "emoji": "🕶️🧑‍🏫",
+      "clue": "Sosok pengajar atau mentor berkekuatan luar biasa dan berdedikasi tinggi, tetapi kelakuannya sehari-hari di luar situasi genting membuat muridnya malu atau geleng-geleng kepala.",
+      "answerType": "character",
+      "items": [
+        {
+          "id": 304,
+          "answer": "Satoru Gojo",
+          "anime": "Jujutsu Kaisen",
+          "aliases": [
+            "Gojo Satoru"
+          ],
+          "reason": "Penyihir terkuat Jujutsu Kaisen sekaligus guru yang santai, genit, dan kerap bertingkah kekanak-kanakan di depan murid-muridnya.",
+          "rank": 1,
+          "difficulty": "Mudah",
+          "anilistRank": 1,
+          "rankShift": 0,
+          "score": 1.354,
+          "scoreAniList": 2.639,
+          "scoreIndonesia": 0.069,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Jujutsu Kaisen peringkat #2 anime terpopuler Indonesia (Bstation ID TV top 10); Gojo karakter paling viral."
+          },
+          "rankVolatility": 5,
+          "rankStable": false
+        },
+        {
+          "id": 305,
+          "answer": "Kakashi Hatake",
+          "anime": "Naruto",
+          "aliases": [
+            "Kakashi Hatake (Naruto)"
+          ],
+          "reason": "Guru Tim 7 yang jenius, tetapi selalu membaca novel romantis Icha-Icha dan sering terlambat dengan alasan tak jelas.",
+          "rank": 2,
+          "difficulty": "Mudah",
+          "anilistRank": 3,
+          "rankShift": 1,
+          "score": 0.993,
+          "scoreAniList": 0.958,
+          "scoreIndonesia": 1.029,
+          "indonesiaSignal": {
+            "tv": 1,
+            "manga": 1,
+            "stream": 0,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Naruto TV nasional + manga Elex; Kakashi ikon lintas generasi."
+          },
+          "adjustmentReason": "tayang TV nasional Indonesia; manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 4,
+          "rankStable": false
+        },
+        {
+          "id": 308,
+          "answer": "Kisuke Urahara",
+          "anime": "Bleach",
+          "aliases": [
+            "Urahara Kisuke"
+          ],
+          "reason": "Mantan kapten Divisi 12 yang jenius dan kuat, tetapi berpenampilan santai dan sering bertingkah misterius serta centil.",
+          "rank": 3,
+          "difficulty": "Mudah",
+          "anilistRank": 6,
+          "rankShift": 3,
+          "score": 0.572,
+          "scoreAniList": -0.125,
+          "scoreIndonesia": 1.27,
+          "indonesiaSignal": {
+            "tv": 1,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Bleach tayang Indosiar; manga diterbitkan m&c!/Elex; TYBW tersedia Netflix ID."
+          },
+          "adjustmentReason": "tayang TV nasional Indonesia; manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 5,
+          "rankStable": false
+        },
+        {
+          "id": 311,
+          "answer": "Reigen Arataka",
+          "anime": "Mob Psycho 100",
+          "aliases": [
+            "Arataka Reigen"
+          ],
+          "reason": "Mengaku 'psikik terhebat abad 21' padahal tidak punya kekuatan; jurus 'pijat spiritual'-nya jadi lelucon paling konyol sekaligus mentor paling tulus untuk Mob.",
+          "rank": 4,
+          "difficulty": "Sedang",
+          "anilistRank": 2,
+          "rankShift": -2,
+          "score": 0.394,
+          "scoreAniList": 1.32,
+          "scoreIndonesia": -0.532,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Mob Psycho 100 populer di komunitas; Reigen karakter favorit."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 8,
+          "rankStable": false
+        },
+        {
+          "id": 301,
+          "answer": "Jiraiya",
+          "anime": "Naruto",
+          "aliases": [
+            "Jiraiya (Naruto)"
+          ],
+          "reason": "Sannin legendaris guru Naruto; sangat kuat, tetapi kelakuannya mesum dan suka mengintip pemandian membuat muridnya geleng-geleng kepala.",
+          "rank": 5,
+          "difficulty": "Sedang",
+          "anilistRank": 8,
+          "rankShift": 3,
+          "score": 0.37,
+          "scoreAniList": -0.29,
+          "scoreIndonesia": 1.029,
+          "indonesiaSignal": {
+            "tv": 1,
+            "manga": 1,
+            "stream": 0,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Naruto tayang Trans TV/Indosiar/Global TV; manga oleh Elex. Jiraiya tokoh ikonis."
+          },
+          "adjustmentReason": "tayang TV nasional Indonesia; manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 6,
+          "rankStable": false
+        },
+        {
+          "id": 303,
+          "answer": "Might Guy",
+          "anime": "Naruto",
+          "aliases": [
+            "Maito Gai"
+          ],
+          "reason": "Guru kebugaran Konoha yang membuka Delapan Gerbang; sangat kuat, tetapi gaya hidup 'youth' dan tantangannya ke Kakashi bikin malu muridnya.",
+          "rank": 6,
+          "difficulty": "Sedang",
+          "anilistRank": 9,
+          "rankShift": 3,
+          "score": 0.194,
+          "scoreAniList": -0.641,
+          "scoreIndonesia": 1.029,
+          "indonesiaSignal": {
+            "tv": 1,
+            "manga": 1,
+            "stream": 0,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Naruto siaran TV nasional + manga Elex."
+          },
+          "adjustmentReason": "tayang TV nasional Indonesia; manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 5,
+          "rankStable": false
+        },
+        {
+          "id": 302,
+          "answer": "Master Roshi / Kamesennin",
+          "anime": "Dragon Ball",
+          "aliases": [
+            "Master Roshi",
+            "Kamesennin",
+            "Muten Roshi"
+          ],
+          "reason": "Mentor tertua Dragon Ball yang mengajari Kamehameha, namun obsesinya pada majalah dewasa jadi lelucon sengklek sepanjang seri.",
+          "rank": 7,
+          "difficulty": "Sedang",
+          "anilistRank": 13,
+          "rankShift": 6,
+          "score": 0.118,
+          "scoreAniList": -0.793,
+          "scoreIndonesia": 1.029,
+          "indonesiaSignal": {
+            "tv": 1,
+            "manga": 1,
+            "stream": 0,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Dragon Ball tayang Indosiar sejak era 90-an; salah satu anime pembuka popularitas anime di Indonesia."
+          },
+          "adjustmentReason": "tayang TV nasional Indonesia; manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 10,
+          "rankStable": false
+        },
+        {
+          "id": 309,
+          "answer": "Yami Sukehiro",
+          "anime": "Black Clover",
+          "aliases": [
+            "Yami Sukehiro (Black Clover)"
+          ],
+          "reason": "Kapten Black Bulls yang menakutkan dan sangat kuat, tetapi kebiasaan merokok, kasar, dan cueknya bikin anggotanya sering mengeluh.",
+          "rank": 8,
+          "difficulty": "Sulit",
+          "anilistRank": 4,
+          "rankShift": -4,
+          "score": 0.084,
+          "scoreAniList": 0.1,
+          "scoreIndonesia": 0.069,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Black Clover manga diterbitkan Elex Media (2019); anime tersedia Bstation ID."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 5,
+          "rankStable": false
+        },
+        {
+          "id": 306,
+          "answer": "Koro-sensei",
+          "anime": "Assassination Classroom",
+          "aliases": [
+            "Korosensei"
+          ],
+          "reason": "Guru kelas 3-E dengan kecepatan Mach 20; target pembunuhan muridnya sendiri sekaligus guru paling perhatian dan penuh tingkah konyol.",
+          "rank": 9,
+          "difficulty": "Sulit",
+          "anilistRank": 5,
+          "rankShift": -4,
+          "score": 0.032,
+          "scoreAniList": -0.004,
+          "scoreIndonesia": 0.069,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Assassination Classroom manga diterbitkan Elex Media (2015); anime tersedia sub Indo."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 4,
+          "rankStable": false
+        },
+        {
+          "id": 307,
+          "answer": "Eikichi Onizuka",
+          "anime": "Great Teacher Onizuka",
+          "aliases": [
+            "Onizuka Eikichi",
+            "GTO"
+          ],
+          "reason": "Mantan berandal yang jadi guru terbaik; kelakuan cabul dan brutalnya di luar kelas justru jadi lelucon yang bikin muridnya malu.",
+          "rank": 10,
+          "difficulty": "Sulit",
+          "anilistRank": 7,
+          "rankShift": -3,
+          "score": -0.072,
+          "scoreAniList": -0.212,
+          "scoreIndonesia": 0.069,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "GTO manga diterbitkan Elex Media (25 volume, tamat); tersedia di Netflix Indonesia."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 3,
+          "rankStable": false
+        }
+      ],
+      "ranking": {
+        "metric": "character_favourites",
+        "blend": {
+          "anilist": 0.5,
+          "indonesia": 0.5
+        },
+        "itemCount": 10,
+        "note": "Diurutkan dari skor gabungan AniList + heuristik Indonesia, dihitung di dalam kategori ini saja.",
+        "meanVolatility": 4.5,
+        "stableItems": 3,
+        "volatilityNote": "Seberapa jauh posisi item bergeser bila bobot gabungan diubah (0=pure heuristik Indonesia, 1=pure AniList). 0 = tidak bergeser; angka besar = posisi tidak stabil.",
+        "tierCut": "3 Mudah / 4 Sedang / 3 Sulit (dipotong ulang untuk pool 10 item)"
+      }
+    },
+    {
+      "id": 4,
+      "category": "Duta Penderitaan: Karakter Paling Kena Siksa Batin & Fisik",
+      "emoji": "🌧️💀",
+      "clue": "Tokoh fiksi yang hidupnya dihantam cobaan berat tanpa henti, menanggung trauma ekstrem, kehilangan orang terkasih, atau jadi korban takdir tragis.",
+      "answerType": "character",
+      "items": [
+        {
+          "id": 406,
+          "answer": "Itachi Uchiha",
+          "anime": "Naruto",
+          "aliases": [
+            "Uchiha Itachi"
+          ],
+          "reason": "Membantai seluruh klannya sendiri demi perdamaian, menanggung aib dan kebencian adiknya sepanjang hidup tanpa bisa menjelaskan.",
+          "rank": 1,
+          "difficulty": "Mudah",
+          "anilistRank": 4,
+          "rankShift": 3,
+          "score": 1.157,
+          "scoreAniList": 0.741,
+          "scoreIndonesia": 1.574,
+          "indonesiaSignal": {
+            "tv": 1,
+            "manga": 1,
+            "stream": 0,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Naruto TV nasional + manga Elex; Itachi salah satu tokoh paling ikonis."
+          },
+          "adjustmentReason": "tayang TV nasional Indonesia; manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 3,
+          "rankStable": false
+        },
+        {
+          "id": 413,
+          "answer": "Eren Yeager",
+          "anime": "Attack on Titan",
+          "aliases": [
+            "Yeager Eren"
+          ],
+          "reason": "Menyaksikan ibunya dimakan Titan, terpaksa menanggung beban takdir dan akhirnya memilih jalan yang menghancurkan dirinya sendiri.",
+          "rank": 2,
+          "difficulty": "Mudah",
+          "anilistRank": 1,
+          "rankShift": -1,
+          "score": 1.122,
+          "scoreAniList": 1.683,
+          "scoreIndonesia": 0.561,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Attack on Titan populer di Indonesia; manga disebut dalam jurnal akademik; anime tersedia Netflix ID."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 5,
+          "rankStable": false
+        },
+        {
+          "id": 412,
+          "answer": "Ken Kaneki",
+          "anime": "Tokyo Ghoul",
+          "aliases": [
+            "Kaneki Ken"
+          ],
+          "reason": "Disiksa berkali-kali hingga rambutnya memutih, kehilangan ingatan, dan hidup terjepit di antara dua dunia.",
+          "rank": 3,
+          "difficulty": "Mudah",
+          "anilistRank": 2,
+          "rankShift": -1,
+          "score": 0.86,
+          "scoreAniList": 1.16,
+          "scoreIndonesia": 0.561,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Tokyo Ghoul sangat populer di Indonesia; disebut dalam jurnal akademik Indonesia soal manga populer."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 3,
+          "rankStable": false
+        },
+        {
+          "id": 409,
+          "answer": "Denji",
+          "anime": "Chainsaw Man",
+          "aliases": [
+            "Denji (Chainsaw Man)"
+          ],
+          "reason": "Hidup dalam kemiskinan ekstrem, kehilangan Pochita, dan berkali-kali dikhianati serta dimanfaatkan orang-orang yang ia percaya.",
+          "rank": 4,
+          "difficulty": "Sedang",
+          "anilistRank": 6,
+          "rankShift": 2,
+          "score": 0.631,
+          "scoreAniList": 0.7,
+          "scoreIndonesia": 0.561,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Chainsaw Man Reze Arc tayang bioskop Indonesia 26 Sep 2025; manga diterbitkan ID."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 2,
+          "rankStable": true
+        },
+        {
+          "id": 411,
+          "answer": "Guts",
+          "anime": "Berserk",
+          "aliases": [
+            "Guts (Berserk)"
+          ],
+          "reason": "Selamat dari Eclipse setelah menyaksikan seluruh sahabatnya dibantai dan dikorbankan oleh orang yang paling ia percaya.",
+          "rank": 5,
+          "difficulty": "Sedang",
+          "anilistRank": 3,
+          "rankShift": -2,
+          "score": 0.436,
+          "scoreAniList": 0.945,
+          "scoreIndonesia": -0.072,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Berserk rutin masuk daftar 'anime seinen/gore terbaik' media Indonesia (kearipan, gopay blog)."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 6,
+          "rankStable": false
+        },
+        {
+          "id": 414,
+          "answer": "Okabe Rintarou",
+          "anime": "Steins;Gate",
+          "aliases": [
+            "Okabe Rintaro",
+            "Rintaro Okabe"
+          ],
+          "reason": "Berulang kali menyaksikan Mayuri mati di garis waktu berbeda sebelum akhirnya berhasil mengubah takdir.",
+          "rank": 6,
+          "difficulty": "Sedang",
+          "anilistRank": 5,
+          "rankShift": -1,
+          "score": 0.325,
+          "scoreAniList": 0.722,
+          "scoreIndonesia": -0.072,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Steins;Gate rutin masuk daftar 'anime terbaik sepanjang masa' media Indonesia (detik.com)."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 5,
+          "rankStable": false
+        },
+        {
+          "id": 407,
+          "answer": "Nagato / Pain",
+          "anime": "Naruto",
+          "aliases": [
+            "Nagato",
+            "Pain"
+          ],
+          "reason": "Menyaksikan orang tuanya dan sahabatnya dibunuh, lalu tumbuh menjadi pemimpin Akatsuki yang penuh luka batin.",
+          "rank": 7,
+          "difficulty": "Sedang",
+          "anilistRank": 11,
+          "rankShift": 4,
+          "score": 0.318,
+          "scoreAniList": -0.938,
+          "scoreIndonesia": 1.574,
+          "indonesiaSignal": {
+            "tv": 1,
+            "manga": 1,
+            "stream": 0,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Naruto siaran TV nasional; arc Pain sangat terkenal di Indonesia."
+          },
+          "adjustmentReason": "tayang TV nasional Indonesia; manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 9,
+          "rankStable": false
+        },
+        {
+          "id": 410,
+          "answer": "Subaru Natsuki",
+          "anime": "Re:Zero",
+          "aliases": [
+            "Natsuki Subaru"
+          ],
+          "reason": "Memiliki Return by Death, sehingga harus mengalami kematian berkali-kali secara sadar untuk menyelamatkan orang lain.",
+          "rank": 8,
+          "difficulty": "Sulit",
+          "anilistRank": 7,
+          "rankShift": -1,
+          "score": 0.075,
+          "scoreAniList": 0.222,
+          "scoreIndonesia": -0.072,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Re:Zero tersedia Bstation ID; Subaru tokoh utama yang dikenal."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 2,
+          "rankStable": true
+        },
+        {
+          "id": 401,
+          "answer": "Homura Akemi",
+          "anime": "Mahou Shoujo Madoka Magica",
+          "aliases": [
+            "Akemi Homura"
+          ],
+          "reason": "Terjebak dalam loop waktu berulang demi menyelamatkan Madoka; menanggung trauma dan kehilangan tanpa henti di setiap pengulangan.",
+          "rank": 9,
+          "difficulty": "Sulit",
+          "anilistRank": 8,
+          "rankShift": -1,
+          "score": -0.078,
+          "scoreAniList": -0.083,
+          "scoreIndonesia": -0.072,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 0,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Madoka Magica klasik yang dibahas luas di komunitas anime Indonesia."
+          },
+          "adjustmentReason": "waralaba dikenal luas di Indonesia",
+          "rankVolatility": 3,
+          "rankStable": false
+        },
+        {
+          "id": 402,
+          "answer": "Tomoya Okazaki",
+          "anime": "Clannad: After Story",
+          "aliases": [
+            "Okazaki Tomoya"
+          ],
+          "reason": "Kehilangan istrinya Nagisa lalu harus membesarkan putrinya sendirian; salah satu kisah duka paling terkenal di anime.",
+          "rank": 10,
+          "difficulty": "Sulit",
+          "anilistRank": 9,
+          "rankShift": -1,
+          "score": -0.109,
+          "scoreAniList": -0.78,
+          "scoreIndonesia": 0.561,
+          "indonesiaSignal": {
+            "tv": 0,
+            "manga": 1,
+            "stream": 1,
+            "franchise": 1,
+            "niche": 0,
+            "evidence": "Clannad masuk daftar 'anime terbaik sepanjang masa' media Indonesia (detik.com); populer sebagai anime legendaris."
+          },
+          "adjustmentReason": "manga terbit resmi di Indonesia; waralaba dikenal luas di Indonesia",
+          "rankVolatility": 7,
+          "rankStable": false
+        }
+      ],
+      "ranking": {
+        "metric": "character_favourites",
+        "blend": {
+          "anilist": 0.5,
+          "indonesia": 0.5
+        },
+        "itemCount": 10,
+        "note": "Diurutkan dari skor gabungan AniList + heuristik Indonesia, dihitung di dalam kategori ini saja.",
+        "meanVolatility": 4,
+        "stableItems": 4,
+        "volatilityNote": "Seberapa jauh posisi item bergeser bila bobot gabungan diubah (0=pure heuristik Indonesia, 1=pure AniList). 0 = tidak bergeser; angka besar = posisi tidak stabil.",
+        "tierCut": "3 Mudah / 4 Sedang / 3 Sulit (dipotong ulang untuk pool 10 item)"
+      }
+    }
+  ],
+  "rankingInfo": {
+    "perCategory": true,
+    "direction": "rank 1 = paling dikenal / termudah ditebak di Indonesia; rank terakhir = paling niche",
+    "method": "Setiap kategori diurutkan TERPISAH. Skor akhir = 0.5 x z(sinyal global AniList) + 0.5 x z(sinyal heuristik Indonesia), di-z-score di dalam kategori masing-masing. Tidak ada perbandingan lintas kategori.",
+    "metrics": {
+      "animeCategory": "AniList popularity (jumlah pengguna yang menambahkan judul ke list)",
+      "characterCategory": "AniList favourites (jumlah pengguna yang menjadikan karakter favorit)",
+      "indonesia": "Flag berbasis sumber: tv (tayang TV nasional ID), manga (terbit resmi ID), stream (platform legal ID), franchise (dikenal luas), niche (terbukti niche)"
+    },
+    "blendWeights": {
+      "anilist": 0.5,
+      "indonesia": 0.5
+    },
+    "indonesiaWeights": {
+      "tv": 2.0,
+      "manga": 1.0,
+      "stream": 0.4,
+      "franchise": 0.8,
+      "niche": -1.5
+    },
+    "droppedSignals": {
+      "googleTrends": "DIBUANG. Tidak dapat diandalkan: 44/56 istilah bernilai 0, hasil tidak konsisten antar-batch (Zero Two 1.65 vs 29.44 = 94% selisih untuk istilah & periode yang sama), dan false positive (Aqua/Rem). Rate limit agresif."
+    },
+    "tiers": {
+      "Mudah": "rank 1-5",
+      "Sedang": "rank 6-9",
+      "Sulit": "rank 10-14"
+    },
+    "caveat": "Peringkat SENSITIF terhadap bobot gabungan. Uji sensitivitas (bobot 0.0-1.0) menunjukkan banyak item bergeser 4-12 posisi. Item dengan rankVolatility<=2 relatif aman; nilai besar = perkiraan, bukan urutan pasti.",
+    "cat1Rerank": {
+      "method": "Kategori 1 dihitung ulang memakai 3 sinyal: (a) AniList favourites, (b) MAL favourites, (c) kehadiran di daftar waifu editorial Indonesia (Duniaku/IDN Times '15 Waifu Sejuta Umat', VCGamers 'Top 10 Waifu Sejuta Umat'). Ditambah 2 dimensi kualitatif bersumber: status ikon/OG-waifu (longevity) dan virality terkini di fandom Indonesia.",
+      "iconDimension": "Kurumi & Rias = OG waifu (2012-2013, masih relevan 12+ tahun); sumber: 'no female character has surpassed Rias', 'Kurumi carried the whole Date A Live franchise'.",
+      "viralDimension": "Kaoruko Waguri = waifu viral terbaru; sumber: BiliBili ID 'Munculnya Waguri Waifu Sejuta Umat Yang Baru', meme 'Waguri versi nyata' (Vayala Maulidina) viral Sep 2025.",
+      "dropped": {
+        "Tohsaka Rin": "rank 8 pada data murni, TAPI absen dari kedua daftar waifu editorial Indonesia; dikorbankan demi mempertahankan Rias Gremory (OG waifu) sesuai permintaan.",
+        "Fern": "data rank 10",
+        "Aqua": "data rank 11",
+        "Hinata Hyuga": "data rank 2 pada model lama, tapi turun ke 14 setelah sinyal Indonesia masuk (tidak ada di daftar waifu ID manapun)"
+      }
+    },
+    "trimmedTo": 10
+  }
+}
