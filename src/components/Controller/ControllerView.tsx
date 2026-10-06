@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { QuizState, QuizCategory, WSMessage } from '../../types/quiz';
+import { socketClient } from '../../services/socket';
 import { CategorySelector } from './CategorySelector';
 import { AnswerRoster } from './AnswerRoster';
 import { StrikeControls } from './StrikeControls';
@@ -19,15 +20,65 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
 }) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isIntroPlaying, setIsIntroPlaying] = useState(false);
+  const [isApplausePlaying, setIsApplausePlaying] = useState(false);
 
-  const handlePlaySound = (sound: 'applause' | 'intro' | 'stop_music') => {
+  const introTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const applauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handlePlaySound = (
+    sound: 'applause' | 'stop_applause' | 'intro' | 'stop_music'
+  ) => {
     sendMessage({ type: 'PLAY_SOUND', sound });
+
     if (sound === 'intro') {
       setIsIntroPlaying(true);
+      if (introTimerRef.current) clearTimeout(introTimerRef.current);
+      // intro.mp3 duration ~7.13s -> auto reset button when finished
+      introTimerRef.current = setTimeout(() => {
+        setIsIntroPlaying(false);
+      }, 7200);
     } else if (sound === 'stop_music') {
+      if (introTimerRef.current) clearTimeout(introTimerRef.current);
       setIsIntroPlaying(false);
+    } else if (sound === 'applause') {
+      setIsApplausePlaying(true);
+      if (applauseTimerRef.current) clearTimeout(applauseTimerRef.current);
+      // applause.wav duration ~8.84s -> auto reset button when finished
+      applauseTimerRef.current = setTimeout(() => {
+        setIsApplausePlaying(false);
+      }, 8900);
+    } else if (sound === 'stop_applause') {
+      if (applauseTimerRef.current) clearTimeout(applauseTimerRef.current);
+      setIsApplausePlaying(false);
     }
   };
+
+  // Sync state if another controller or external trigger stops audio
+  useEffect(() => {
+    const unsub = socketClient.subscribeSound((sound) => {
+      if (sound === 'stop_music') {
+        if (introTimerRef.current) clearTimeout(introTimerRef.current);
+        setIsIntroPlaying(false);
+      } else if (sound === 'stop_applause') {
+        if (applauseTimerRef.current) clearTimeout(applauseTimerRef.current);
+        setIsApplausePlaying(false);
+      } else if (sound === 'intro') {
+        setIsIntroPlaying(true);
+        if (introTimerRef.current) clearTimeout(introTimerRef.current);
+        introTimerRef.current = setTimeout(() => setIsIntroPlaying(false), 7200);
+      } else if (sound === 'applause') {
+        setIsApplausePlaying(true);
+        if (applauseTimerRef.current) clearTimeout(applauseTimerRef.current);
+        applauseTimerRef.current = setTimeout(() => setIsApplausePlaying(false), 8900);
+      }
+    });
+
+    return () => {
+      unsub();
+      if (introTimerRef.current) clearTimeout(introTimerRef.current);
+      if (applauseTimerRef.current) clearTimeout(applauseTimerRef.current);
+    };
+  }, []);
 
   const currentCategory =
     categories.find((c) => c.id === state.categoryId) || categories[0];
@@ -132,6 +183,7 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         onOpenSettings={() => setIsSettingsOpen(true)}
         onPlaySound={handlePlaySound}
         isIntroPlaying={isIntroPlaying}
+        isApplausePlaying={isApplausePlaying}
       />
 
       {/* Board Utility Actions Bar (Includes Title Screen Toggle) */}

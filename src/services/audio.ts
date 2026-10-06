@@ -19,6 +19,7 @@ class AudioService {
 
   private ctx: AudioContext | null = null;
   private introAudio: HTMLAudioElement | null = null;
+  private applauseAudio: HTMLAudioElement | null = null;
 
   private getAudioContext(): AudioContext | null {
     if (typeof window === 'undefined') return null;
@@ -125,22 +126,57 @@ class AudioService {
     this.playCorrectSound();
   }
 
-  public playApplauseSound(): void {
+  public playApplauseSound(onEnded?: () => void): void {
+    if (typeof window === 'undefined') return;
     if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
-    this.playAudioFile('/audio/applause.wav', 0.9);
+
+    try {
+      if (!this.applauseAudio) {
+        this.applauseAudio = new Audio('/audio/applause.wav');
+      }
+      this.applauseAudio.loop = false;
+      this.applauseAudio.volume = Math.max(0, Math.min(this.settings.soundVolume * 0.9, 1));
+      this.applauseAudio.currentTime = 0;
+      this.applauseAudio.onended = () => {
+        if (onEnded) onEnded();
+      };
+      this.applauseAudio.play().catch((err) => {
+        console.warn('Applause play failed:', err);
+      });
+    } catch (err) {
+      console.warn('Error playing applause:', err);
+    }
   }
 
-  public playIntroMusic(): void {
+  public stopApplauseSound(): void {
+    if (this.applauseAudio) {
+      try {
+        this.applauseAudio.pause();
+        this.applauseAudio.currentTime = 0;
+      } catch {
+        // no-op
+      }
+    }
+  }
+
+  public isApplausePlaying(): boolean {
+    return Boolean(this.applauseAudio && !this.applauseAudio.paused && !this.applauseAudio.ended);
+  }
+
+  public playIntroMusic(onEnded?: () => void): void {
     if (typeof window === 'undefined') return;
     if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
 
     try {
       if (!this.introAudio) {
         this.introAudio = new Audio('/audio/intro.mp3');
-        this.introAudio.loop = true;
       }
+      this.introAudio.loop = false;
       this.introAudio.volume = this.settings.soundVolume;
       this.introAudio.currentTime = 0;
+      this.introAudio.onended = () => {
+        if (onEnded) onEnded();
+      };
       this.introAudio.play().catch((err) => {
         console.warn('Intro music play failed:', err);
       });
@@ -161,7 +197,7 @@ class AudioService {
   }
 
   public isIntroPlaying(): boolean {
-    return Boolean(this.introAudio && !this.introAudio.paused);
+    return Boolean(this.introAudio && !this.introAudio.paused && !this.introAudio.ended);
   }
 
   // Synthesized Fallbacks if audio files cannot be loaded

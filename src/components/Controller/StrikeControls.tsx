@@ -8,8 +8,9 @@ interface StrikeControlsProps {
   onSetStrikes: (strikes: number) => void;
   onTriggerQuickBuzzer: () => void;
   onOpenSettings: () => void;
-  onPlaySound?: (sound: 'applause' | 'intro' | 'stop_music') => void;
+  onPlaySound?: (sound: 'applause' | 'stop_applause' | 'intro' | 'stop_music') => void;
   isIntroPlaying?: boolean;
+  isApplausePlaying?: boolean;
 }
 
 export const StrikeControls: React.FC<StrikeControlsProps> = ({
@@ -20,7 +21,8 @@ export const StrikeControls: React.FC<StrikeControlsProps> = ({
   onTriggerQuickBuzzer,
   onOpenSettings,
   onPlaySound,
-  isIntroPlaying = false
+  isIntroPlaying = false,
+  isApplausePlaying = false
 }) => {
   const handleAddStrike = () => {
     if (currentStrikes < maxStrikeSlots) {
@@ -53,12 +55,20 @@ export const StrikeControls: React.FC<StrikeControlsProps> = ({
 
         {/* Soundboard Button: Clap (applause.wav) */}
         <button
-          onClick={() => onPlaySound && onPlaySound('applause')}
-          className="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-[#1C2555] hover:bg-[#2A377D] border border-[#304192] text-xs font-bold text-yellow-300 transition-all cursor-pointer shadow-md active:scale-95"
-          title="Putar Efek Tepuk Tangan (applause.wav)"
+          onClick={() => {
+            if (onPlaySound) {
+              onPlaySound(isApplausePlaying ? 'stop_applause' : 'applause');
+            }
+          }}
+          className={`flex items-center space-x-1.5 px-3 py-2 rounded-xl border text-xs font-bold transition-all cursor-pointer shadow-md active:scale-95 ${
+            isApplausePlaying
+              ? 'bg-[#FF2E93] text-white border-[#FF2E93] animate-pulse shadow-[0_0_12px_rgba(255,46,147,0.7)]'
+              : 'bg-[#1C2555] hover:bg-[#2A377D] text-yellow-300 border-[#304192]'
+          }`}
+          title={isApplausePlaying ? 'Hentikan Tepuk Tangan' : 'Putar Efek Tepuk Tangan (applause.wav)'}
         >
           <span className="text-base leading-none">👏</span>
-          <span className="hidden sm:inline">Tepuk Tangan</span>
+          <span>{isApplausePlaying ? 'Stop Tepuk Tangan' : 'Tepuk Tangan'}</span>
         </button>
 
         {/* Soundboard Button: Intro Music (intro.mp3 toggle) */}

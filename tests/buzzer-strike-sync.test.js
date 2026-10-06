@@ -114,6 +114,19 @@ async function run() {
     assert.strictEqual(soundMsg.type, 'PLAY_SOUND');
     assert.strictEqual(soundMsg.sound, 'applause');
 
+    // Test 10: PLAY_SOUND broadcasts stop_applause and stop_music
+    const stopApplausePromise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'PLAY_SOUND', sound: 'stop_applause' }));
+    const stopApplauseMsg = await stopApplausePromise;
+    assert.strictEqual(stopApplauseMsg.type, 'PLAY_SOUND');
+    assert.strictEqual(stopApplauseMsg.sound, 'stop_applause');
+
+    const stopMusicPromise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'PLAY_SOUND', sound: 'stop_music' }));
+    const stopMusicMsg = await stopMusicPromise;
+    assert.strictEqual(stopMusicMsg.type, 'PLAY_SOUND');
+    assert.strictEqual(stopMusicMsg.sound, 'stop_music');
+
     ws.close();
     await serverInstance.close();
     console.log('✅ Buzzer & Strike State Synchronization and Soundboard test passed!');

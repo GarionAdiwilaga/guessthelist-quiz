@@ -42,6 +42,7 @@ export interface QuizState {
 
 export type SoundEffectType =
   | 'applause'
+  | 'stop_applause'
   | 'intro'
   | 'stop_music'
   | 'correct'

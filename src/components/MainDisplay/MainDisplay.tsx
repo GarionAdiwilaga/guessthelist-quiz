@@ -94,6 +94,9 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
         case 'applause':
           audioService.playApplauseSound();
           break;
+        case 'stop_applause':
+          audioService.stopApplauseSound();
+          break;
         case 'intro':
           audioService.playIntroMusic();
           break;
