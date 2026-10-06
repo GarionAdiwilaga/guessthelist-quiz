@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface StrikeSlotsProps {
   enabled: boolean;
@@ -11,6 +11,22 @@ export const StrikeSlots: React.FC<StrikeSlotsProps> = ({
   maxSlots,
   currentStrikes
 }) => {
+  const [prevStrikes, setPrevStrikes] = useState(currentStrikes);
+  const [isResetting, setIsResetting] = useState(false);
+
+  useEffect(() => {
+    if (currentStrikes === 0 && prevStrikes > 0) {
+      // Trigger reset dissolve animation
+      setIsResetting(true);
+      const timer = setTimeout(() => {
+        setIsResetting(false);
+      }, 500);
+      setPrevStrikes(0);
+      return () => clearTimeout(timer);
+    }
+    setPrevStrikes(currentStrikes);
+  }, [currentStrikes, prevStrikes]);
+
   if (!enabled) return null;
 
   const totalSlots = Math.max(2, Math.min(maxSlots, 5));
@@ -19,18 +35,16 @@ export const StrikeSlots: React.FC<StrikeSlotsProps> = ({
   return (
     <div className="flex items-center justify-center space-x-3 mt-2 sm:mt-3 mb-1 select-none">
       <div className="flex items-center space-x-2.5 px-4 py-1.5 rounded-xl bg-[#0C1032]/90 border border-[#FF2E93]/60 shadow-[0_0_15px_rgba(255,46,147,0.3)]">
-        <span className="text-[11px] sm:text-xs font-black text-[#FF2E93] tracking-widest uppercase mr-1 font-['Outfit',sans-serif]">
-          STRIKES
-        </span>
-
         {slotsArray.map((slotNum) => {
           const isStruck = slotNum <= currentStrikes;
           return (
             <div
               key={slotNum}
-              className={`relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center border-2 transition-all duration-300 ${
+              className={`relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center border-2 transition-all duration-400 ${
                 isStruck
-                  ? 'border-[#FF2E93] bg-[#FF2E93]/25 shadow-[0_0_10px_rgba(255,46,147,0.8)]'
+                  ? 'border-[#FF2E93] bg-[#FF2E93]/25 shadow-[0_0_12px_rgba(255,46,147,0.85)] scale-100'
+                  : isResetting
+                  ? 'border-[#202958] bg-[#090D28]/60 opacity-40 transition-opacity duration-500'
                   : 'border-[#202958] bg-[#090D28]/60'
               }`}
             >
@@ -39,7 +53,11 @@ export const StrikeSlots: React.FC<StrikeSlotsProps> = ({
                   ✕
                 </span>
               ) : (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#202958]" />
+                <div
+                  className={`w-1.5 h-1.5 rounded-full bg-[#202958] transition-all duration-300 ${
+                    isResetting ? 'scale-0' : 'scale-100'
+                  }`}
+                />
               )}
             </div>
           );

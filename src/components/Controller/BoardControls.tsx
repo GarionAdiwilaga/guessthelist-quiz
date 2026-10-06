@@ -1,28 +1,54 @@
 import React from 'react';
-import { Eye, RotateCcw, Lightbulb, Settings } from 'lucide-react';
+import { Eye, RotateCcw, Lightbulb, Settings, Tv, Play } from 'lucide-react';
 
 interface BoardControlsProps {
   showClue: boolean;
+  showTitleScreen: boolean;
   onRevealAll: () => void;
   onHideAll: () => void;
   onToggleClue: () => void;
+  onToggleTitleScreen: () => void;
   onOpenSettings: () => void;
 }
 
 export const BoardControls: React.FC<BoardControlsProps> = ({
   showClue,
+  showTitleScreen,
   onRevealAll,
   onHideAll,
   onToggleClue,
+  onToggleTitleScreen,
   onOpenSettings
 }) => {
   return (
     <div className="flex flex-wrap items-center justify-between gap-2.5 p-3 rounded-xl bg-[#0B0F2F] border border-[#1C255A]">
       <div className="flex flex-wrap items-center gap-2">
+        {/* Toggle Title / Game Board Screen */}
+        <button
+          onClick={onToggleTitleScreen}
+          className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-lg border text-xs font-black transition-all cursor-pointer shadow-md ${
+            showTitleScreen
+              ? 'bg-[#00F0FF] text-[#0A0D26] border-white shadow-[0_0_12px_rgba(0,240,255,0.6)]'
+              : 'bg-[#FF2E93] text-white border-[#FF2E93] shadow-[0_0_12px_rgba(255,46,147,0.5)] hover:brightness-110'
+          }`}
+        >
+          {showTitleScreen ? (
+            <>
+              <Play className="w-4 h-4 fill-current" />
+              <span>Buka Layar Game (Board)</span>
+            </>
+          ) : (
+            <>
+              <Tv className="w-4 h-4" />
+              <span>Transisi ke Layar Judul (Pause)</span>
+            </>
+          )}
+        </button>
+
         {/* Reveal All */}
         <button
           onClick={onRevealAll}
-          className="flex items-center space-x-1.5 px-3 py-2 rounded-lg bg-[#00F0FF]/20 hover:bg-[#00F0FF]/30 border border-[#00F0FF]/60 text-xs font-bold text-[#00F0FF] transition-all cursor-pointer"
+          className="flex items-center space-x-1.5 px-3 py-2 rounded-lg bg-[#00F0FF]/15 hover:bg-[#00F0FF]/25 border border-[#00F0FF]/60 text-xs font-bold text-[#00F0FF] transition-all cursor-pointer"
         >
           <Eye className="w-4 h-4" />
           <span>Buka Semua Jawaban</span>
@@ -34,7 +60,7 @@ export const BoardControls: React.FC<BoardControlsProps> = ({
           className="flex items-center space-x-1.5 px-3 py-2 rounded-lg bg-red-950/40 hover:bg-red-900/40 border border-red-500/50 text-xs font-bold text-red-400 transition-all cursor-pointer"
         >
           <RotateCcw className="w-4 h-4" />
-          <span>Tutup Semua (Reset Board)</span>
+          <span>Tutup Semua</span>
         </button>
 
         {/* Toggle Subtitle / Theme Description */}

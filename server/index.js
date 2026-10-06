@@ -18,8 +18,11 @@ const categories = database.categories;
 function createInitialState() {
   return {
     categoryId: categories[0]?.id ?? 1,
+    showTitleScreen: true, // Show title screen before category is selected
+    titleLogoUrl: null,
+    transitionWipeTimestamp: null,
     revealedItemIds: [],
-    showClue: false,
+    showClue: true,
     strikeSlotsEnabled: false,
     maxStrikeSlots: 3,
     currentStrikes: 0,
@@ -39,7 +42,7 @@ let currentState = createInitialState();
 
 export function startServer(preferredPort = 3001) {
   const app = express();
-  app.use(express.json({ limit: '15mb' }));
+  app.use(express.json({ limit: '25mb' }));
 
   // REST API
   app.get('/api/state', (req, res) => {
@@ -95,14 +98,31 @@ export function startServer(preferredPort = 3001) {
             }));
             break;
           }
+          case 'SET_SHOW_TITLE_SCREEN': {
+            currentState.showTitleScreen = Boolean(msg.show);
+            currentState.transitionWipeTimestamp = Date.now();
+            broadcastState();
+            break;
+          }
+          case 'UPDATE_TITLE_LOGO': {
+            currentState.titleLogoUrl = msg.logoUrl || null;
+            broadcastState();
+            break;
+          }
+          case 'TRIGGER_WIPE': {
+            currentState.transitionWipeTimestamp = Date.now();
+            broadcastState();
+            break;
+          }
           case 'SELECT_CATEGORY': {
             const targetCat = categories.find((c) => c.id === msg.categoryId);
             if (targetCat) {
               currentState.categoryId = targetCat.id;
               currentState.revealedItemIds = [];
               currentState.currentStrikes = 0;
-              currentState.showClue = false;
               currentState.quickBuzzerTriggerTime = null;
+              currentState.showTitleScreen = false;
+              currentState.transitionWipeTimestamp = Date.now();
               broadcastState();
             }
             break;

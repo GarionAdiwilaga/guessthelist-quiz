@@ -25,6 +25,9 @@ export interface CustomAudioConfig {
 
 export interface QuizState {
   categoryId: number;
+  showTitleScreen: boolean;
+  titleLogoUrl: string | null;
+  transitionWipeTimestamp: number | null;
   revealedItemIds: number[];
   showClue: boolean;
   strikeSlotsEnabled: boolean;
@@ -40,7 +43,10 @@ export interface QuizState {
 export type WSMessage =
   | { type: 'STATE_SNAPSHOT'; state: QuizState; categories: QuizCategory[] }
   | { type: 'CLIENT_HELLO' }
-  | { type: 'SELECT_CATEGORY'; categoryId: number }
+  | { type: 'SELECT_CATEGORY'; categoryId: number; transitionViaTitle?: boolean }
+  | { type: 'SET_SHOW_TITLE_SCREEN'; show: boolean }
+  | { type: 'UPDATE_TITLE_LOGO'; logoUrl: string | null }
+  | { type: 'TRIGGER_WIPE' }
   | { type: 'REVEAL_ITEM'; itemId: number }
   | { type: 'HIDE_ITEM'; itemId: number }
   | { type: 'REVEAL_ALL' }

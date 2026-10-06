@@ -4,6 +4,8 @@ import { HeaderBanner } from './HeaderBanner';
 import { GameBoard } from './GameBoard';
 import { StrikeSlots } from './StrikeSlots';
 import { BuzzerOverlay } from './BuzzerOverlay';
+import { TitleScreen } from './TitleScreen';
+import { TransitionWipe } from './TransitionWipe';
 import { audioService } from '../../services/audio';
 import { Volume2 } from 'lucide-react';
 
@@ -81,10 +83,23 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
 
   const activeBuzzerTime = state.quickBuzzerTriggerTime || strikeOverlayTime;
 
+  // Render Title/Transition Screen if showTitleScreen is true
+  if (state.showTitleScreen) {
+    return (
+      <div onClick={unlockAudio} className="relative h-screen max-h-screen overflow-hidden">
+        <TitleScreen
+          titleLogoUrl={state.titleLogoUrl}
+          isTransparent={isTransparent}
+        />
+        <TransitionWipe wipeTimestamp={state.transitionWipeTimestamp} />
+      </div>
+    );
+  }
+
   return (
     <div
       onClick={unlockAudio}
-      className={`h-screen max-h-screen w-full flex flex-col justify-between py-2 sm:py-3 px-3 sm:px-6 relative overflow-hidden select-none ${
+      className={`h-screen max-h-screen w-full flex flex-col justify-between pt-6 sm:pt-8 pb-3 px-4 sm:px-8 relative overflow-hidden select-none ${
         isTransparent
           ? 'bg-transparent'
           : 'bg-gradient-to-b from-[#0A0D26] via-[#0D1236] to-[#070A1E]'
@@ -116,14 +131,12 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
       <div className="z-10 w-full max-w-6xl mx-auto shrink-0">
         <HeaderBanner
           category={currentCategory}
-          revealedCount={revealedCount}
-          totalCount={items.length}
           showClue={state.showClue}
         />
       </div>
 
       {/* Center: 10-Slot Game Board */}
-      <div className="flex-1 flex items-center justify-center z-10 w-full max-w-6xl mx-auto min-h-0">
+      <div className="flex-1 flex items-center justify-center z-10 w-full max-w-6xl mx-auto min-h-0 my-auto">
         <GameBoard items={items} revealedItemIds={state.revealedItemIds} />
       </div>
 
@@ -135,7 +148,7 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
           currentStrikes={state.currentStrikes}
         />
 
-        <footer className="w-full text-center py-1">
+        <footer className="w-full text-center py-1 mt-1">
           <span className="text-[10px] text-[#00F0FF]/40 tracking-wider font-semibold uppercase">
             Wibu Gameshow Screen • Plaza Cosplay Day
           </span>
@@ -144,6 +157,9 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
 
       {/* Fullscreen Buzzer Overlay */}
       <BuzzerOverlay triggerTimestamp={activeBuzzerTime} />
+
+      {/* Holographic Wipe Transition */}
+      <TransitionWipe wipeTimestamp={state.transitionWipeTimestamp} />
     </div>
   );
 };

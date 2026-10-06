@@ -54,6 +54,17 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
     sendMessage({ type: 'TOGGLE_CLUE', showClue: !state.showClue });
   };
 
+  const handleToggleTitleScreen = () => {
+    sendMessage({
+      type: 'SET_SHOW_TITLE_SCREEN',
+      show: !state.showTitleScreen
+    });
+  };
+
+  const handleUpdateTitleLogo = (logoUrl: string | null) => {
+    sendMessage({ type: 'UPDATE_TITLE_LOGO', logoUrl });
+  };
+
   const handleUpdateStrikeConfig = (enabled: boolean, maxSlots: number) => {
     sendMessage({ type: 'UPDATE_STRIKE_CONFIG', enabled, maxSlots });
   };
@@ -82,13 +93,13 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
             </h1>
           </div>
           <p className="text-xs text-gray-400 mt-0.5">
-            Layar Pengendali Utama: Reveal jawaban, buzzer salah, dan pengaturan OBS.
+            Layar Pengendali: Transisi judul, buka jawaban, buzzer salah, dan pengaturan OBS.
           </p>
         </div>
 
         <div className="flex items-center space-x-2">
           <span className="text-xs px-3 py-1.5 rounded-lg bg-[#0E1540] border border-[#00F0FF]/40 text-[#00F0FF] font-black">
-            {state.revealedItemIds.length} / {currentCategory?.items.length || 10} Terbuka
+            {state.showTitleScreen ? '📺 Layar Judul (Pause)' : `🎮 Ronde: ${state.revealedItemIds.length}/10`}
           </span>
           <a
             href="/"
@@ -111,12 +122,14 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
-      {/* Board Utility Actions Bar */}
+      {/* Board Utility Actions Bar (Includes Title Screen Toggle) */}
       <BoardControls
         showClue={state.showClue}
+        showTitleScreen={state.showTitleScreen}
         onRevealAll={handleRevealAll}
         onHideAll={handleHideAll}
         onToggleClue={handleToggleClue}
+        onToggleTitleScreen={handleToggleTitleScreen}
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
@@ -141,6 +154,7 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         onClose={() => setIsSettingsOpen(false)}
         onUpdateStrikeConfig={handleUpdateStrikeConfig}
         onUpdateThemeMode={handleUpdateThemeMode}
+        onUpdateTitleLogo={handleUpdateTitleLogo}
         onUpdateAudioConfig={handleUpdateAudioConfig}
       />
     </div>

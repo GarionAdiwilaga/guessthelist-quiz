@@ -52,3 +52,23 @@
 .animate-pop-in {
   animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
+
+@keyframes wipeSweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  50% {
+    transform: translateX(0%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(120%) skewX(-18deg);
+  }
+}
+
+.animate-wipe-sweep {
+  animation: wipeSweep 0.9s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.animate-wipe-sweep-delay {
+  animation: wipeSweep 0.9s cubic-bezier(0.77, 0, 0.175, 1) 0.05s forwards;
+}

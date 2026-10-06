@@ -57,36 +57,27 @@ export const FlipCard: React.FC<FlipCardProps> = ({ item, isRevealed }) => {
         </div>
       </div>
 
-      {/* State 2: Revealed Answer */}
+      {/* State 2: Revealed Answer (No left box/star, right-aligned wrapped anime name) */}
       <div
-        className={`absolute inset-0 w-full h-full rounded-xl border-2 transition-all duration-500 flex items-center justify-between px-3 sm:px-4 ${
+        className={`absolute inset-0 w-full h-full rounded-xl border-2 transition-all duration-500 flex items-center justify-between px-4 sm:px-6 ${
           isRevealed
             ? 'opacity-100 scale-100 border-[#FFD600] bg-gradient-to-r from-[#171D50] via-[#222A6E] to-[#171D50] shadow-[0_0_20px_rgba(255,214,0,0.35)]'
             : 'opacity-0 scale-105 pointer-events-none'
         }`}
       >
-        {/* Left: Star / Check Icon Badge (Unranked) */}
-        <div className="flex items-center space-x-3 min-w-0 flex-1 mr-2">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-lg bg-gradient-to-br from-[#FFD600] to-[#FFAA00] flex items-center justify-center shadow-[0_0_10px_rgba(255,214,0,0.5)] border border-white/60">
-            <span className="text-base sm:text-lg text-[#0A0D26] font-black">
-              ★
-            </span>
-          </div>
-
-          {/* Answer Text */}
-          <div className="min-w-0 flex-1">
-            <span
-              className={`font-black text-white tracking-wide font-['Outfit',sans-serif] uppercase line-clamp-2 break-words leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] ${fontSizeClass}`}
-            >
-              {answerText}
-            </span>
-          </div>
+        {/* Left: Answer Text Only (No box or star) */}
+        <div className="min-w-0 flex-1 mr-3 flex items-center">
+          <span
+            className={`font-black text-white tracking-wide font-['Outfit',sans-serif] uppercase line-clamp-2 break-words leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] ${fontSizeClass}`}
+          >
+            {answerText}
+          </span>
         </div>
 
-        {/* Right: Anime Tag Pill */}
+        {/* Right: Anime Tag (Wrapped cleanly, right-horizontal, center-vertical) */}
         {item?.anime && (
-          <div className="shrink-0 max-w-[36%] ml-2">
-            <span className="inline-block px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-[#00F0FF]/20 text-[#00F0FF] border border-[#00F0FF]/60 truncate shadow-[0_0_6px_rgba(0,240,255,0.3)]">
+          <div className="shrink-0 max-w-[45%] flex items-center justify-end">
+            <span className="inline-block px-3 py-1 rounded-xl text-[10px] sm:text-xs font-semibold bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/50 text-right whitespace-normal break-words leading-tight shadow-[0_0_6px_rgba(0,240,255,0.25)]">
               {item.anime}
             </span>
           </div>

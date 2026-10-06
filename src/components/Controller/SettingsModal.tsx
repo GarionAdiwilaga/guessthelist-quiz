@@ -1,6 +1,6 @@
 import React from 'react';
 import { QuizState } from '../../types/quiz';
-import { X, Volume2, ShieldAlert, Monitor, Music, Upload } from 'lucide-react';
+import { X, Volume2, ShieldAlert, Monitor, Image, Upload, Trash2 } from 'lucide-react';
 
 interface SettingsModalProps {
   state: QuizState;
@@ -8,6 +8,7 @@ interface SettingsModalProps {
   onClose: () => void;
   onUpdateStrikeConfig: (enabled: boolean, maxSlots: number) => void;
   onUpdateThemeMode: (mode: 'stage' | 'transparent') => void;
+  onUpdateTitleLogo: (logoUrl: string | null) => void;
   onUpdateAudioConfig: (
     settings: Partial<
       QuizState['customAudio'] & { soundEnabled: boolean; soundVolume: number }
@@ -21,6 +22,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onClose,
   onUpdateStrikeConfig,
   onUpdateThemeMode,
+  onUpdateTitleLogo,
   onUpdateAudioConfig
 }) => {
   if (!isOpen) return null;
@@ -44,6 +46,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     reader.readAsDataURL(file);
   };
 
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      onUpdateTitleLogo(dataUrl);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-pop-in">
       <div className="relative w-full max-w-lg rounded-2xl bg-[#0D1236] border-2 border-[#00F0FF]/60 shadow-[0_0_35px_rgba(0,240,255,0.3)] p-6 text-white max-h-[90vh] overflow-y-auto">
@@ -63,8 +77,57 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </button>
         </div>
 
+        {/* Section: Custom PNG Logo for Title Screen */}
+        <div className="mb-5 p-4 rounded-xl bg-[#141A48] border border-[#232F72]">
+          <div className="flex items-center space-x-2 mb-2">
+            <Image className="w-4 h-4 text-[#00F0FF]" />
+            <span className="text-sm font-bold text-white uppercase tracking-wider">
+              Logo Layar Judul (Custom PNG)
+            </span>
+          </div>
+          <p className="text-xs text-gray-400 mb-3">
+            Ganti teks judul tengah di layar transisi dengan gambar/logo PNG kustom.
+          </p>
+
+          {state.titleLogoUrl ? (
+            <div className="flex items-center space-x-3 p-2 rounded-lg bg-black/40 border border-[#00F0FF]/40">
+              <img
+                src={state.titleLogoUrl}
+                alt="Logo preview"
+                className="h-12 w-auto object-contain bg-white/5 rounded p-1"
+              />
+              <div className="flex-1 min-w-0">
+                <span className="text-xs text-green-400 font-bold block">
+                  Logo PNG Aktif
+                </span>
+                <span className="text-[11px] text-gray-400">
+                  Akan ditampilkan di layar transisi.
+                </span>
+              </div>
+              <button
+                onClick={() => onUpdateTitleLogo(null)}
+                className="p-1.5 rounded-lg bg-red-950/60 hover:bg-red-900 border border-red-500/50 text-red-400 transition cursor-pointer"
+                title="Hapus Logo & Gunakan Teks Default"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <label className="flex items-center justify-center space-x-2 p-3 rounded-lg bg-[#0E133A] border-2 border-dashed border-[#2A3778] hover:border-[#00F0FF] cursor-pointer text-xs font-semibold text-gray-300 transition">
+              <Upload className="w-4 h-4 text-[#00F0FF]" />
+              <span>Pilih Gambar PNG Logo</span>
+              <input
+                type="file"
+                accept="image/png,image/webp,image/jpeg"
+                onChange={handleLogoUpload}
+                className="hidden"
+              />
+            </label>
+          )}
+        </div>
+
         {/* Section 1: Strike Slots Configuration */}
-        <div className="mb-6 p-4 rounded-xl bg-[#141A48] border border-[#232F72]">
+        <div className="mb-5 p-4 rounded-xl bg-[#141A48] border border-[#232F72]">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
               <ShieldAlert className="w-4 h-4 text-[#FF2E93]" />
@@ -86,7 +149,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </div>
 
           <p className="text-xs text-gray-400 mb-3">
-            Default dinonaktifkan (hanya buzzer instan). Jika diaktifkan, layar menampilkan indikator strike 2–5 slot.
+            Default dinonaktifkan (hanya buzzer instan). Jika diaktifkan, layar menampilkan slot strike (2–5 slot) di bawah board.
           </p>
 
           {state.strikeSlotsEnabled && (
@@ -114,7 +177,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         </div>
 
         {/* Section 2: Display Canvas & OBS Mode */}
-        <div className="mb-6 p-4 rounded-xl bg-[#141A48] border border-[#232F72]">
+        <div className="mb-5 p-4 rounded-xl bg-[#141A48] border border-[#232F72]">
           <div className="flex items-center space-x-2 mb-2">
             <Monitor className="w-4 h-4 text-[#00F0FF]" />
             <span className="text-sm font-bold text-white uppercase tracking-wider">
