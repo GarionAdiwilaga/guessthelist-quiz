@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { QuizState, QuizCategory, WSMessage } from '../../types/quiz';
 import { CategorySelector } from './CategorySelector';
 import { AnswerRoster } from './AnswerRoster';
+import { StrikeControls } from './StrikeControls';
+import { BoardControls } from './BoardControls';
+import { SettingsModal } from './SettingsModal';
 
 interface ControllerViewProps {
   state: QuizState;
@@ -14,6 +17,8 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
   categories,
   sendMessage
 }) => {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
   const currentCategory =
     categories.find((c) => c.id === state.categoryId) || categories[0];
 
@@ -29,25 +34,91 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
     }
   };
 
+  const handleSetStrikes = (strikes: number) => {
+    sendMessage({ type: 'SET_STRIKES', strikes });
+  };
+
+  const handleTriggerQuickBuzzer = () => {
+    sendMessage({ type: 'TRIGGER_QUICK_BUZZER' });
+  };
+
+  const handleRevealAll = () => {
+    sendMessage({ type: 'REVEAL_ALL' });
+  };
+
+  const handleHideAll = () => {
+    sendMessage({ type: 'HIDE_ALL' });
+  };
+
+  const handleToggleClue = () => {
+    sendMessage({ type: 'TOGGLE_CLUE', showClue: !state.showClue });
+  };
+
+  const handleUpdateStrikeConfig = (enabled: boolean, maxSlots: number) => {
+    sendMessage({ type: 'UPDATE_STRIKE_CONFIG', enabled, maxSlots });
+  };
+
+  const handleUpdateThemeMode = (mode: 'stage' | 'transparent') => {
+    sendMessage({ type: 'SET_THEME_MODE', mode });
+  };
+
+  const handleUpdateAudioConfig = (
+    settings: Partial<
+      QuizState['customAudio'] & { soundEnabled: boolean; soundVolume: number }
+    >
+  ) => {
+    sendMessage({ type: 'UPDATE_AUDIO_CONFIG', settings });
+  };
+
   return (
-    <div className="min-h-screen bg-[#070A1E] text-white p-4 md:p-6 max-w-7xl mx-auto flex flex-col space-y-6">
-      {/* Header */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#1E2656] gap-3">
+    <div className="min-h-screen bg-[#070A1E] text-white p-4 md:p-6 max-w-7xl mx-auto flex flex-col space-y-5">
+      {/* Header Bar */}
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#1E2656] gap-3">
         <div>
-          <h1 className="text-xl md:text-2xl font-black text-[#00F0FF] tracking-wide font-['Outfit',sans-serif]">
-            PANEL KONTROL HOST • FAMILY WIBU 100
-          </h1>
-          <p className="text-xs text-gray-400">
-            Kendali layar utama, reveal jawaban, buzzer salah & manajemen ronde.
+          <div className="flex items-center space-x-2">
+            <span className="text-xl text-[#00F0FF]">🎮</span>
+            <h1 className="text-xl md:text-2xl font-black text-[#00F0FF] tracking-wide font-['Outfit',sans-serif]">
+              HOST CONTROLLER • FAMILY WIBU 100
+            </h1>
+          </div>
+          <p className="text-xs text-gray-400 mt-0.5">
+            Layar Pengendali Utama: Reveal jawaban, buzzer salah, dan pengaturan OBS.
           </p>
         </div>
 
         <div className="flex items-center space-x-2">
-          <span className="text-xs px-2.5 py-1 rounded bg-[#0E1540] border border-[#00F0FF]/40 text-[#00F0FF] font-semibold">
+          <span className="text-xs px-3 py-1.5 rounded-lg bg-[#0E1540] border border-[#00F0FF]/40 text-[#00F0FF] font-black">
             {state.revealedItemIds.length} / {currentCategory?.items.length || 10} Terbuka
           </span>
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs px-3 py-1.5 rounded-lg bg-[#201A54] border border-[#FF2E93]/50 text-[#FF2E93] hover:text-white font-bold transition"
+          >
+            Buka Display ↗
+          </a>
         </div>
       </header>
+
+      {/* Strike & Buzzer Action Panel */}
+      <StrikeControls
+        strikeSlotsEnabled={state.strikeSlotsEnabled}
+        maxStrikeSlots={state.maxStrikeSlots}
+        currentStrikes={state.currentStrikes}
+        onSetStrikes={handleSetStrikes}
+        onTriggerQuickBuzzer={handleTriggerQuickBuzzer}
+        onOpenSettings={() => setIsSettingsOpen(true)}
+      />
+
+      {/* Board Utility Actions Bar */}
+      <BoardControls
+        showClue={state.showClue}
+        onRevealAll={handleRevealAll}
+        onHideAll={handleHideAll}
+        onToggleClue={handleToggleClue}
+        onOpenSettings={() => setIsSettingsOpen(true)}
+      />
 
       {/* Category Tabs */}
       <CategorySelector
@@ -56,11 +127,21 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         onSelectCategory={handleSelectCategory}
       />
 
-      {/* Answer Roster with Live Search */}
+      {/* Top 10 Answer Roster with Live Search Filter */}
       <AnswerRoster
         items={currentCategory?.items || []}
         revealedItemIds={state.revealedItemIds}
         onToggleReveal={handleToggleReveal}
+      />
+
+      {/* Settings Modal */}
+      <SettingsModal
+        state={state}
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        onUpdateStrikeConfig={handleUpdateStrikeConfig}
+        onUpdateThemeMode={handleUpdateThemeMode}
+        onUpdateAudioConfig={handleUpdateAudioConfig}
       />
     </div>
   );
