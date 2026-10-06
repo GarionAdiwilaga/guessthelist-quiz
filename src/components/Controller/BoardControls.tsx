@@ -37,7 +37,7 @@ export const BoardControls: React.FC<BoardControlsProps> = ({
           <span>Tutup Semua (Reset Board)</span>
         </button>
 
-        {/* Toggle Clue */}
+        {/* Toggle Subtitle / Theme Description */}
         <button
           onClick={onToggleClue}
           className={`flex items-center space-x-1.5 px-3 py-2 rounded-lg border text-xs font-bold transition-all cursor-pointer ${
@@ -47,7 +47,7 @@ export const BoardControls: React.FC<BoardControlsProps> = ({
           }`}
         >
           <Lightbulb className="w-4 h-4" />
-          <span>{showClue ? 'Sembunyikan Clue' : 'Tampilkan Clue'}</span>
+          <span>{showClue ? 'Sembunyikan Subtitle' : 'Tampilkan Subtitle'}</span>
         </button>
       </div>
 

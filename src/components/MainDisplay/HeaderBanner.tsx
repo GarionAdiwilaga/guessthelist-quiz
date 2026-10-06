@@ -15,53 +15,44 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = ({
   showClue
 }) => {
   return (
-    <header className="w-full flex flex-col items-center mb-6 select-none">
-      {/* Top Brand Pill */}
-      <div className="flex items-center space-x-2 px-4 py-1 rounded-full bg-gradient-to-r from-[#FF2E93] to-[#00F0FF] shadow-[0_0_15px_rgba(255,46,147,0.5)] mb-3">
-        <span className="text-xs md:text-sm font-black text-white tracking-widest uppercase font-['Outfit',sans-serif]">
+    <header className="w-full flex flex-col items-center select-none mb-3 sm:mb-4">
+      {/* Top Brand Tag */}
+      <div className="flex items-center space-x-2 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#FF2E93] to-[#00F0FF] shadow-[0_0_12px_rgba(255,46,147,0.4)] mb-2">
+        <span className="text-[10px] sm:text-xs font-black text-white tracking-widest uppercase font-['Outfit',sans-serif]">
           MiniGames • Family Wibu 100
         </span>
       </div>
 
-      {/* Main Category Banner Box */}
-      <div className="relative w-full max-w-5xl px-6 py-4 rounded-2xl bg-gradient-to-r from-[#141A4B] via-[#1E2669] to-[#141A4B] border-2 border-[#00F0FF] shadow-[0_0_30px_rgba(0,240,255,0.35)] flex items-center justify-between">
-        {/* Left Glow Ornament */}
-        <div className="hidden sm:flex items-center space-x-1 text-[#FFD600] text-xl drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]">
-          <span>✦</span>
-          <span>✦</span>
-        </div>
-
-        {/* Center: Emoji & Title */}
-        <div className="flex-1 text-center px-4">
-          <div className="flex items-center justify-center space-x-3">
+      {/* Main Header Container */}
+      <div className="relative w-full max-w-5xl px-5 py-3 rounded-2xl bg-gradient-to-r from-[#121744] via-[#1B2362] to-[#121744] border-2 border-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.3)] flex items-center justify-between gap-4">
+        {/* Left / Center: Category Emoji + Title + Subtitle Description */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center space-x-2.5 sm:space-x-3">
             {category?.emoji && (
-              <span className="text-3xl md:text-4xl drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+              <span className="text-2xl sm:text-3xl shrink-0 drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]">
                 {category.emoji}
               </span>
             )}
-            <h1 className="text-2xl md:text-4xl font-extrabold text-white tracking-wide font-['Outfit',sans-serif] drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] uppercase">
+            <h1 className="text-lg sm:text-2xl lg:text-3xl font-black text-white tracking-wide font-['Outfit',sans-serif] uppercase leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] truncate">
               {category?.category || 'Memuat Kategori...'}
             </h1>
           </div>
+
+          {/* Subtitle: Theme Description / Clue */}
+          {showClue && category?.clue && (
+            <p className="mt-1 text-xs sm:text-sm text-[#00F0FF]/90 font-medium leading-snug drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] line-clamp-2">
+              {category.clue}
+            </p>
+          )}
         </div>
 
-        {/* Right: Score/Progress Chip */}
-        <div className="shrink-0 px-4 py-1.5 rounded-xl bg-[#0A0D26]/80 border border-[#FFD600]/80 shadow-[0_0_12px_rgba(255,214,0,0.4)]">
-          <span className="text-sm md:text-base font-black text-[#FFD600] font-['Fredoka',sans-serif]">
+        {/* Right: Counter Badge */}
+        <div className="shrink-0 px-3.5 py-1.5 rounded-xl bg-[#090D28]/90 border border-[#FFD600]/80 shadow-[0_0_10px_rgba(255,214,0,0.3)]">
+          <span className="text-xs sm:text-sm font-black text-[#FFD600] font-['Fredoka',sans-serif]">
             {revealedCount} / {totalCount}
           </span>
         </div>
       </div>
-
-      {/* Optional Clue Banner */}
-      {showClue && category?.clue && (
-        <div className="w-full max-w-4xl mt-3 px-6 py-2.5 rounded-xl bg-[#FF2E93]/15 border border-[#FF2E93]/60 shadow-[0_0_20px_rgba(255,46,147,0.3)] animate-pop-in">
-          <p className="text-center text-sm md:text-base font-medium text-[#FFE6F2] drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
-            <span className="font-bold text-[#FF2E93] mr-2">💡 CLUE:</span>
-            {category.clue}
-          </p>
-        </div>
-      )}
     </header>
   );
 };

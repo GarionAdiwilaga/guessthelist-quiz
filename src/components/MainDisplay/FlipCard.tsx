@@ -3,90 +3,94 @@ import { QuizItem } from '../../types/quiz';
 
 interface FlipCardProps {
   item?: QuizItem;
-  slotNumber: number;
+  slotIndex: number;
   isRevealed: boolean;
 }
 
 function getAnswerFontSize(text: string): string {
   const len = text.trim().length;
-  if (len <= 12) {
-    return 'text-lg md:text-2xl';
-  } else if (len <= 20) {
-    return 'text-base md:text-xl';
+  if (len <= 14) {
+    return 'text-base sm:text-lg lg:text-xl';
+  } else if (len <= 24) {
+    return 'text-sm sm:text-base lg:text-lg';
   } else {
-    return 'text-sm md:text-base';
+    return 'text-xs sm:text-sm lg:text-base';
   }
 }
 
-export const FlipCard: React.FC<FlipCardProps> = ({ item, slotNumber, isRevealed }) => {
-  const displayRank = item ? item.rank : slotNumber;
-  const formattedSlot = String(slotNumber).padStart(2, '0');
+export const FlipCard: React.FC<FlipCardProps> = ({ item, isRevealed }) => {
   const answerText = item?.answer || '???';
   const fontSizeClass = getAnswerFontSize(answerText);
 
   return (
-    <div className="w-full h-20 md:h-24 perspective-1000 select-none">
+    <div className="w-full h-14 sm:h-16 lg:h-18 select-none relative rounded-xl overflow-hidden shadow-lg transition-all duration-300">
+      {/* State 1: Covered / Mystery Slot */}
       <div
-        className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${
-          isRevealed ? 'rotate-y-180' : ''
+        className={`absolute inset-0 w-full h-full rounded-xl border-2 transition-all duration-500 flex items-center justify-between px-4 sm:px-6 ${
+          isRevealed
+            ? 'opacity-0 scale-95 pointer-events-none'
+            : 'opacity-100 scale-100 border-[#00F0FF]/60 bg-gradient-to-r from-[#111742] via-[#1A235E] to-[#111742] shadow-[0_4px_16px_rgba(0,0,0,0.5)]'
         }`}
       >
-        {/* FRONT: Covered Slot */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rounded-xl overflow-hidden border-2 border-[#00F0FF]/60 bg-gradient-to-b from-[#161D4C] to-[#0D1236] shadow-[0_6px_20px_rgba(0,0,0,0.6)] flex items-center justify-between px-6 transition-all duration-300">
-          {/* Subtle mechanical horizontal lines */}
-          <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(0deg,#00F0FF,#00F0FF_2px,transparent_2px,transparent_10px)] pointer-events-none" />
+        {/* Subtle horizontal scanline */}
+        <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(0deg,#00F0FF,#00F0FF_1px,transparent_1px,transparent_6px)] pointer-events-none" />
 
-          {/* Left indicator icon */}
-          <div className="flex items-center space-x-2 z-10">
-            <span className="text-xl md:text-2xl text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]">★</span>
-            <div className="h-6 w-1 bg-[#00F0FF]/40 rounded-full" />
-          </div>
+        {/* Left Deco */}
+        <div className="flex items-center space-x-1.5 z-10 text-[#00F0FF]/50 text-base">
+          <span>◆</span>
+          <div className="w-4 h-0.5 bg-[#00F0FF]/30 rounded-full" />
+        </div>
 
-          {/* Center Slot Number */}
-          <div className="z-10 flex items-center justify-center">
-            <div className="px-5 py-1.5 rounded-lg bg-[#0A0D26]/80 border border-[#00F0FF]/40 shadow-inner">
-              <span className="text-3xl md:text-4xl font-extrabold text-[#FFD600] tracking-wider drop-shadow-[0_2px_10px_rgba(255,214,0,0.5)] font-['Fredoka',sans-serif]">
-                {formattedSlot}
-              </span>
-            </div>
-          </div>
-
-          {/* Right indicator icon */}
-          <div className="flex items-center space-x-2 z-10">
-            <div className="h-6 w-1 bg-[#00F0FF]/40 rounded-full" />
-            <span className="text-xl md:text-2xl text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]">★</span>
+        {/* Center Mystery Mark "?" */}
+        <div className="z-10 flex items-center justify-center">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#090D28]/90 border border-[#00F0FF]/50 flex items-center justify-center shadow-[0_0_12px_rgba(0,240,255,0.3)]">
+            <span className="text-2xl sm:text-3xl font-black text-[#FFD600] font-['Fredoka',sans-serif] drop-shadow-[0_0_10px_rgba(255,214,0,0.6)]">
+              ?
+            </span>
           </div>
         </div>
 
-        {/* BACK: Revealed Answer */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-xl overflow-hidden border-2 border-[#FFD600] bg-gradient-to-r from-[#1A1F52] via-[#242A68] to-[#1A1F52] shadow-[0_8px_25px_rgba(255,214,0,0.3)] flex items-center justify-between px-3 md:px-5">
-          {/* Rank Badge & Answer Title */}
-          <div className="flex items-center space-x-2.5 md:space-x-3.5 min-w-0 flex-1 mr-2">
-            <div className="w-9 h-9 md:w-11 md:h-11 shrink-0 rounded-lg bg-gradient-to-br from-[#FFD600] to-[#FFAA00] flex items-center justify-center shadow-[0_0_12px_rgba(255,214,0,0.6)] border border-white/50">
-              <span className="text-lg md:text-xl font-black text-[#0A0D26] font-['Fredoka',sans-serif]">
-                {displayRank}
-              </span>
-            </div>
+        {/* Right Deco */}
+        <div className="flex items-center space-x-1.5 z-10 text-[#00F0FF]/50 text-base">
+          <div className="w-4 h-0.5 bg-[#00F0FF]/30 rounded-full" />
+          <span>◆</span>
+        </div>
+      </div>
 
-            {/* Answer Title: Never truncated, cleanly wrapped */}
-            <div className="min-w-0 flex-1">
-              <span
-                className={`font-black text-white tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-['Outfit',sans-serif] uppercase line-clamp-2 break-words leading-tight ${fontSizeClass}`}
-              >
-                {answerText}
-              </span>
-            </div>
+      {/* State 2: Revealed Answer */}
+      <div
+        className={`absolute inset-0 w-full h-full rounded-xl border-2 transition-all duration-500 flex items-center justify-between px-3 sm:px-4 ${
+          isRevealed
+            ? 'opacity-100 scale-100 border-[#FFD600] bg-gradient-to-r from-[#171D50] via-[#222A6E] to-[#171D50] shadow-[0_0_20px_rgba(255,214,0,0.35)]'
+            : 'opacity-0 scale-105 pointer-events-none'
+        }`}
+      >
+        {/* Left: Star / Check Icon Badge (Unranked) */}
+        <div className="flex items-center space-x-3 min-w-0 flex-1 mr-2">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-lg bg-gradient-to-br from-[#FFD600] to-[#FFAA00] flex items-center justify-center shadow-[0_0_10px_rgba(255,214,0,0.5)] border border-white/60">
+            <span className="text-base sm:text-lg text-[#0A0D26] font-black">
+              ★
+            </span>
           </div>
 
-          {/* Anime Tag / Subtitle */}
-          {item?.anime && (
-            <div className="shrink-0 max-w-[38%]">
-              <span className="inline-block px-2.5 py-1 rounded-full text-[11px] md:text-xs font-semibold bg-[#00F0FF]/20 text-[#00F0FF] border border-[#00F0FF]/60 truncate shadow-[0_0_8px_rgba(0,240,255,0.3)]">
-                {item.anime}
-              </span>
-            </div>
-          )}
+          {/* Answer Text */}
+          <div className="min-w-0 flex-1">
+            <span
+              className={`font-black text-white tracking-wide font-['Outfit',sans-serif] uppercase line-clamp-2 break-words leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] ${fontSizeClass}`}
+            >
+              {answerText}
+            </span>
+          </div>
         </div>
+
+        {/* Right: Anime Tag Pill */}
+        {item?.anime && (
+          <div className="shrink-0 max-w-[36%] ml-2">
+            <span className="inline-block px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-[#00F0FF]/20 text-[#00F0FF] border border-[#00F0FF]/60 truncate shadow-[0_0_6px_rgba(0,240,255,0.3)]">
+              {item.anime}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

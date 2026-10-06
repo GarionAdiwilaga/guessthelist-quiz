@@ -27,7 +27,7 @@ export const AnswerRoster: React.FC<AnswerRosterProps> = ({
       {/* Search Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <label className="text-xs font-bold text-[#FFD600] tracking-wider uppercase">
-          DAFTAR JAWABAN (TOP 10):
+          DAFTAR 10 JAWABAN (UN-RANKED LIST):
         </label>
 
         {/* Live Search Input */}
@@ -53,7 +53,7 @@ export const AnswerRoster: React.FC<AnswerRosterProps> = ({
 
       {/* Answer Cards Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        {sortedItems.map((item) => {
+        {sortedItems.map((item, index) => {
           const isRevealed = revealedItemIds.includes(item.id);
           const isHighlighted =
             normalizedQuery.length > 0 &&
@@ -66,6 +66,7 @@ export const AnswerRoster: React.FC<AnswerRosterProps> = ({
             <AnswerCard
               key={item.id}
               item={item}
+              index={index}
               isRevealed={isRevealed}
               isHighlighted={isHighlighted}
               onToggleReveal={onToggleReveal}
