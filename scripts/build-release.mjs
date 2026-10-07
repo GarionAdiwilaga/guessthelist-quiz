@@ -44,16 +44,46 @@ if (fs.existsSync(path.join(rootDir, 'public/logo.png'))) {
   fs.copyFileSync(path.join(rootDir, 'public/logo.png'), path.join(targetDir, 'public/logo.png'));
 }
 
-fs.copyFileSync(
-  path.join(rootDir, 'anime-family-database-ranked-top10.json'),
-  path.join(targetDir, 'anime-family-database-ranked-top10.json')
+// Clean default starter databank for portable release (sample database is kept in GitHub repo)
+const cleanStarterDb = {
+  quizType: 'top10_list',
+  title: 'Guess The List Quiz',
+  language: 'id',
+  instructions: 'Tebak semua item yang masuk ke dalam daftar ini.',
+  categories: [
+    {
+      id: 1,
+      category: 'Daftar Contoh (Silakan Ubah di Bank Data)',
+      emoji: '🎯',
+      clue: 'Ini adalah daftar contoh bawaan. Buka Bank Data di Host Controller untuk mengimpor sample data dari repo GitHub atau menambah soal Anda sendiri.',
+      answerType: 'Umum',
+      items: [
+        { id: 101, rank: 1, answer: 'Jawaban #1', anime: 'Keterangan 1', aliases: [], reason: 'Petunjuk 1' },
+        { id: 102, rank: 2, answer: 'Jawaban #2', anime: 'Keterangan 2', aliases: [], reason: 'Petunjuk 2' },
+        { id: 103, rank: 3, answer: 'Jawaban #3', anime: 'Keterangan 3', aliases: [], reason: 'Petunjuk 3' },
+        { id: 104, rank: 4, answer: 'Jawaban #4', anime: 'Keterangan 4', aliases: [], reason: 'Petunjuk 4' },
+        { id: 105, rank: 5, answer: 'Jawaban #5', anime: 'Keterangan 5', aliases: [], reason: 'Petunjuk 5' },
+        { id: 106, rank: 6, answer: 'Jawaban #6', anime: 'Keterangan 6', aliases: [], reason: 'Petunjuk 6' },
+        { id: 107, rank: 7, answer: 'Jawaban #7', anime: 'Keterangan 7', aliases: [], reason: 'Petunjuk 7' },
+        { id: 108, rank: 8, answer: 'Jawaban #8', anime: 'Keterangan 8', aliases: [], reason: 'Petunjuk 8' },
+        { id: 109, rank: 9, answer: 'Jawaban #9', anime: 'Keterangan 9', aliases: [], reason: 'Petunjuk 9' },
+        { id: 110, rank: 10, answer: 'Jawaban #10', anime: 'Keterangan 10', aliases: [], reason: 'Petunjuk 10' }
+      ]
+    }
+  ]
+};
+
+fs.writeFileSync(
+  path.join(targetDir, 'anime-family-database-ranked-top10.json'),
+  JSON.stringify(cleanStarterDb, null, 2),
+  'utf8'
 );
-if (fs.existsSync(path.join(rootDir, 'anime-family-database-ranked-top10.default.json'))) {
-  fs.copyFileSync(
-    path.join(rootDir, 'anime-family-database-ranked-top10.default.json'),
-    path.join(targetDir, 'anime-family-database-ranked-top10.default.json')
-  );
-}
+fs.writeFileSync(
+  path.join(targetDir, 'anime-family-database-ranked-top10.default.json'),
+  JSON.stringify(cleanStarterDb, null, 2),
+  'utf8'
+);
+
 if (fs.existsSync(path.join(rootDir, 'LICENSE'))) {
   fs.copyFileSync(path.join(rootDir, 'LICENSE'), path.join(targetDir, 'LICENSE'));
 }
@@ -177,6 +207,16 @@ Cari alamat IP lokal komputer server (misal 192.168.1.10), lalu buka:
 - Controller: http://192.168.1.10:3001/controller
 
 Semua perubahan data dan klik jawaban akan tersinkronisasi secara instan melalui WebSocket.
+
+Mengimpor Data Sampel (Sample Databank):
+----------------------------------------
+Rilis portabel ini menyertakan bank data contoh bawaan yang bersih.
+Untuk mengunduh dataset contoh lengkap (Anime / Family Wibu 100):
+1. Unduh file sample databank JSON dari repositori resmi:
+   https://github.com/GarionAdiwilaga/guessthelist-quiz
+2. Di Host Controller (http://localhost:3001/controller), klik tombol "Bank Data".
+3. Pilih "Tab JSON" -> klik "Impor File JSON" dan pilih file yang diunduh.
+4. Klik "Terapkan & Simpan" untuk langsung memainkan kuis dengan data tersebut.
 `;
 fs.writeFileSync(path.join(targetDir, 'README.txt'), readmeTxt, 'utf8');
 

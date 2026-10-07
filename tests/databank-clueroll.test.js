@@ -2,6 +2,9 @@ import { startServer } from '../server/index.js';
 import WebSocket from 'ws';
 import assert from 'node:assert';
 
+import fs from 'node:fs';
+import path from 'node:path';
+
 function waitForMessage(ws, predicate = () => true) {
   return new Promise((resolve) => {
     const handler = (data) => {
@@ -16,6 +19,8 @@ function waitForMessage(ws, predicate = () => true) {
 }
 
 async function run() {
+  const dbPath = path.resolve(process.cwd(), 'anime-family-database-ranked-top10.json');
+  const backup = fs.existsSync(dbPath) ? fs.readFileSync(dbPath, 'utf8') : null;
   const testPort = 3399;
   const serverInstance = await startServer(testPort);
   const wsUrl = `ws://localhost:${testPort}/ws`;
@@ -96,11 +101,14 @@ async function run() {
     ws2.close();
     await serverInstance.close();
     console.log('🎉 All databank & clue roll tests passed!');
-    process.exit(0);
   } catch (err) {
     console.error('Test error:', err);
     await serverInstance.close();
-    process.exit(1);
+    process.exitCode = 1;
+  } finally {
+    if (backup && fs.existsSync(dbPath)) {
+      fs.writeFileSync(dbPath, backup, 'utf8');
+    }
   }
 }
 

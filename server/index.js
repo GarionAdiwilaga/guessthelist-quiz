@@ -11,7 +11,51 @@ const rootDir = path.resolve(__dirname, '..');
 
 // Load database
 const dbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.json');
-let database = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+const defaultDbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.default.json');
+
+const starterTemplate = {
+  quizType: 'top10_list',
+  title: 'Guess The List Quiz',
+  language: 'id',
+  instructions: 'Tebak semua item yang masuk ke dalam daftar ini.',
+  categories: [
+    {
+      id: 1,
+      category: 'Daftar Contoh (Silakan Ubah di Bank Data)',
+      emoji: '🎯',
+      clue: 'Ini adalah daftar contoh bawaan. Buka Bank Data di Host Controller untuk mengimpor sample data dari repo atau menambah soal Anda sendiri.',
+      answerType: 'Umum',
+      items: [
+        { id: 101, rank: 1, answer: 'Jawaban #1', anime: 'Keterangan 1', aliases: [], reason: 'Petunjuk 1' },
+        { id: 102, rank: 2, answer: 'Jawaban #2', anime: 'Keterangan 2', aliases: [], reason: 'Petunjuk 2' },
+        { id: 103, rank: 3, answer: 'Jawaban #3', anime: 'Keterangan 3', aliases: [], reason: 'Petunjuk 3' },
+        { id: 104, rank: 4, answer: 'Jawaban #4', anime: 'Keterangan 4', aliases: [], reason: 'Petunjuk 4' },
+        { id: 105, rank: 5, answer: 'Jawaban #5', anime: 'Keterangan 5', aliases: [], reason: 'Petunjuk 5' },
+        { id: 106, rank: 6, answer: 'Jawaban #6', anime: 'Keterangan 6', aliases: [], reason: 'Petunjuk 6' },
+        { id: 107, rank: 7, answer: 'Jawaban #7', anime: 'Keterangan 7', aliases: [], reason: 'Petunjuk 7' },
+        { id: 108, rank: 8, answer: 'Jawaban #8', anime: 'Keterangan 8', aliases: [], reason: 'Petunjuk 8' },
+        { id: 109, rank: 9, answer: 'Jawaban #9', anime: 'Keterangan 9', aliases: [], reason: 'Petunjuk 9' },
+        { id: 110, rank: 10, answer: 'Jawaban #10', anime: 'Keterangan 10', aliases: [], reason: 'Petunjuk 10' }
+      ]
+    }
+  ]
+};
+
+let database;
+try {
+  if (fs.existsSync(dbPath)) {
+    database = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+  } else if (fs.existsSync(defaultDbPath)) {
+    database = JSON.parse(fs.readFileSync(defaultDbPath, 'utf8'));
+    fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');
+  } else {
+    database = starterTemplate;
+    fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');
+  }
+} catch (err) {
+  console.error('[Quiz Server] Error reading database, using fallback starter template:', err.message);
+  database = starterTemplate;
+}
 let categories = database.categories;
 
 // Default initial state
@@ -116,12 +160,12 @@ export function startServer(preferredPort = 3001) {
 
   app.post('/api/database/reset', (req, res) => {
     try {
-      const defaultPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.default.json');
-      if (!fs.existsSync(defaultPath)) {
-        return res.status(404).json({ error: 'Default databank tidak ditemukan' });
+      let defaultDb;
+      if (fs.existsSync(defaultDbPath)) {
+        defaultDb = JSON.parse(fs.readFileSync(defaultDbPath, 'utf8'));
+      } else {
+        defaultDb = starterTemplate;
       }
-      const raw = fs.readFileSync(defaultPath, 'utf8');
-      const defaultDb = JSON.parse(raw);
       database = defaultDb;
       categories = defaultDb.categories;
       fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');

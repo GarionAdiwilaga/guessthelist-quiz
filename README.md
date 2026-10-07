@@ -148,6 +148,22 @@ The production server starts on port `3001` (or `PORT` environment variable) and
 
 ---
 
+## 📥 Sample Databank (Contoh Data Kuis)
+
+Repository ini menyertakan dataset contoh lengkap (**Family Wibu 100**) yang siap diunduh dan diimpor:
+
+- **File**: [`samples/anime-family-databank.sample.json`](samples/anime-family-databank.sample.json) atau [`anime-family-database-ranked-top10.json`](anime-family-database-ranked-top10.json)
+- **Direct Raw Download**: [Unduh Sample Databank JSON](https://raw.githubusercontent.com/GarionAdiwilaga/guessthelist-quiz/main/samples/anime-family-databank.sample.json)
+
+### Cara Mengimpor ke Aplikasi:
+1. Unduh file sample JSON di atas ke komputer Anda.
+2. Buka **Host Controller** (`http://localhost:3001/?view=controller`).
+3. Klik tombol **"Bank Data"** pada bilah aksi bagian atas.
+4. Pilih tab **"Tab JSON"**, klik **"Impor File JSON"**, lalu pilih file JSON yang telah diunduh (atau salin-tempel isi JSON secara langsung).
+5. Klik **"Terapkan & Simpan"**. Semua kategori dan jawaban kuis akan langsung aktif dan tersinkronisasi secara real-time ke Layar Utama (Display)!
+
+---
+
 ## 🎮 Host Controller Shortcuts & Actions
 
 | Button / Control | Description |
