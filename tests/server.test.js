@@ -24,8 +24,8 @@ async function run() {
 
     assert.strictEqual(init1.type, 'STATE_SNAPSHOT');
     assert.strictEqual(init2.type, 'STATE_SNAPSHOT');
-    assert.strictEqual(init2.state.categoryId, 1);
-    assert.strictEqual(init2.categories.length, 4);
+    assert.strictEqual(init2.state.categoryId, init2.categories[0].id);
+    assert.ok(init2.categories.length >= 1);
 
     // Client 1 reveals item
     const itemToReveal = init1.categories[0].items[0].id;

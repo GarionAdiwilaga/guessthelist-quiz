@@ -1,21 +1,12 @@
 import assert from 'node:assert';
+import { getAnswerFontSize } from '../src/components/MainDisplay/FlipCard';
 
-export function getAnswerFontSizeClass(text: string): string {
-  const len = text.trim().length;
-  if (len <= 14) {
-    return 'text-sm sm:text-base lg:text-lg';
-  } else if (len <= 24) {
-    return 'text-xs sm:text-sm lg:text-base';
-  } else {
-    return 'text-[11px] sm:text-xs lg:text-sm';
-  }
-}
-
-// Test short names
-assert.strictEqual(getAnswerFontSizeClass('Rem'), 'text-sm sm:text-base lg:text-lg');
-// Test medium names
-assert.strictEqual(getAnswerFontSizeClass('Mai Sakurajima'), 'text-sm sm:text-base lg:text-lg');
-// Test long titles
-assert.strictEqual(getAnswerFontSizeClass('Koro-sensei (Assassination Classroom)'), 'text-[11px] sm:text-xs lg:text-sm');
+// Test short names (<= 14 chars)
+assert.strictEqual(getAnswerFontSize('Rem'), 'text-base sm:text-lg lg:text-xl');
+assert.strictEqual(getAnswerFontSize('Mai Sakurajima'), 'text-base sm:text-lg lg:text-xl');
+// Test medium names (<= 26 chars)
+assert.strictEqual(getAnswerFontSize('Sousou no Frieren'), 'text-sm sm:text-base lg:text-lg');
+// Test long titles (> 26 chars)
+assert.strictEqual(getAnswerFontSize('Spice and Wolf (Ookami to Koushinryou)'), 'text-xs sm:text-sm lg:text-base');
 
 console.log('FlipCard responsive text sizing test passed!');

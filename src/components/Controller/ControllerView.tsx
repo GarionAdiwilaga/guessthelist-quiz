@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { QuizState, QuizCategory, WSMessage } from '../../types/quiz';
+import { QuizState, QuizCategory, WSMessage, QuizDatabase } from '../../types/quiz';
 import { socketClient } from '../../services/socket';
 import { CategorySelector } from './CategorySelector';
 import { AnswerRoster } from './AnswerRoster';
 import { StrikeControls } from './StrikeControls';
 import { BoardControls } from './BoardControls';
 import { SettingsModal } from './SettingsModal';
+import { DataEditorModal } from './DataEditorModal';
 
 interface ControllerViewProps {
   state: QuizState;
@@ -19,6 +20,7 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
   sendMessage
 }) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isDataEditorOpen, setIsDataEditorOpen] = useState(false);
   const [isIntroPlaying, setIsIntroPlaying] = useState(false);
   const [isApplausePlaying, setIsApplausePlaying] = useState(false);
 
@@ -134,12 +136,42 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
     sendMessage({ type: 'SET_THEME_MODE', mode });
   };
 
+  const handleToggleBgm = () => {
+    sendMessage({ type: 'TOGGLE_BGM' });
+  };
+
+  const handleSetBgmVolume = (volume: number) => {
+    sendMessage({ type: 'SET_BGM_VOLUME', volume });
+  };
+
   const handleUpdateAudioConfig = (
     settings: Partial<
-      QuizState['customAudio'] & { soundEnabled: boolean; soundVolume: number }
+      QuizState['customAudio'] & {
+        soundEnabled: boolean;
+        soundVolume: number;
+        bgmEnabled: boolean;
+        bgmVolume: number;
+        bgmPlaying: boolean;
+      }
     >
   ) => {
     sendMessage({ type: 'UPDATE_AUDIO_CONFIG', settings });
+  };
+
+  const handleRollClue = () => {
+    sendMessage({ type: 'ROLL_CLUE' });
+  };
+
+  const handleDismissClue = () => {
+    sendMessage({ type: 'DISMISS_CLUE' });
+  };
+
+  const handleSaveCategories = (updatedCategories: QuizCategory[]) => {
+    sendMessage({ type: 'SAVE_CATEGORIES', categories: updatedCategories });
+  };
+
+  const handleUpdateDatabank = (updatedDatabase: QuizDatabase) => {
+    sendMessage({ type: 'UPDATE_DATABANK', database: updatedDatabase });
   };
 
   return (
@@ -162,6 +194,13 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
           <span className="text-xs px-3 py-1.5 rounded-lg bg-[#0E1540] border border-[#00F0FF]/40 text-[#00F0FF] font-black">
             {state.showTitleScreen ? '📺 Layar Judul (Pause)' : `🎮 Ronde: ${state.revealedItemIds.length}/10`}
           </span>
+          <button
+            onClick={() => setIsDataEditorOpen(true)}
+            className="text-xs px-3 py-1.5 rounded-lg bg-[#00F0FF]/15 border border-[#00F0FF]/50 text-[#00F0FF] hover:text-white font-bold transition cursor-pointer"
+            title="Buka Bank Data & Editor Soal"
+          >
+            📚 Bank Data
+          </button>
           <a
             href="/"
             target="_blank"
@@ -184,16 +223,24 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         onPlaySound={handlePlaySound}
         isIntroPlaying={isIntroPlaying}
         isApplausePlaying={isApplausePlaying}
+        bgmPlaying={state.bgmPlaying}
+        bgmVolume={state.bgmVolume}
+        onToggleBgm={handleToggleBgm}
+        onSetBgmVolume={handleSetBgmVolume}
       />
 
       {/* Board Utility Actions Bar (Includes Title Screen Toggle) */}
       <BoardControls
         showClue={state.showClue}
         showTitleScreen={state.showTitleScreen}
+        isCluePopupOpen={state.isCluePopupOpen}
         onRevealAll={handleRevealAll}
         onHideAll={handleHideAll}
         onToggleClue={handleToggleClue}
         onToggleTitleScreen={handleToggleTitleScreen}
+        onRollClue={handleRollClue}
+        onDismissClue={handleDismissClue}
+        onOpenDataEditor={() => setIsDataEditorOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
@@ -220,6 +267,15 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         onUpdateThemeMode={handleUpdateThemeMode}
         onUpdateTitleLogo={handleUpdateTitleLogo}
         onUpdateAudioConfig={handleUpdateAudioConfig}
+      />
+
+      {/* Bank Data & Category Editor Modal */}
+      <DataEditorModal
+        isOpen={isDataEditorOpen}
+        categories={categories}
+        onClose={() => setIsDataEditorOpen(false)}
+        onSaveCategories={handleSaveCategories}
+        onUpdateDatabank={handleUpdateDatabank}
       />
     </div>
   );

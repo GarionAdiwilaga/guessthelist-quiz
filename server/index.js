@@ -11,8 +11,8 @@ const rootDir = path.resolve(__dirname, '..');
 
 // Load database
 const dbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.json');
-const database = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-const categories = database.categories;
+let database = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+let categories = database.categories;
 
 // Default initial state
 function createInitialState() {
@@ -29,12 +29,19 @@ function createInitialState() {
     quickBuzzerTriggerTime: null,
     soundEnabled: true,
     soundVolume: 0.8,
+    bgmEnabled: true,
+    bgmVolume: 0.8,
+    bgmPlaying: true,
     customAudio: {
       useCustomSound: false,
       correctAudioDataUrl: null,
       wrongAudioDataUrl: null
     },
-    themeMode: 'stage'
+    themeMode: 'stage',
+    clueRollTimestamp: null,
+    clueRollTargetItemId: null,
+    isCluePopupOpen: false,
+    bgmOffsetMs: 0
   };
 }
 
@@ -51,6 +58,85 @@ export function startServer(preferredPort = 3001) {
 
   app.get('/api/categories', (req, res) => {
     res.json(categories);
+  });
+
+  app.get('/api/database', (req, res) => {
+    res.json(database);
+  });
+
+  app.post('/api/database', (req, res) => {
+    try {
+      const newDb = req.body;
+      if (!newDb || !Array.isArray(newDb.categories) || newDb.categories.length === 0) {
+        return res.status(400).json({ error: 'Format databank tidak valid (wajib memiliki array categories)' });
+      }
+      // Backup old database
+      try {
+        fs.writeFileSync(path.resolve(rootDir, 'anime-family-database-ranked-top10.backup.json'), JSON.stringify(database, null, 2), 'utf8');
+      } catch (err) {
+        console.warn('Backup write failed:', err);
+      }
+      database = newDb;
+      categories = newDb.categories;
+      fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');
+
+      if (!categories.some((c) => c.id === currentState.categoryId)) {
+        currentState.categoryId = categories[0].id;
+        currentState.revealedItemIds = [];
+      }
+      currentState.isCluePopupOpen = false;
+      currentState.clueRollTargetItemId = null;
+      currentState.clueRollTimestamp = null;
+      broadcastState();
+      res.json({ success: true, message: 'Databank berhasil diperbarui', categories });
+    } catch (err) {
+      res.status(500).json({ error: 'Gagal menyimpan databank: ' + err.message });
+    }
+  });
+
+  app.post('/api/categories', (req, res) => {
+    try {
+      const newCategories = req.body.categories || req.body;
+      if (!Array.isArray(newCategories) || newCategories.length === 0) {
+        return res.status(400).json({ error: 'Array categories tidak valid' });
+      }
+      database.categories = newCategories;
+      categories = newCategories;
+      fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');
+      if (!categories.some((c) => c.id === currentState.categoryId)) {
+        currentState.categoryId = categories[0].id;
+        currentState.revealedItemIds = [];
+      }
+      broadcastState();
+      res.json({ success: true, message: 'Kategori berhasil disimpan', categories });
+    } catch (err) {
+      res.status(500).json({ error: 'Gagal menyimpan kategori: ' + err.message });
+    }
+  });
+
+  app.post('/api/database/reset', (req, res) => {
+    try {
+      const defaultPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.default.json');
+      if (!fs.existsSync(defaultPath)) {
+        return res.status(404).json({ error: 'Default databank tidak ditemukan' });
+      }
+      const raw = fs.readFileSync(defaultPath, 'utf8');
+      const defaultDb = JSON.parse(raw);
+      database = defaultDb;
+      categories = defaultDb.categories;
+      fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');
+      if (!categories.some((c) => c.id === currentState.categoryId)) {
+        currentState.categoryId = categories[0].id;
+        currentState.revealedItemIds = [];
+      }
+      currentState.isCluePopupOpen = false;
+      currentState.clueRollTargetItemId = null;
+      currentState.clueRollTimestamp = null;
+      broadcastState();
+      res.json({ success: true, message: 'Databank berhasil di-reset ke default', database });
+    } catch (err) {
+      res.status(500).json({ error: 'Gagal reset databank: ' + err.message });
+    }
   });
 
   // Serve audio files from public/audio and root
@@ -142,6 +228,9 @@ export function startServer(preferredPort = 3001) {
               currentState.quickBuzzerTriggerTime = null;
               currentState.showTitleScreen = false;
               currentState.transitionWipeTimestamp = Date.now();
+              currentState.isCluePopupOpen = false;
+              currentState.clueRollTargetItemId = null;
+              currentState.clueRollTimestamp = null;
               broadcastState();
             }
             break;
@@ -216,6 +305,21 @@ export function startServer(preferredPort = 3001) {
             broadcastState();
             break;
           }
+          case 'TOGGLE_BGM': {
+            currentState.bgmPlaying = !currentState.bgmPlaying;
+            broadcastState();
+            break;
+          }
+          case 'SET_BGM_PLAYING': {
+            currentState.bgmPlaying = Boolean(msg.playing);
+            broadcastState();
+            break;
+          }
+          case 'SET_BGM_VOLUME': {
+            currentState.bgmVolume = Math.max(0, Math.min(Number(msg.volume) || 0, 1));
+            broadcastState();
+            break;
+          }
           case 'UPDATE_AUDIO_CONFIG': {
             if (msg.settings) {
               if (typeof msg.settings.soundEnabled === 'boolean') {
@@ -223,6 +327,15 @@ export function startServer(preferredPort = 3001) {
               }
               if (typeof msg.settings.soundVolume === 'number') {
                 currentState.soundVolume = Math.max(0, Math.min(msg.settings.soundVolume, 1));
+              }
+              if (typeof msg.settings.bgmEnabled === 'boolean') {
+                currentState.bgmEnabled = msg.settings.bgmEnabled;
+              }
+              if (typeof msg.settings.bgmVolume === 'number') {
+                currentState.bgmVolume = Math.max(0, Math.min(msg.settings.bgmVolume, 1));
+              }
+              if (typeof msg.settings.bgmPlaying === 'boolean') {
+                currentState.bgmPlaying = msg.settings.bgmPlaying;
               }
               if (typeof msg.settings.useCustomSound === 'boolean') {
                 currentState.customAudio.useCustomSound = msg.settings.useCustomSound;
@@ -232,6 +345,9 @@ export function startServer(preferredPort = 3001) {
               }
               if (msg.settings.wrongAudioDataUrl !== undefined) {
                 currentState.customAudio.wrongAudioDataUrl = msg.settings.wrongAudioDataUrl;
+              }
+              if (typeof msg.settings.bgmOffsetMs === 'number') {
+                currentState.bgmOffsetMs = Math.max(-500, Math.min(msg.settings.bgmOffsetMs, 500));
               }
             }
             broadcastState();
@@ -245,10 +361,70 @@ export function startServer(preferredPort = 3001) {
             }
             break;
           }
+          case 'ROLL_CLUE': {
+            const currentCat = categories.find((c) => c.id === currentState.categoryId);
+            if (currentCat) {
+              const unrevealed = currentCat.items.filter((item) => !currentState.revealedItemIds.includes(item.id));
+              if (unrevealed.length > 0) {
+                const target = unrevealed[Math.floor(Math.random() * unrevealed.length)];
+                currentState.clueRollTargetItemId = target.id;
+                currentState.clueRollTimestamp = Date.now();
+                currentState.isCluePopupOpen = true;
+                broadcastState();
+                broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
+              }
+            }
+            break;
+          }
+          case 'DISMISS_CLUE': {
+            currentState.isCluePopupOpen = false;
+            broadcastState();
+            break;
+          }
+          case 'UPDATE_DATABANK': {
+            if (msg.database && Array.isArray(msg.database.categories) && msg.database.categories.length > 0) {
+              database = msg.database;
+              categories = msg.database.categories;
+              try {
+                fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');
+              } catch (e) {
+                console.error('Error writing databank:', e);
+              }
+              if (!categories.some((c) => c.id === currentState.categoryId)) {
+                currentState.categoryId = categories[0].id;
+                currentState.revealedItemIds = [];
+              }
+              currentState.isCluePopupOpen = false;
+              currentState.clueRollTargetItemId = null;
+              currentState.clueRollTimestamp = null;
+              broadcastState();
+            }
+            break;
+          }
+          case 'SAVE_CATEGORIES': {
+            if (Array.isArray(msg.categories) && msg.categories.length > 0) {
+              database.categories = msg.categories;
+              categories = msg.categories;
+              try {
+                fs.writeFileSync(dbPath, JSON.stringify(database, null, 2), 'utf8');
+              } catch (e) {
+                console.error('Error writing categories:', e);
+              }
+              if (!categories.some((c) => c.id === currentState.categoryId)) {
+                currentState.categoryId = categories[0].id;
+                currentState.revealedItemIds = [];
+              }
+              broadcastState();
+            }
+            break;
+          }
           case 'RESET_ROUND': {
             currentState.revealedItemIds = [];
             currentState.currentStrikes = 0;
             currentState.quickBuzzerTriggerTime = null;
+            currentState.isCluePopupOpen = false;
+            currentState.clueRollTargetItemId = null;
+            currentState.clueRollTimestamp = null;
             broadcastState();
             broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             break;

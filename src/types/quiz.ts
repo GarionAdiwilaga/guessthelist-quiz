@@ -36,8 +36,23 @@ export interface QuizState {
   quickBuzzerTriggerTime: number | null;
   soundEnabled: boolean;
   soundVolume: number;
+  bgmEnabled: boolean;
+  bgmVolume: number;
+  bgmPlaying: boolean;
   customAudio: CustomAudioConfig;
   themeMode: 'stage' | 'transparent';
+  clueRollTimestamp: number | null;
+  clueRollTargetItemId: number | null;
+  isCluePopupOpen: boolean;
+  bgmOffsetMs?: number;
+}
+
+export interface QuizDatabase {
+  quizType?: string;
+  title?: string;
+  language?: string;
+  instructions?: string;
+  categories: QuizCategory[];
 }
 
 export type SoundEffectType =
@@ -67,6 +82,13 @@ export type WSMessage =
   | { type: 'SET_STRIKES'; strikes: number }
   | { type: 'TRIGGER_QUICK_BUZZER' }
   | { type: 'UPDATE_STRIKE_CONFIG'; enabled: boolean; maxSlots: number }
-  | { type: 'UPDATE_AUDIO_CONFIG'; settings: Partial<CustomAudioConfig & { soundEnabled: boolean; soundVolume: number }> }
+  | { type: 'TOGGLE_BGM' }
+  | { type: 'SET_BGM_PLAYING'; playing: boolean }
+  | { type: 'SET_BGM_VOLUME'; volume: number }
+  | { type: 'UPDATE_AUDIO_CONFIG'; settings: Partial<CustomAudioConfig & { soundEnabled: boolean; soundVolume: number; bgmEnabled?: boolean; bgmVolume?: number; bgmPlaying?: boolean; bgmOffsetMs?: number }> }
+  | { type: 'ROLL_CLUE' }
+  | { type: 'DISMISS_CLUE' }
+  | { type: 'UPDATE_DATABANK'; database: QuizDatabase }
+  | { type: 'SAVE_CATEGORIES'; categories: QuizCategory[] }
   | { type: 'SET_THEME_MODE'; mode: 'stage' | 'transparent' }
   | { type: 'RESET_ROUND' };

@@ -6,6 +6,7 @@ import { StrikeSlots } from './StrikeSlots';
 import { BuzzerOverlay } from './BuzzerOverlay';
 import { TitleScreen } from './TitleScreen';
 import { TransitionWipe } from './TransitionWipe';
+import { CluePopupModal } from './CluePopupModal';
 import { audioService } from '../../services/audio';
 import { socketClient } from '../../services/socket';
 import { Volume2 } from 'lucide-react';
@@ -60,13 +61,31 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
     audioService.updateSettings({
       soundEnabled: state.soundEnabled,
       soundVolume: state.soundVolume,
+      bgmEnabled: state.bgmEnabled,
+      bgmVolume: state.bgmVolume,
+      bgmPlaying: state.bgmPlaying,
+      bgmOffsetMs: state.bgmOffsetMs,
       customAudio: state.customAudio
     });
-  }, [state.soundEnabled, state.soundVolume, state.customAudio]);
+  }, [
+    state.soundEnabled,
+    state.soundVolume,
+    state.bgmEnabled,
+    state.bgmVolume,
+    state.bgmPlaying,
+    state.bgmOffsetMs,
+    state.customAudio
+  ]);
+
+  // Synchronize active screen for BGM ducking (100% Layar Judul, 50% Game screen)
+  useEffect(() => {
+    audioService.setScreen(displayedCategoryState.showTitleScreen);
+  }, [displayedCategoryState.showTitleScreen]);
 
   const unlockAudio = () => {
     if (!audioUnlocked) {
       audioService.playCorrectSound();
+      audioService.ensureBgmPlaying();
       setAudioUnlocked(true);
     }
   };
@@ -74,6 +93,7 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
   useEffect(() => {
     const handleGesture = () => {
       setAudioUnlocked(true);
+      audioService.ensureBgmPlaying();
       window.removeEventListener('click', handleGesture);
       window.removeEventListener('keydown', handleGesture);
     };
@@ -168,6 +188,43 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
 
   const activeBuzzerTime = state.quickBuzzerTriggerTime || strikeOverlayTime;
 
+  // Clue roll modal state & synchronization
+  const [showClueModal, setShowClueModal] = useState(false);
+  const prevRollTimeRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (state.clueRollTimestamp && state.clueRollTimestamp !== prevRollTimeRef.current) {
+      prevRollTimeRef.current = state.clueRollTimestamp;
+      setShowClueModal(false);
+    }
+  }, [state.clueRollTimestamp]);
+
+  useEffect(() => {
+    if (state.isCluePopupOpen) {
+      const isFreshRoll = state.clueRollTimestamp && Date.now() - state.clueRollTimestamp < 3000;
+      if (!isFreshRoll) {
+        setShowClueModal(true);
+      }
+    } else {
+      setShowClueModal(false);
+    }
+  }, [state.isCluePopupOpen, state.clueRollTimestamp]);
+
+  const handleRollComplete = useCallback(() => {
+    if (state.isCluePopupOpen) {
+      setShowClueModal(true);
+    }
+  }, [state.isCluePopupOpen]);
+
+  const handleDismissClue = useCallback(() => {
+    setShowClueModal(false);
+    socketClient.send({ type: 'DISMISS_CLUE' });
+  }, []);
+
+  const targetItem = items.find((it) => it.id === state.clueRollTargetItemId);
+  const sortedItems = [...items].sort((a, b) => a.rank - b.rank);
+  const targetSlotIndex = targetItem ? sortedItems.findIndex((it) => it.id === targetItem.id) : undefined;
+
   return (
     <div
       onClick={unlockAudio}
@@ -204,9 +261,10 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
         <TitleScreen
           titleLogoUrl={state.titleLogoUrl}
           isTransparent={isTransparent}
+          bgmOffsetMs={state.bgmOffsetMs || 0}
         />
       ) : (
-        <div className="h-full w-full flex flex-col justify-between pt-3 sm:pt-4 pb-2 px-3 sm:px-6 relative z-10">
+        <div className="h-full w-full flex flex-col justify-between pt-6 sm:pt-8 md:pt-10 pb-6 sm:pb-8 px-4 sm:px-8 lg:px-12 relative z-10">
           {/* Top Header */}
           <div className="w-full max-w-5xl mx-auto shrink-0">
             <HeaderBanner
@@ -217,7 +275,13 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
 
           {/* Center: 10-Slot Game Board */}
           <div className="flex-1 flex items-center justify-center w-full max-w-5xl mx-auto min-h-0 my-auto">
-            <GameBoard items={items} revealedItemIds={state.revealedItemIds} />
+            <GameBoard
+              items={items}
+              revealedItemIds={state.revealedItemIds}
+              clueRollTimestamp={state.clueRollTimestamp}
+              clueRollTargetItemId={state.clueRollTargetItemId}
+              onRollComplete={handleRollComplete}
+            />
           </div>
 
           {/* Bottom Area: Strike Slots (No footer) */}
@@ -230,6 +294,15 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
           </div>
         </div>
       )}
+
+      {/* Clue Popup Modal (Triggered after roulette roll stops) */}
+      <CluePopupModal
+        isOpen={showClueModal && Boolean(targetItem)}
+        item={targetItem}
+        slotIndex={targetSlotIndex}
+        category={currentCategory}
+        onClose={handleDismissClue}
+      />
 
       {/* Fullscreen Buzzer Overlay (Persists across view swaps without unmounting) */}
       <BuzzerOverlay triggerTimestamp={activeBuzzerTime} />

@@ -1,5 +1,15 @@
 node_modules/
 dist/
+release/
 .superpowers/
+.agents/
+scratch/
 .env
+.env.*
 .DS_Store
+*.log
+
+# Loose root audio copies (canonical files are in public/audio/)
+/*.mp3
+/*.wav
+/logo.png

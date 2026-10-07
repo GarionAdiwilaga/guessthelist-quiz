@@ -11,9 +11,9 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = ({
   showClue
 }) => {
   return (
-    <header className="w-full flex flex-col items-center select-none mb-2 sm:mb-3">
+    <header className="w-full flex flex-col items-center select-none mb-3 sm:mb-4 lg:mb-5">
       {/* Top Brand Tag with Sub-brand */}
-      <div className="flex items-center space-x-2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-[#FF2E93] via-[#7B00FF] to-[#00F0FF] shadow-[0_0_12px_rgba(255,46,147,0.4)] mb-1.5">
+      <div className="flex items-center space-x-2 px-4 py-1 rounded-full bg-gradient-to-r from-[#FF2E93] via-[#7B00FF] to-[#00F0FF] shadow-[0_0_14px_rgba(255,46,147,0.45)] mb-3.5 sm:mb-4">
         <span className="text-[10px] sm:text-xs font-black text-white tracking-widest uppercase font-['Outfit',sans-serif]">
           MiniGames • Family Wibu 100 • Plaza Cosplay Day
         </span>

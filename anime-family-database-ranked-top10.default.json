@@ -1153,8 +1153,8 @@
       "indonesia": 0.5
     },
     "indonesiaWeights": {
-      "tv": 2,
-      "manga": 1,
+      "tv": 2.0,
+      "manga": 1.0,
       "stream": 0.4,
       "franchise": 0.8,
       "niche": -1.5

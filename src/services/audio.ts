@@ -3,6 +3,10 @@ import { CustomAudioConfig } from '../types/quiz';
 interface AudioSettings {
   soundEnabled: boolean;
   soundVolume: number;
+  bgmEnabled: boolean;
+  bgmVolume: number;
+  bgmPlaying: boolean;
+  bgmOffsetMs?: number;
   customAudio: CustomAudioConfig;
 }
 
@@ -10,6 +14,10 @@ class AudioService {
   private settings: AudioSettings = {
     soundEnabled: true,
     soundVolume: 0.8,
+    bgmEnabled: true,
+    bgmVolume: 0.8,
+    bgmPlaying: true,
+    bgmOffsetMs: 0,
     customAudio: {
       useCustomSound: false,
       correctAudioDataUrl: null,
@@ -20,6 +28,9 @@ class AudioService {
   private ctx: AudioContext | null = null;
   private introAudio: HTMLAudioElement | null = null;
   private applauseAudio: HTMLAudioElement | null = null;
+  private bgmAudio: HTMLAudioElement | null = null;
+  private isTitleScreen: boolean = true;
+  private bgmFadeTimer: ReturnType<typeof setInterval> | null = null;
 
   private getAudioContext(): AudioContext | null {
     if (typeof window === 'undefined') return null;
@@ -50,12 +61,22 @@ class AudioService {
         this.introAudio.volume = this.settings.soundVolume;
       }
     }
+    if (partial.bgmEnabled !== undefined) {
+      this.settings.bgmEnabled = partial.bgmEnabled;
+    }
+    if (partial.bgmVolume !== undefined) {
+      this.settings.bgmVolume = Math.max(0, Math.min(partial.bgmVolume, 1));
+    }
+    if (partial.bgmPlaying !== undefined) {
+      this.settings.bgmPlaying = partial.bgmPlaying;
+    }
     if (partial.customAudio) {
       this.settings.customAudio = {
         ...this.settings.customAudio,
         ...partial.customAudio
       };
     }
+    this.updateBgm();
   }
 
   public getSettings(): AudioSettings {
@@ -63,6 +84,135 @@ class AudioService {
       ...this.settings,
       customAudio: { ...this.settings.customAudio }
     };
+  }
+
+  public setScreen(isTitleScreen: boolean): void {
+    if (this.isTitleScreen !== isTitleScreen) {
+      this.isTitleScreen = isTitleScreen;
+      this.updateBgm();
+    }
+  }
+
+  public getScreen(): boolean {
+    return this.isTitleScreen;
+  }
+
+  private initBgmAudio(): HTMLAudioElement | null {
+    if (typeof window === 'undefined') return null;
+    if (!this.bgmAudio) {
+      this.bgmAudio = new Audio('/audio/bgm.mp3');
+      this.bgmAudio.loop = true;
+      this.bgmAudio.volume = 0;
+    }
+    return this.bgmAudio;
+  }
+
+  public calculateTargetBgmVolume(): number {
+    if (!this.settings.soundEnabled || !this.settings.bgmEnabled || !this.settings.bgmPlaying) {
+      return 0;
+    }
+    // 100% volume at Layar Judul (isTitleScreen = true), 50% volume at Game screen (isTitleScreen = false)
+    const screenScale = this.isTitleScreen ? 1.0 : 0.5;
+    return Math.max(0, Math.min(this.settings.bgmVolume * screenScale, 1.0));
+  }
+
+  public updateBgm(fadeDurationMs = 600): void {
+    if (typeof window === 'undefined') return;
+    const targetVolume = this.calculateTargetBgmVolume();
+    const bgm = this.initBgmAudio();
+    if (!bgm) return;
+
+    if (this.bgmFadeTimer) {
+      clearInterval(this.bgmFadeTimer);
+      this.bgmFadeTimer = null;
+    }
+
+    if (targetVolume > 0 && (bgm.paused || bgm.ended)) {
+      bgm.play().catch((err) => {
+        console.warn('[AudioService] BGM playback deferred (waiting for interaction):', err);
+      });
+    }
+
+    const startVolume = bgm.volume;
+    const diff = targetVolume - startVolume;
+    if (Math.abs(diff) < 0.01) {
+      bgm.volume = targetVolume;
+      if (targetVolume <= 0 && !bgm.paused) {
+        try { bgm.pause(); } catch {}
+      }
+      return;
+    }
+
+    const intervalMs = 30;
+    const steps = Math.max(1, Math.round(fadeDurationMs / intervalMs));
+    let step = 0;
+
+    this.bgmFadeTimer = setInterval(() => {
+      step++;
+      const nextVolume = Math.max(0, Math.min(1, startVolume + diff * (step / steps)));
+      if (this.bgmAudio) {
+        this.bgmAudio.volume = nextVolume;
+      }
+
+      if (step >= steps) {
+        if (this.bgmFadeTimer) {
+          clearInterval(this.bgmFadeTimer);
+          this.bgmFadeTimer = null;
+        }
+        if (this.bgmAudio) {
+          this.bgmAudio.volume = targetVolume;
+          if (targetVolume <= 0 && !this.bgmAudio.paused) {
+            try { this.bgmAudio.pause(); } catch {}
+          }
+        }
+      }
+    }, intervalMs);
+  }
+
+  public ensureBgmPlaying(): void {
+    if (typeof window === 'undefined') return;
+    const targetVolume = this.calculateTargetBgmVolume();
+    if (targetVolume > 0) {
+      const bgm = this.initBgmAudio();
+      if (bgm && (bgm.paused || bgm.ended)) {
+        bgm.play().catch((err) => {
+          console.warn('[AudioService] ensureBgmPlaying deferred:', err);
+        });
+      }
+      this.updateBgm(500);
+    }
+  }
+
+  public getBgmCurrentTime(): number {
+    if (!this.bgmAudio) return 0;
+    return this.bgmAudio.currentTime;
+  }
+
+  public isBgmActive(): boolean {
+    return Boolean(
+      this.bgmAudio &&
+      !this.bgmAudio.paused &&
+      !this.bgmAudio.ended &&
+      this.bgmAudio.currentTime > 0
+    );
+  }
+
+  public getBgmOffsetMs(): number {
+    return this.settings.bgmOffsetMs || 0;
+  }
+
+  public stopBgm(fadeDurationMs = 600): void {
+    this.settings.bgmPlaying = false;
+    this.updateBgm(fadeDurationMs);
+  }
+
+  public startBgm(fadeDurationMs = 600): void {
+    this.settings.bgmPlaying = true;
+    this.updateBgm(fadeDurationMs);
+  }
+
+  public isBgmPlaying(): boolean {
+    return Boolean(this.bgmAudio && !this.bgmAudio.paused && !this.bgmAudio.ended && this.bgmAudio.volume > 0.01);
   }
 
   private playAudioFile(url: string, volumeScale = 1.0): Promise<void> {
@@ -126,6 +276,59 @@ class AudioService {
     this.playCorrectSound();
   }
 
+  private fadeTimers: Map<HTMLAudioElement, ReturnType<typeof setInterval>> = new Map();
+
+  private fadeOutAndStop(audio: HTMLAudioElement | null, durationMs = 600): void {
+    if (!audio) return;
+
+    if (this.fadeTimers.has(audio)) {
+      clearInterval(this.fadeTimers.get(audio)!);
+      this.fadeTimers.delete(audio);
+    }
+
+    if (audio.paused || audio.ended) {
+      try {
+        audio.currentTime = 0;
+      } catch {}
+      return;
+    }
+
+    const startVolume = audio.volume;
+    if (startVolume <= 0) {
+      try {
+        audio.pause();
+        audio.currentTime = 0;
+      } catch {}
+      return;
+    }
+
+    const intervalTime = 30;
+    const steps = Math.max(1, Math.round(durationMs / intervalTime));
+    const volumeStep = startVolume / steps;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      const nextVolume = Math.max(0, startVolume - volumeStep * step);
+      audio.volume = nextVolume;
+
+      if (step >= steps || nextVolume <= 0.01) {
+        clearInterval(timer);
+        this.fadeTimers.delete(audio);
+        try {
+          audio.pause();
+          audio.currentTime = 0;
+        } catch {
+          // ignore seek errors on pause
+        }
+        // Reset volume back to initial for next playback
+        audio.volume = startVolume;
+      }
+    }, intervalTime);
+
+    this.fadeTimers.set(audio, timer);
+  }
+
   public playApplauseSound(onEnded?: () => void): void {
     if (typeof window === 'undefined') return;
     if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
@@ -133,6 +336,10 @@ class AudioService {
     try {
       if (!this.applauseAudio) {
         this.applauseAudio = new Audio('/audio/applause.wav');
+      }
+      if (this.fadeTimers.has(this.applauseAudio)) {
+        clearInterval(this.fadeTimers.get(this.applauseAudio)!);
+        this.fadeTimers.delete(this.applauseAudio);
       }
       this.applauseAudio.loop = false;
       this.applauseAudio.volume = Math.max(0, Math.min(this.settings.soundVolume * 0.9, 1));
@@ -148,15 +355,8 @@ class AudioService {
     }
   }
 
-  public stopApplauseSound(): void {
-    if (this.applauseAudio) {
-      try {
-        this.applauseAudio.pause();
-        this.applauseAudio.currentTime = 0;
-      } catch {
-        // no-op
-      }
-    }
+  public stopApplauseSound(durationMs = 600): void {
+    this.fadeOutAndStop(this.applauseAudio, durationMs);
   }
 
   public isApplausePlaying(): boolean {
@@ -170,6 +370,10 @@ class AudioService {
     try {
       if (!this.introAudio) {
         this.introAudio = new Audio('/audio/intro.mp3');
+      }
+      if (this.fadeTimers.has(this.introAudio)) {
+        clearInterval(this.fadeTimers.get(this.introAudio)!);
+        this.fadeTimers.delete(this.introAudio);
       }
       this.introAudio.loop = false;
       this.introAudio.volume = this.settings.soundVolume;
@@ -185,15 +389,8 @@ class AudioService {
     }
   }
 
-  public stopIntroMusic(): void {
-    if (this.introAudio) {
-      try {
-        this.introAudio.pause();
-        this.introAudio.currentTime = 0;
-      } catch {
-        // no-op
-      }
-    }
+  public stopIntroMusic(durationMs = 600): void {
+    this.fadeOutAndStop(this.introAudio, durationMs);
   }
 
   public isIntroPlaying(): boolean {

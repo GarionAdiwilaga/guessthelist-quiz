@@ -26,18 +26,19 @@ async function testE2E() {
 
     assert.strictEqual(dispInit.type, 'STATE_SNAPSHOT');
     assert.strictEqual(ctrlInit.type, 'STATE_SNAPSHOT');
-    assert.strictEqual(dispInit.state.categoryId, 1);
-    assert.strictEqual(dispInit.categories.length, 4);
+    assert.strictEqual(dispInit.state.categoryId, dispInit.categories[0].id);
+    assert.ok(dispInit.categories.length >= 2);
 
-    // 1. Controller selects Category 2
+    // 1. Controller selects second Category
+    const targetCat = dispInit.categories[1];
     let nextSnap = waitForSnapshot(displayWs);
-    controllerWs.send(JSON.stringify({ type: 'SELECT_CATEGORY', categoryId: 2 }));
+    controllerWs.send(JSON.stringify({ type: 'SELECT_CATEGORY', categoryId: targetCat.id }));
     let updated = await nextSnap;
-    assert.strictEqual(updated.state.categoryId, 2);
+    assert.strictEqual(updated.state.categoryId, targetCat.id);
     assert.strictEqual(updated.state.revealedItemIds.length, 0);
 
-    // 2. Controller reveals first 2 items of Category 2
-    const cat2Items = updated.categories.find((c: any) => c.id === 2).items;
+    // 2. Controller reveals first 2 items of selected Category
+    const cat2Items = updated.categories.find((c: any) => c.id === targetCat.id).items;
     const item1 = cat2Items[0].id;
     const item2 = cat2Items[1].id;
 

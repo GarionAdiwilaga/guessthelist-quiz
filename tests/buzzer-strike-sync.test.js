@@ -127,9 +127,23 @@ async function run() {
     assert.strictEqual(stopMusicMsg.type, 'PLAY_SOUND');
     assert.strictEqual(stopMusicMsg.sound, 'stop_music');
 
+    // Test 11: TOGGLE_BGM toggles bgmPlaying state
+    const toggleBgmPromise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'TOGGLE_BGM' }));
+    const toggleBgmMsg = await toggleBgmPromise;
+    assert.strictEqual(toggleBgmMsg.type, 'STATE_SNAPSHOT');
+    assert.strictEqual(toggleBgmMsg.state.bgmPlaying, false, 'BGM should be paused after toggle');
+
+    // Test 12: SET_BGM_VOLUME updates bgmVolume state
+    const setBgmVolPromise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'SET_BGM_VOLUME', volume: 0.65 }));
+    const setBgmVolMsg = await setBgmVolPromise;
+    assert.strictEqual(setBgmVolMsg.type, 'STATE_SNAPSHOT');
+    assert.strictEqual(setBgmVolMsg.state.bgmVolume, 0.65, 'BGM volume should update to 0.65');
+
     ws.close();
     await serverInstance.close();
-    console.log('✅ Buzzer & Strike State Synchronization and Soundboard test passed!');
+    console.log('✅ Buzzer & Strike State Synchronization, Soundboard, and BGM test passed!');
     process.exit(0);
   } catch (err) {
     console.error('Test failed:', err);

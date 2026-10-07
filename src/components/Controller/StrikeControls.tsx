@@ -11,6 +11,10 @@ interface StrikeControlsProps {
   onPlaySound?: (sound: 'applause' | 'stop_applause' | 'intro' | 'stop_music') => void;
   isIntroPlaying?: boolean;
   isApplausePlaying?: boolean;
+  bgmPlaying?: boolean;
+  bgmVolume?: number;
+  onToggleBgm?: () => void;
+  onSetBgmVolume?: (volume: number) => void;
 }
 
 export const StrikeControls: React.FC<StrikeControlsProps> = ({
@@ -22,7 +26,11 @@ export const StrikeControls: React.FC<StrikeControlsProps> = ({
   onOpenSettings,
   onPlaySound,
   isIntroPlaying = false,
-  isApplausePlaying = false
+  isApplausePlaying = false,
+  bgmPlaying = true,
+  bgmVolume = 0.8,
+  onToggleBgm,
+  onSetBgmVolume
 }) => {
   const handleAddStrike = () => {
     if (currentStrikes < maxStrikeSlots) {
@@ -88,6 +96,40 @@ export const StrikeControls: React.FC<StrikeControlsProps> = ({
           <span className="text-base leading-none">🎵</span>
           <span>{isIntroPlaying ? 'Stop Musik' : 'Musik Intro'}</span>
         </button>
+
+        {/* Soundboard Button: BGM Loop Toggle */}
+        <button
+          onClick={onToggleBgm}
+          className={`flex items-center space-x-1.5 px-3 py-2 rounded-xl border text-xs font-bold transition-all cursor-pointer shadow-md active:scale-95 ${
+            bgmPlaying
+              ? 'bg-[#00F0FF]/20 text-[#00F0FF] border-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.4)] hover:bg-[#00F0FF]/30'
+              : 'bg-[#1C2555] hover:bg-[#2A377D] text-gray-400 border-[#304192]'
+          }`}
+          title={bgmPlaying ? 'Hentikan BGM Loop (bgm.mp3)' : 'Putar BGM Loop (bgm.mp3)'}
+        >
+          <span className="text-base leading-none">📻</span>
+          <span>{bgmPlaying ? 'Stop BGM' : 'Putar BGM'}</span>
+        </button>
+
+        {/* Quick BGM Volume Slider Control */}
+        <div className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-[#141B4A] border border-[#2B3980] text-xs">
+          <span className="text-[10px] text-gray-300 font-bold uppercase tracking-wider">
+            BGM:
+          </span>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value={bgmVolume}
+            onChange={(e) => onSetBgmVolume && onSetBgmVolume(parseFloat(e.target.value))}
+            className="w-14 sm:w-18 accent-[#00F0FF] cursor-pointer h-1.5"
+            title={`Volume BGM: ${Math.round(bgmVolume * 100)}% (100% Layar Judul, 50% Layar Game)`}
+          />
+          <span className="text-[11px] font-mono font-black text-[#00F0FF] min-w-[28px] text-right">
+            {Math.round(bgmVolume * 100)}%
+          </span>
+        </div>
       </div>
 
       {/* Strike Slot Adjustment Controls */}

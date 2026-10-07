@@ -89,7 +89,40 @@
 }
 
 .animate-slow-pulse {
-  animation: slowPulse 3.6s ease-in-out infinite;
+  animation: slowPulse 2.712s ease-in-out infinite;
   will-change: transform;
+  transform: translateZ(0);
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.35));
+  }
+  14% {
+    transform: scale(1.07);
+    filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.85));
+  }
+  24% {
+    transform: scale(0.985);
+    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.35));
+  }
+  38% {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 28px rgba(255, 46, 147, 0.7));
+  }
+  50% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.35));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.35));
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.356s ease-in-out infinite;
+  will-change: transform, filter;
   transform: translateZ(0);
 }

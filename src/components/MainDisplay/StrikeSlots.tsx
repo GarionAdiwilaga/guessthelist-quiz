@@ -33,28 +33,28 @@ export const StrikeSlots: React.FC<StrikeSlotsProps> = ({
   const slotsArray = Array.from({ length: totalSlots }, (_, i) => i + 1);
 
   return (
-    <div className="flex items-center justify-center space-x-2 mt-1.5 sm:mt-2 mb-0.5 select-none">
-      <div className="flex items-center space-x-2 px-3 py-1 rounded-xl bg-[#0C1032]/90 border border-[#FF2E93]/60 shadow-[0_0_12px_rgba(255,46,147,0.3)]">
+    <div className="flex items-center justify-center space-x-2 mt-3 sm:mt-4 lg:mt-5 select-none">
+      <div className="flex items-center space-x-2.5 px-4 py-1.5 rounded-2xl bg-[#0C1032]/95 border-2 border-[#FF2E93]/70 shadow-[0_0_16px_rgba(255,46,147,0.35)]">
         {slotsArray.map((slotNum) => {
           const isStruck = slotNum <= currentStrikes;
           return (
             <div
               key={slotNum}
-              className={`relative w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center border-2 transition-all duration-400 ${
+              className={`relative w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl flex items-center justify-center border-2 transition-all duration-400 ${
                 isStruck
-                  ? 'border-[#FF2E93] bg-[#FF2E93]/25 shadow-[0_0_10px_rgba(255,46,147,0.85)] scale-100'
+                  ? 'border-[#FF2E93] bg-[#FF2E93]/25 shadow-[0_0_12px_rgba(255,46,147,0.85)] scale-100'
                   : isResetting
                   ? 'border-[#202958] bg-[#090D28]/60 opacity-40 transition-opacity duration-500'
                   : 'border-[#202958] bg-[#090D28]/60'
               }`}
             >
               {isStruck ? (
-                <span className="text-lg sm:text-xl font-black text-[#FF2E93] drop-shadow-[0_0_8px_rgba(255,46,147,1)] font-['Fredoka',sans-serif] animate-pop-in">
+                <span className="text-xl sm:text-2xl font-black text-[#FF2E93] drop-shadow-[0_0_8px_rgba(255,46,147,1)] font-['Fredoka',sans-serif] animate-pop-in">
                   ✕
                 </span>
               ) : (
                 <div
-                  className={`w-1.5 h-1.5 rounded-full bg-[#202958] transition-all duration-300 ${
+                  className={`w-2 h-2 rounded-full bg-[#202958] transition-all duration-300 ${
                     isResetting ? 'scale-0' : 'scale-100'
                   }`}
                 />

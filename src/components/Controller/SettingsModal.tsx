@@ -11,7 +11,13 @@ interface SettingsModalProps {
   onUpdateTitleLogo: (logoUrl: string | null) => void;
   onUpdateAudioConfig: (
     settings: Partial<
-      QuizState['customAudio'] & { soundEnabled: boolean; soundVolume: number }
+      QuizState['customAudio'] & {
+        soundEnabled: boolean;
+        soundVolume: number;
+        bgmEnabled?: boolean;
+        bgmVolume?: number;
+        bgmPlaying?: boolean;
+      }
     >
   ) => void;
 }
@@ -212,7 +218,89 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </div>
         </div>
 
-        {/* Section 3: Audio Settings */}
+        {/* Section 3: Background Music (BGM Loop) */}
+        <div className="mb-5 p-4 rounded-xl bg-[#141A48] border border-[#232F72]">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center space-x-2">
+              <span className="text-base leading-none">📻</span>
+              <span className="text-sm font-bold text-white uppercase tracking-wider">
+                Musik Latar (BGM Loop)
+              </span>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={state.bgmPlaying}
+                onChange={(e) =>
+                  onUpdateAudioConfig({ bgmPlaying: e.target.checked })
+                }
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00F0FF]"></div>
+            </label>
+          </div>
+
+          <p className="text-xs text-gray-400 mb-3">
+            Memutar <code className="text-[#00F0FF] font-mono">bgm.mp3</code> secara berulang. Otomatis 100% volume di Layar Judul dan turun ke 50% di Layar Game kuis.
+          </p>
+
+          {/* BGM Volume Slider */}
+          <div className="mb-2">
+            <div className="flex justify-between text-xs text-gray-300 mb-1">
+              <span>Volume Induk BGM:</span>
+              <span className="font-mono text-[#00F0FF] font-bold">
+                {Math.round(state.bgmVolume * 100)}%
+                <span className="text-gray-400 font-normal ml-1.5">
+                  ({Math.round(state.bgmVolume * 100)}% Judul / {Math.round(state.bgmVolume * 50)}% Game)
+                </span>
+              </span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={state.bgmVolume}
+              onChange={(e) =>
+                onUpdateAudioConfig({ bgmVolume: parseFloat(e.target.value) })
+              }
+              className="w-full accent-[#00F0FF] cursor-pointer"
+            />
+          </div>
+
+          {/* BGM Beat Sync Calibration (Latency Offset) */}
+          <div className="mt-3.5 pt-3 border-t border-[#1E265C]">
+            <div className="flex justify-between text-xs text-gray-300 mb-1">
+              <span>Kalibrasi Beat / Ketukan (Offset):</span>
+              <span className="font-mono text-[#FFD600] font-bold">
+                {(state.bgmOffsetMs || 0) > 0 ? `+${state.bgmOffsetMs}ms` : `${state.bgmOffsetMs || 0}ms`}
+                <span className="text-gray-400 font-normal ml-1">
+                  ({(state.bgmOffsetMs || 0) === 0 ? 'Tepat' : (state.bgmOffsetMs || 0) > 0 ? 'Lebih Cepat' : 'Lebih Lambat'})
+                </span>
+              </span>
+            </div>
+            <p className="text-[11px] text-gray-400 mb-2 leading-relaxed">
+              Sesuaikan jika efek detak logo dan gelombang ripple terasa sedikit mendahului atau tertinggal dari audio speaker / Bluetooth.
+            </p>
+            <div className="flex items-center space-x-2">
+              <span className="text-[10px] text-gray-400 font-mono">-200ms</span>
+              <input
+                type="range"
+                min="-200"
+                max="200"
+                step="10"
+                value={state.bgmOffsetMs || 0}
+                onChange={(e) =>
+                  onUpdateAudioConfig({ bgmOffsetMs: parseInt(e.target.value, 10) })
+                }
+                className="w-full accent-[#FFD600] cursor-pointer"
+              />
+              <span className="text-[10px] text-gray-400 font-mono">+200ms</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Section 4: Sound Effects (SFX) */}
         <div className="p-4 rounded-xl bg-[#141A48] border border-[#232F72]">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">

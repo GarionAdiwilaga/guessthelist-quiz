@@ -1,23 +1,31 @@
 import React from 'react';
-import { Eye, RotateCcw, Lightbulb, Settings, Tv, Play } from 'lucide-react';
+import { Eye, RotateCcw, Lightbulb, Settings, Tv, Play, Sparkles, Database } from 'lucide-react';
 
 interface BoardControlsProps {
   showClue: boolean;
   showTitleScreen: boolean;
+  isCluePopupOpen?: boolean;
   onRevealAll: () => void;
   onHideAll: () => void;
   onToggleClue: () => void;
   onToggleTitleScreen: () => void;
+  onRollClue?: () => void;
+  onDismissClue?: () => void;
+  onOpenDataEditor?: () => void;
   onOpenSettings: () => void;
 }
 
 export const BoardControls: React.FC<BoardControlsProps> = ({
   showClue,
   showTitleScreen,
+  isCluePopupOpen = false,
   onRevealAll,
   onHideAll,
   onToggleClue,
   onToggleTitleScreen,
+  onRollClue,
+  onDismissClue,
+  onOpenDataEditor,
   onOpenSettings
 }) => {
   return (
@@ -75,16 +83,47 @@ export const BoardControls: React.FC<BoardControlsProps> = ({
           <Lightbulb className="w-4 h-4" />
           <span>{showClue ? 'Sembunyikan Subtitle' : 'Tampilkan Subtitle'}</span>
         </button>
+
+        {/* Roll Clue / Dismiss Clue Button */}
+        <button
+          onClick={isCluePopupOpen ? onDismissClue : onRollClue}
+          className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-lg border text-xs font-black transition-all cursor-pointer shadow-md ${
+            isCluePopupOpen
+              ? 'bg-[#FF2E93] text-white border-[#FF2E93] shadow-[0_0_12px_rgba(255,46,147,0.6)] animate-pulse'
+              : 'bg-[#FFD600]/20 hover:bg-[#FFD600]/30 border-[#FFD600] text-[#FFD600] shadow-[0_0_10px_rgba(255,214,0,0.3)]'
+          }`}
+          title={
+            isCluePopupOpen
+              ? 'Tutup Pop-up Petunjuk di Layar Display'
+              : 'Acak & Tampilkan Petunjuk untuk Slot Belum Terbuka'
+          }
+        >
+          <Sparkles className="w-4 h-4" />
+          <span>{isCluePopupOpen ? '✕ Tutup Petunjuk' : '🎲 Roll Petunjuk'}</span>
+        </button>
       </div>
 
-      {/* Settings Button */}
-      <button
-        onClick={onOpenSettings}
-        className="flex items-center space-x-1.5 px-3.5 py-2 rounded-lg bg-[#182258] hover:bg-[#202C70] border border-[#2B3980] text-xs font-bold text-gray-200 transition-all cursor-pointer ml-auto"
-      >
-        <Settings className="w-4 h-4 text-[#00F0FF]" />
-        <span>Pengaturan</span>
-      </button>
+      {/* Right Controls: Bank Data & Settings */}
+      <div className="flex items-center space-x-2 ml-auto">
+        {onOpenDataEditor && (
+          <button
+            onClick={onOpenDataEditor}
+            className="flex items-center space-x-1.5 px-3.5 py-2 rounded-lg bg-[#00F0FF]/15 hover:bg-[#00F0FF]/25 border border-[#00F0FF]/60 text-xs font-bold text-[#00F0FF] transition-all cursor-pointer shadow-[0_0_10px_rgba(0,240,255,0.2)]"
+            title="Buka Bank Data & Editor Kategori Soal"
+          >
+            <Database className="w-4 h-4" />
+            <span>Bank Data Soal</span>
+          </button>
+        )}
+
+        <button
+          onClick={onOpenSettings}
+          className="flex items-center space-x-1.5 px-3.5 py-2 rounded-lg bg-[#182258] hover:bg-[#202C70] border border-[#2B3980] text-xs font-bold text-gray-200 transition-all cursor-pointer"
+        >
+          <Settings className="w-4 h-4 text-[#00F0FF]" />
+          <span>Pengaturan</span>
+        </button>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const data = JSON.parse(raw);
 
 assert.strictEqual(typeof data, 'object', 'Database root must be an object');
 assert.ok(Array.isArray(data.categories), 'Database must contain categories array');
-assert.strictEqual(data.categories.length, 4, 'Must have exactly 4 categories');
+assert.ok(data.categories.length >= 1, 'Must have at least 1 category');
 
 for (const cat of data.categories) {
   assert.ok(cat.id, 'Category must have an id');
@@ -23,4 +23,4 @@ for (const cat of data.categories) {
   }
 }
 
-console.log('Database integrity check passed successfully! 4 categories, 10 items each.');
+console.log(`Database integrity check passed successfully! ${data.categories.length} categories, 10 items each.`);
