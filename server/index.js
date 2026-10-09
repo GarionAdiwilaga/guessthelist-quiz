@@ -12,6 +12,9 @@ const rootDir = path.resolve(__dirname, '..');
 // Load database
 const dbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.json');
 const defaultDbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.default.json');
+const millionaireDbPath = path.resolve(rootDir, 'anime-quiz-database-v3.json');
+const millionaireDefaultDbPath = path.resolve(rootDir, 'anime-quiz-database-v3.default.json');
+const configPath = path.resolve(rootDir, 'quiz-config.json');
 
 const starterTemplate = {
   quizType: 'top10_list',
@@ -58,50 +61,159 @@ try {
 }
 let categories = database.categories;
 
-// Default initial state
-function createInitialState() {
+let millionaireQuestions = [];
+function loadMillionaireDatabase() {
+  try {
+    if (fs.existsSync(millionaireDbPath)) {
+      millionaireQuestions = JSON.parse(fs.readFileSync(millionaireDbPath, 'utf8'));
+    } else if (fs.existsSync(millionaireDefaultDbPath)) {
+      millionaireQuestions = JSON.parse(fs.readFileSync(millionaireDefaultDbPath, 'utf8'));
+      fs.writeFileSync(millionaireDbPath, JSON.stringify(millionaireQuestions, null, 2), 'utf8');
+    } else {
+      millionaireQuestions = [];
+    }
+  } catch (err) {
+    console.error('[Quiz Server] Error reading millionaire database:', err.message);
+    millionaireQuestions = [];
+  }
+}
+loadMillionaireDatabase();
+
+function getDefaultConfig() {
   return {
-    categoryId: categories[0]?.id ?? 1,
-    showTitleScreen: true,
-    titleLogoUrl: null,
-    transitionWipeTimestamp: null,
-    revealedItemIds: [],
-    showClue: true,
-    strikeSlotsEnabled: false,
-    maxStrikeSlots: 3,
-    currentStrikes: 0,
-    quickBuzzerTriggerTime: null,
+    gameMode: 'quiz',
+    currentMillionaireQuestionId: millionaireQuestions[0]?.id ?? 1,
+    familyCategoryId: categories[0]?.id ?? 1,
     soundEnabled: true,
     soundVolume: 0.8,
     bgmEnabled: true,
     bgmVolume: 0.8,
-    bgmPlaying: true,
+    bgmOffsetMs: 0,
+    strikeSlotsEnabled: false,
+    maxStrikeSlots: 3,
+    themeMode: 'stage',
+    titleLogoUrl: null,
     customAudio: {
       useCustomSound: false,
       correctAudioDataUrl: null,
       wrongAudioDataUrl: null
+    }
+  };
+}
+
+function loadConfig() {
+  const defaults = getDefaultConfig();
+  try {
+    if (fs.existsSync(configPath)) {
+      const data = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+      return {
+        ...defaults,
+        ...data,
+        customAudio: {
+          ...defaults.customAudio,
+          ...(data.customAudio || {})
+        }
+      };
+    }
+  } catch (err) {
+    console.error('[Quiz Server] Error reading quiz-config.json, using defaults:', err.message);
+  }
+  return defaults;
+}
+
+function saveConfig() {
+  try {
+    const configData = {
+      gameMode: currentState.gameMode,
+      currentMillionaireQuestionId: currentState.millionaireState.currentQuestionId,
+      familyCategoryId: currentState.categoryId,
+      soundEnabled: currentState.soundEnabled,
+      soundVolume: currentState.soundVolume,
+      bgmEnabled: currentState.bgmEnabled,
+      bgmVolume: currentState.bgmVolume,
+      bgmOffsetMs: currentState.bgmOffsetMs ?? 0,
+      strikeSlotsEnabled: currentState.strikeSlotsEnabled,
+      maxStrikeSlots: currentState.maxStrikeSlots,
+      themeMode: currentState.themeMode,
+      titleLogoUrl: currentState.titleLogoUrl,
+      customAudio: currentState.customAudio
+    };
+    fs.writeFileSync(configPath, JSON.stringify(configData, null, 2), 'utf8');
+  } catch (err) {
+    console.error('[Quiz Server] Error writing quiz-config.json:', err.message);
+  }
+}
+
+function createInitialState(savedConfig = loadConfig()) {
+  const activeQuestionId = millionaireQuestions.some((q) => q.id === savedConfig.currentMillionaireQuestionId)
+    ? savedConfig.currentMillionaireQuestionId
+    : (millionaireQuestions[0]?.id ?? 1);
+
+  const activeCategoryId = categories.some((c) => c.id === savedConfig.familyCategoryId)
+    ? savedConfig.familyCategoryId
+    : (categories[0]?.id ?? 1);
+
+  return {
+    gameMode: savedConfig.gameMode || 'quiz',
+    millionaireState: {
+      currentQuestionId: activeQuestionId,
+      selectedOptionIndex: null,
+      isLocked: false,
+      isRevealed: false,
+      showHint: false
     },
-    themeMode: 'stage',
+    categoryId: activeCategoryId,
+    showTitleScreen: true,
+    titleLogoUrl: savedConfig.titleLogoUrl ?? null,
+    transitionWipeTimestamp: null,
+    revealedItemIds: [],
+    showClue: true,
+    strikeSlotsEnabled: Boolean(savedConfig.strikeSlotsEnabled),
+    maxStrikeSlots: savedConfig.maxStrikeSlots ?? 3,
+    currentStrikes: 0,
+    quickBuzzerTriggerTime: null,
+    soundEnabled: savedConfig.soundEnabled !== undefined ? savedConfig.soundEnabled : true,
+    soundVolume: typeof savedConfig.soundVolume === 'number' ? savedConfig.soundVolume : 0.8,
+    bgmEnabled: savedConfig.bgmEnabled !== undefined ? savedConfig.bgmEnabled : true,
+    bgmVolume: typeof savedConfig.bgmVolume === 'number' ? savedConfig.bgmVolume : 0.8,
+    bgmPlaying: true,
+    customAudio: {
+      useCustomSound: Boolean(savedConfig.customAudio?.useCustomSound),
+      correctAudioDataUrl: savedConfig.customAudio?.correctAudioDataUrl ?? null,
+      wrongAudioDataUrl: savedConfig.customAudio?.wrongAudioDataUrl ?? null
+    },
+    themeMode: savedConfig.themeMode || 'stage',
     clueRollTimestamp: null,
     clueRollTargetItemId: null,
     isCluePopupOpen: false,
-    bgmOffsetMs: 0
+    bgmOffsetMs: typeof savedConfig.bgmOffsetMs === 'number' ? savedConfig.bgmOffsetMs : 0
   };
 }
 
 let currentState = createInitialState();
 
 export function startServer(preferredPort = 3001) {
+  loadMillionaireDatabase();
+  currentState = createInitialState(loadConfig());
+
   const app = express();
   app.use(express.json({ limit: '25mb' }));
 
   // REST API
   app.get('/api/state', (req, res) => {
-    res.json({ state: currentState, categories });
+    res.json({ state: currentState, categories, millionaireQuestions });
   });
 
   app.get('/api/categories', (req, res) => {
     res.json(categories);
+  });
+
+  app.get('/api/millionaire-questions', (req, res) => {
+    res.json(millionaireQuestions);
+  });
+
+  app.get('/api/config', (req, res) => {
+    res.json(loadConfig());
   });
 
   app.get('/api/database', (req, res) => {
@@ -215,7 +327,8 @@ export function startServer(preferredPort = 3001) {
     broadcast({
       type: 'STATE_SNAPSHOT',
       state: currentState,
-      categories
+      categories,
+      millionaireQuestions
     });
   }
 
@@ -224,7 +337,8 @@ export function startServer(preferredPort = 3001) {
     ws.send(JSON.stringify({
       type: 'STATE_SNAPSHOT',
       state: currentState,
-      categories
+      categories,
+      millionaireQuestions
     }));
 
     ws.on('message', (raw) => {
@@ -235,7 +349,8 @@ export function startServer(preferredPort = 3001) {
             ws.send(JSON.stringify({
               type: 'STATE_SNAPSHOT',
               state: currentState,
-              categories
+              categories,
+              millionaireQuestions
             }));
             break;
           }
@@ -248,6 +363,7 @@ export function startServer(preferredPort = 3001) {
           }
           case 'UPDATE_TITLE_LOGO': {
             currentState.titleLogoUrl = msg.logoUrl || null;
+            saveConfig();
             broadcastState();
             break;
           }
@@ -262,6 +378,75 @@ export function startServer(preferredPort = 3001) {
               type: 'PLAY_SOUND',
               sound: msg.sound
             });
+            break;
+          }
+          case 'SET_GAME_MODE': {
+            if (msg.mode === 'quiz' || msg.mode === 'family') {
+              currentState.gameMode = msg.mode;
+              currentState.transitionWipeTimestamp = Date.now();
+              saveConfig();
+              broadcastState();
+            }
+            break;
+          }
+          case 'SELECT_MILLIONAIRE_QUESTION': {
+            const targetQ = millionaireQuestions.find((q) => q.id === msg.questionId);
+            if (targetQ) {
+              currentState.millionaireState.currentQuestionId = targetQ.id;
+            } else if (typeof msg.questionId === 'number') {
+              currentState.millionaireState.currentQuestionId = msg.questionId;
+            }
+            currentState.millionaireState.selectedOptionIndex = null;
+            currentState.millionaireState.isLocked = false;
+            currentState.millionaireState.isRevealed = false;
+            currentState.millionaireState.showHint = false;
+            currentState.transitionWipeTimestamp = Date.now();
+            saveConfig();
+            broadcastState();
+            break;
+          }
+          case 'HIGHLIGHT_MILLIONAIRE_OPTION': {
+            currentState.millionaireState.selectedOptionIndex =
+              typeof msg.optionIndex === 'number' ? msg.optionIndex : null;
+            broadcastState();
+            broadcast({ type: 'PLAY_SOUND', sound: 'click' });
+            break;
+          }
+          case 'LOCK_MILLIONAIRE_ANSWER': {
+            currentState.millionaireState.isLocked = true;
+            broadcastState();
+            broadcast({ type: 'PLAY_SOUND', sound: 'lock' });
+            break;
+          }
+          case 'REVEAL_MILLIONAIRE_ANSWER': {
+            const currentQ = millionaireQuestions.find(
+              (q) => q.id === currentState.millionaireState.currentQuestionId
+            );
+            const selectedIdx = currentState.millionaireState.selectedOptionIndex;
+            const isMatch = Boolean(
+              currentQ &&
+              selectedIdx !== null &&
+              selectedIdx >= 0 &&
+              selectedIdx < currentQ.options.length &&
+              currentQ.answer === currentQ.options[selectedIdx]
+            );
+            currentState.millionaireState.isRevealed = true;
+            broadcastState();
+            broadcast({ type: 'PLAY_SOUND', sound: isMatch ? 'correct' : 'buzzer' });
+            break;
+          }
+          case 'TOGGLE_MILLIONAIRE_HINT': {
+            currentState.millionaireState.showHint =
+              msg.show !== undefined ? Boolean(msg.show) : !currentState.millionaireState.showHint;
+            broadcastState();
+            break;
+          }
+          case 'RESET_MILLIONAIRE_QUESTION': {
+            currentState.millionaireState.selectedOptionIndex = null;
+            currentState.millionaireState.isLocked = false;
+            currentState.millionaireState.isRevealed = false;
+            currentState.millionaireState.showHint = false;
+            broadcastState();
             break;
           }
           case 'SELECT_CATEGORY': {
@@ -347,6 +532,7 @@ export function startServer(preferredPort = 3001) {
             if (currentState.currentStrikes > slots) {
               currentState.currentStrikes = slots;
             }
+            saveConfig();
             broadcastState();
             break;
           }
@@ -362,6 +548,7 @@ export function startServer(preferredPort = 3001) {
           }
           case 'SET_BGM_VOLUME': {
             currentState.bgmVolume = Math.max(0, Math.min(Number(msg.volume) || 0, 1));
+            saveConfig();
             broadcastState();
             break;
           }
@@ -394,6 +581,7 @@ export function startServer(preferredPort = 3001) {
               if (typeof msg.settings.bgmOffsetMs === 'number') {
                 currentState.bgmOffsetMs = Math.max(-500, Math.min(msg.settings.bgmOffsetMs, 500));
               }
+              saveConfig();
             }
             broadcastState();
             break;
@@ -401,6 +589,7 @@ export function startServer(preferredPort = 3001) {
           case 'SET_THEME_MODE': {
             if (msg.mode === 'stage' || msg.mode === 'transparent') {
               currentState.themeMode = msg.mode;
+              saveConfig();
               broadcastState();
               broadcast({ type: 'PLAY_SOUND', sound: 'swoosh' });
             }
@@ -495,6 +684,9 @@ export function startServer(preferredPort = 3001) {
           port,
           close: () =>
             new Promise((res) => {
+              for (const client of wss.clients) {
+                client.terminate();
+              }
               wss.close(() => {
                 server.close(res);
               });
