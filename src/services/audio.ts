@@ -1,4 +1,6 @@
-import { CustomAudioConfig } from '../types/quiz';
+import { CustomAudioConfig, SoundEffectType } from '../types/quiz';
+
+export type { SoundEffectType };
 
 interface AudioSettings {
   soundEnabled: boolean;
@@ -28,6 +30,8 @@ class AudioService {
   private ctx: AudioContext | null = null;
   private clickBuffer: AudioBuffer | null = null;
   private clickBufferLoading: boolean = false;
+  private lockBuffer: AudioBuffer | null = null;
+  private lockBufferLoading: boolean = false;
   private introAudio: HTMLAudioElement | null = null;
   private applauseAudio: HTMLAudioElement | null = null;
   private bgmAudio: HTMLAudioElement | null = null;
@@ -323,6 +327,54 @@ class AudioService {
     this.playAudioFile('/audio/click-short.wav', volumeScale);
     if (!this.clickBuffer) {
       this.preloadClickSound().catch(() => {});
+    }
+  }
+
+  public async preloadLockSound(): Promise<void> {
+    if (typeof window === 'undefined') return;
+    if (this.lockBuffer || this.lockBufferLoading) return;
+    const ctx = this.getAudioContext();
+    if (!ctx) return;
+    try {
+      this.lockBufferLoading = true;
+      const res = await fetch('/audio/spacebar.mp3');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const arrayBuf = await res.arrayBuffer();
+      this.lockBuffer = await ctx.decodeAudioData(arrayBuf);
+    } catch (err) {
+      console.warn('Failed to preload spacebar.mp3 buffer:', err);
+    } finally {
+      this.lockBufferLoading = false;
+    }
+  }
+
+  public playLockSound(volumeScale = 1.0): void {
+    if (typeof window === 'undefined') return;
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+
+    const ctx = this.getAudioContext();
+    if (ctx && this.lockBuffer) {
+      try {
+        const source = ctx.createBufferSource();
+        source.buffer = this.lockBuffer;
+        const gainNode = ctx.createGain();
+        gainNode.gain.setValueAtTime(
+          Math.max(0, Math.min(this.settings.soundVolume * volumeScale, 1)),
+          ctx.currentTime
+        );
+        source.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        source.start(0);
+        return;
+      } catch (err) {
+        console.warn('WebAudio lock playback failed:', err);
+      }
+    }
+
+    // Fallback using HTMLAudioElement
+    this.playAudioFile('/audio/spacebar.mp3', volumeScale);
+    if (!this.lockBuffer) {
+      this.preloadLockSound().catch(() => {});
     }
   }
 

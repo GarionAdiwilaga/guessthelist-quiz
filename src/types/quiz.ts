@@ -23,7 +23,46 @@ export interface CustomAudioConfig {
   wrongAudioDataUrl: string | null;
 }
 
+export type GameMode = 'quiz' | 'family';
+
+export interface MillionaireQuestion {
+  id: number;
+  category: string;
+  anime: string;
+  question: string;
+  options: string[]; // Exactly 4 options: [A, B, C, D]
+  answer: string;    // String matching one of the options
+  hint?: string;     // Optional hint (defaults to empty string if not provided)
+  explanation: string;
+}
+
+export interface MillionaireState {
+  currentQuestionId: number;
+  selectedOptionIndex: number | null; // 0..3 (A, B, C, D) or null
+  isLocked: boolean;                  // Answer locked ("Final Answer")
+  isRevealed: boolean;                // Result revealed (true/false)
+  showHint: boolean;                  // Hint banner open on Main Display
+}
+
+export interface QuizConfigPersistent {
+  gameMode: GameMode;
+  currentMillionaireQuestionId: number;
+  familyCategoryId: number;
+  soundEnabled: boolean;
+  soundVolume: number;
+  bgmEnabled: boolean;
+  bgmVolume: number;
+  bgmOffsetMs: number;
+  strikeSlotsEnabled: boolean;
+  maxStrikeSlots: number;
+  themeMode: 'stage' | 'transparent';
+  titleLogoUrl: string | null;
+  customAudio: CustomAudioConfig;
+}
+
 export interface QuizState {
+  gameMode?: GameMode;
+  millionaireState?: MillionaireState;
   categoryId: number;
   showTitleScreen: boolean;
   titleLogoUrl: string | null;
@@ -65,7 +104,8 @@ export type SoundEffectType =
   | 'woosh'
   | 'swoosh'
   | 'reveal_all'
-  | 'click';
+  | 'click'
+  | 'lock';
 
 export type WSMessage =
   | { type: 'STATE_SNAPSHOT'; state: QuizState; categories: QuizCategory[] }

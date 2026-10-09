@@ -77,4 +77,9 @@ audioService.setScreen(true);
 audioService.playClickSound();
 audioService.preloadClickSound();
 
+// Test lock sound methods execute safely without error
+audioService.playLockSound();
+audioService.preloadLockSound();
+
 console.log('Audio service unit tests passed successfully!');
+
