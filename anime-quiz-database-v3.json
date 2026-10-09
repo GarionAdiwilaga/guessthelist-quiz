@@ -1,0 +1,1682 @@
+[
+  {
+    "id": 1,
+    "category": "Anime Populer",
+    "anime": "Solo Leveling",
+    "question": "Kata perintah yang diucapkan Sung Jinwoo untuk membangkitkan monster yang telah mati menjadi prajurit bayangannya adalah...",
+    "options": [
+      "Awake",
+      "Arise",
+      "Revive",
+      "Summon"
+    ],
+    "answer": "Arise",
+    "explanation": "Sung Jinwoo membangkitkan pasukan bayangan menggunakan perintah 'Arise'."
+  },
+  {
+    "id": 2,
+    "category": "Anime Populer",
+    "anime": "Sakamoto Days",
+    "question": "Setelah memutuskan pensiun dari dunia pembunuh bayaran legendaris, usaha apa yang dijalankan Taro Sakamoto sehari-hari?",
+    "options": [
+      "Toko roti",
+      "Toko bunga",
+      "Toko kelontong",
+      "Restoran ramen"
+    ],
+    "answer": "Toko kelontong",
+    "explanation": "Taro Sakamoto memilih hidup damai mengelola toko kelontong keluarga."
+  },
+  {
+    "id": 3,
+    "category": "Anime Populer",
+    "anime": "Kusuriya no Hitorigoto (The Apothecary Diaries)",
+    "question": "Metode apa yang digunakan Maomao dalam mengungkap racun berbahaya di lingkungan istana kekaisaran?",
+    "options": [
+      "Menggunakan mantra sihir kuno",
+      "Mencicipi racun secara langsung",
+      "Menguji racun pada tanaman obat",
+      "Memakai jarum akupunktur emas"
+    ],
+    "answer": "Mencicipi racun secara langsung",
+    "explanation": "Maomao mengidentifikasi kandungan racun di istana dengan cara mencicipinya langsung."
+  },
+  {
+    "id": 4,
+    "category": "Anime Populer",
+    "anime": "Kaoru Hana wa Rin to Saku",
+    "question": "Kisah cinta antara Rintaro dan Kaoruko melibatkan interaksi antara dua sekolah bertetangga, yaitu...",
+    "options": [
+      "SMA Chidori dan SMA Kikyo",
+      "SMA Otonokizaka dan SMA UTX",
+      "SMA Karasuno dan SMA Aoba Johsai",
+      "SMA Kamome dan SMA Shibusawa"
+    ],
+    "answer": "SMA Chidori dan SMA Kikyo",
+    "explanation": "Rintaro berasal dari sekolah putra Chidori, sedangkan Kaoruko berasal dari sekolah putri Kikyo."
+  },
+  {
+    "id": 5,
+    "category": "Anime Populer",
+    "anime": "Sono Bisque Doll wa Koi wo Suru",
+    "question": "Sebelum mengenal dunia cosplay bersama Marin Kitagawa, apa keahlian kerajinan tradisional yang ditekuni Wakana Gojo?",
+    "options": [
+      "Pengrajin pedang katana",
+      "Pembuat boneka hina",
+      "Pengrajin tembikar keramik",
+      "Penenun kimono sutra"
+    ],
+    "answer": "Pembuat boneka hina",
+    "explanation": "Gojo dilatih sejak kecil untuk menjadi pengrajin kepala boneka tradisional hina."
+  },
+  {
+    "id": 6,
+    "category": "Anime Populer",
+    "anime": "Dandadan",
+    "question": "Konflik dan kerja sama antara Momo Ayase dan Okarun berakar dari perbedaan kepercayaan gaib mereka di awal cerita, yaitu...",
+    "options": [
+      "Momo percaya alien, Okarun percaya hantu",
+      "Momo percaya penyihir, Okarun percaya monster",
+      "Momo percaya hantu, Okarun percaya alien",
+      "Momo percaya dewa, Okarun percaya iblis"
+    ],
+    "answer": "Momo percaya hantu, Okarun percaya alien",
+    "explanation": "Momo percaya pada dunia spiritual/hantu, sedangkan Okarun terobsesi membuktikan keberadaan alien dan UFO."
+  },
+  {
+    "id": 7,
+    "category": "Anime Populer",
+    "anime": "One Punch Man",
+    "question": "Menurut pengakuan Saitama sendiri, faktor utama yang membuat kepalanya botak licin adalah...",
+    "options": [
+      "Efek samping memakan sel monster",
+      "Kutukan genetik sejak lahir",
+      "Latihan fisik intensif yang terlampau keras",
+      "Radiasi ledakan nuklir bawah tanah"
+    ],
+    "answer": "Latihan fisik intensif yang terlampau keras",
+    "explanation": "Saitama kehilangan rambutnya akibat menu latihan fisik rutin tanpa istirahat hingga melampaui batas manusia."
+  },
+  {
+    "id": 8,
+    "category": "Anime Populer",
+    "anime": "Dr. Stone",
+    "question": "Berapa lama Senku Ishigami dan seluruh umat manusia terperangkap dalam kondisi membeku menjadi batu?",
+    "options": [
+      "1.000 tahun",
+      "3.700 tahun",
+      "5.000 tahun",
+      "10.000 tahun"
+    ],
+    "answer": "3.700 tahun",
+    "explanation": "Senku menghitung detik demi detik selama 3.700 tahun masa pembekuan batu."
+  },
+  {
+    "id": 9,
+    "category": "Anime Populer",
+    "anime": "Kaiju No. 8",
+    "question": "Pasukan Pertahanan (Defense Force) mengukur tingkat kekuatan dan ancaman monster menggunakan indikator persentase bernama...",
+    "options": [
+      "Reiatsu",
+      "Mana capacity",
+      "Fortitude",
+      "Threat factor"
+    ],
+    "answer": "Fortitude",
+    "explanation": "Skala kekuatan tempur kaiju diukur secara resmi dengan tingkat fortitude."
+  },
+  {
+    "id": 10,
+    "category": "Anime Populer",
+    "anime": "Sousou no Frieren",
+    "question": "Kalimat mutlak apa yang diucapkan Frieren kepada iblis Aura the Guillotine setelah memenangkan pertarungan skala mana?",
+    "options": [
+      "'Menyerahlah sekarang juga'",
+      "'Kembalilah ke tempat asalmu'",
+      "'Aura, bunuh dirimu'",
+      "'Jadilah pelayanku selamanya'"
+    ],
+    "answer": "'Aura, bunuh dirimu'",
+    "explanation": "Melalui sihir timbangan Auserlese, Frieren memerintahkan Aura untuk mengakhiri hidupnya sendiri."
+  },
+  {
+    "id": 11,
+    "category": "Anime Populer",
+    "anime": "Jujutsu Kaisen",
+    "question": "Menurut konsep dasar sihir dalam semesta Jujutsu Kaisen, dari manakah energi kutukan berasal?",
+    "options": [
+      "Energi alam semesta",
+      "Roh leluhur klan kuno",
+      "Emosi negatif manusia",
+      "Partikel debu meteorit"
+    ],
+    "answer": "Emosi negatif manusia",
+    "explanation": "Energi kutukan tercipta dari akumulasi perasaan dan emosi negatif manusia."
+  },
+  {
+    "id": 12,
+    "category": "Anime Populer",
+    "anime": "Demon Slayer: Kimetsu no Yaiba",
+    "question": "Siapakah sosok Hashira (Pilar) yang gugur dalam duel sengit melawan Iblis Bulan Atas Akaza di arc Mugen Train?",
+    "options": [
+      "Muichiro Tokito",
+      "Kyojuro Rengoku",
+      "Tengen Uzui",
+      "Giyu Tomioka"
+    ],
+    "answer": "Kyojuro Rengoku",
+    "explanation": "Kyojuro Rengoku gugur sebagai Pilar Api saat melindungi penumpang kereta dari serangan Akaza."
+  },
+  {
+    "id": 13,
+    "category": "Anime Populer",
+    "anime": "Spy x Family",
+    "question": "Nama operasi rahasia yang dijalankan Loid Forger demi menjaga perdamaian antara negara Ostania dan Westalis adalah...",
+    "options": [
+      "Operation Strix",
+      "Operation Paperclip",
+      "Operation Twilight",
+      "Operation Eden"
+    ],
+    "answer": "Operation Strix",
+    "explanation": "Loid Forger menjalankan misi rahasia berjuluk Operation Strix, yang mengharuskannya membentuk keluarga palsu."
+  },
+  {
+    "id": 14,
+    "category": "Anime Populer",
+    "anime": "Chainsaw Man",
+    "question": "Karakter Reze dalam film Chainsaw Man The Movie merupakan wujud dari iblis bernama...",
+    "options": [
+      "Gun Devil",
+      "Blood Devil",
+      "Bomb Devil",
+      "Control Devil"
+    ],
+    "answer": "Bomb Devil",
+    "explanation": "Reze menyamar sebagai gadis biasa dan merupakan inang dari Iblis Bom (Bomb Devil)."
+  },
+  {
+    "id": 15,
+    "category": "Anime Populer",
+    "anime": "Bleach: Thousand-Year Blood War",
+    "question": "Siapakah nama pemimpin tertinggi bangsa Quincy (Wandenreich) yang menyerang Soul Society?",
+    "options": [
+      "Jugram Haschwalth",
+      "Yhwach",
+      "Uryu Ishida",
+      "Gerard Valkyrie"
+    ],
+    "answer": "Yhwach",
+    "explanation": "Yhwach merupakan kaisar bangsa Quincy dan anak dari Soul King."
+  },
+  {
+    "id": 16,
+    "category": "Anime Populer",
+    "anime": "Re:Zero - Starting Life in Another World",
+    "question": "Nama roh kucing kecil yang terikat kontrak dengan Emilia dan menjadi sekutunya di Re:Zero adalah...",
+    "options": [
+      "Puck",
+      "Beatrice",
+      "Garfiel",
+      "Roswaal"
+    ],
+    "answer": "Puck",
+    "explanation": "Puck adalah roh berwujud kucing yang terikat kontrak dengan Emilia dan sangat protektif terhadapnya."
+  },
+  {
+    "id": 17,
+    "category": "Anime Populer",
+    "anime": "Mushoku Tensei: Jobless Reincarnation",
+    "question": "Siapakah sosok ras iblis berambut biru yang menjadi guru sihir pertama Rudeus Greyrat di masa kecilnya?",
+    "options": [
+      "Sylphiette",
+      "Eris Boreas Greyrat",
+      "Roxy Migurdia",
+      "Kishirika Kishirisu"
+    ],
+    "answer": "Roxy Migurdia",
+    "explanation": "Roxy datang ke rumah keluarga Greyrat sebagai instruktur sihir pribadi Rudeus."
+  },
+  {
+    "id": 18,
+    "category": "Anime Populer",
+    "anime": "That Time I Got Reincarnated as a Slime",
+    "question": "Apa nama kemampuan bawaan yang memandu dan menganalisis informasi bagi Rimuru Tempest sesaat setelah bereinkarnasi?",
+    "options": [
+      "Predator",
+      "Gluttony",
+      "Great Sage",
+      "Raphael"
+    ],
+    "answer": "Great Sage",
+    "explanation": "Rimuru dipandu oleh Great Sage yang berfungsi sebagai asisten analisis data di dalam jiwanya."
+  },
+  {
+    "id": 19,
+    "category": "Anime Populer",
+    "anime": "Oshi no Ko",
+    "question": "Rahasia besar apa yang disembunyikan di balik identitas karakter Aqua dan Ruby Hoshino?",
+    "options": [
+      "Mereka adalah agen rahasia pemerintah",
+      "Mereka reinkarnasi dari penggemar dan dokter yang terlahir sebagai anak sang idola, Ai",
+      "Mereka adalah anak angkat dari sutradara film terkenal",
+      "Mereka adalah idola virtual buatan kecerdasan buatan"
+    ],
+    "answer": "Mereka reinkarnasi dari penggemar dan dokter yang terlahir sebagai anak sang idola, Ai",
+    "explanation": "Keduanya bereinkarnasi dan mengingat kehidupan masa lalu mereka sebagai dokter dan pasien penggemar berat Ai."
+  },
+  {
+    "id": 20,
+    "category": "Anime Populer",
+    "anime": "Gachiakuta",
+    "question": "Di semesta Gachiakuta, benda-benda berharga yang dirawat dengan penuh kasih sayang dapat membangkitkan kekuatan khusus yang disebut...",
+    "options": [
+      "Nen",
+      "Jinki",
+      "Zanpakuto",
+      "Cursed tool"
+    ],
+    "answer": "Jinki",
+    "explanation": "Senjata Jinki bangkit dari jiwa dan keterikatan emosional pemiliknya terhadap benda tersebut."
+  },
+  {
+    "id": 21,
+    "category": "Anime Populer",
+    "anime": "Takopi's Original Sin (Takopi no Genzai)",
+    "question": "Dari manakah asal usul alien ceria berbentuk gurita bernama Takopi?",
+    "options": [
+      "Planet Namek",
+      "Planet Happy",
+      "Bintang Cybertron",
+      "Galaksi Nebula"
+    ],
+    "answer": "Planet Happy",
+    "explanation": "Takopi tiba di Bumi membawa perlengkapan ajaib dari Planet Happy untuk menyebarkan keceriaan."
+  },
+  {
+    "id": 22,
+    "category": "Anime Populer",
+    "anime": "DanMachi",
+    "question": "Siapakah identitas asli pelayan bar Hostess of Fertility, Syr Flover, yang diungkap pada Season 5?",
+    "options": [
+      "Dewi Hestia",
+      "Dewi Freya",
+      "Dewi Loki",
+      "Dewi Ishtar"
+    ],
+    "answer": "Dewi Freya",
+    "explanation": "Syr Flover merupakan wujud penyamaran Dewi Freya untuk mendekati Bell Cranel."
+  },
+  {
+    "id": 23,
+    "category": "Anime Populer",
+    "anime": "Kingdom",
+    "question": "Apa ambisi utama yang ingin diraih oleh pemuda miskin bernama Shin (Xin)?",
+    "options": [
+      "Menjadi raja terkaya di Tiongkok",
+      "Menjadi Jenderal Besar di Bawah Langit",
+      "Menguasai jalur sutra perdagangan",
+      "Mendirikan perguruan bela diri terbesar"
+    ],
+    "answer": "Menjadi Jenderal Besar di Bawah Langit",
+    "explanation": "Shin berjanji kepada sahabatnya, Piao, untuk menapaki jenjang militer hingga menjadi jenderal perang terhebat."
+  },
+  {
+    "id": 24,
+    "category": "Anime Populer",
+    "anime": "Uma Musume",
+    "question": "Dalam anime Uma Musume, siapa nama asli karakter yang sangat populer dengan julukan 'Mambo'?",
+    "options": [
+      "Nice Nature",
+      "Matikane Tannhauser",
+      "Twin Turbo",
+      "Meisho Doto"
+    ],
+    "answer": "Matikane Tannhauser",
+    "explanation": "Karakter yang viral dijuluki 'Mambo' di internet dan media sosial adalah Matikane Tannhauser."
+  },
+  {
+    "id": 25,
+    "category": "Anime Populer",
+    "anime": "Bocchi the Rock!",
+    "question": "Hitori Gotoh diam-diam merupakan gitaris populer di internet yang mengunggah video permainan gitarnya dengan nama samaran...",
+    "options": [
+      "guitarhero",
+      "rockstar",
+      "lonelyguitar",
+      "kessokumaster"
+    ],
+    "answer": "guitarhero",
+    "explanation": "Hitori Gotoh mengunggah video permainan gitarnya secara anonim ke internet menggunakan nama akun guitarhero."
+  },
+  {
+    "id": 26,
+    "category": "Anime Populer",
+    "anime": "Medalist",
+    "question": "Cabang olahraga kompetitif apa yang menjadi fokus perjuangan Inori Yuitsuka bersama sang pelatih, Tsukasa?",
+    "options": [
+      "Senam artistik",
+      "Seluncur indah",
+      "Renang indah",
+      "Balet klasik"
+    ],
+    "answer": "Seluncur indah",
+    "explanation": "Serial Medalist berfokus pada dedikasi Inori mengejar medali emas Olimpiade cabang figure skating."
+  },
+  {
+    "id": 27,
+    "category": "Anime Populer",
+    "anime": "Bocchi the Rock!",
+    "question": "Apa nama grup band yang dibentuk oleh Hitori Gotoh bersama teman-temannya di Live House STARRY?",
+    "options": [
+      "Ho-kago Tea Time",
+      "Poppin'Party",
+      "Kessoku Band",
+      "Girls Dead Monster"
+    ],
+    "answer": "Kessoku Band",
+    "explanation": "Hitori Gotoh bergabung sebagai gitaris utama dalam band bernama Kessoku Band."
+  },
+  {
+    "id": 28,
+    "category": "Anime Populer",
+    "anime": "Dragon Ball Daima",
+    "question": "Masalah besar apa yang menimpa Goku dan rekan-rekannya di awal perjalanan serial Dragon Ball Daima?",
+    "options": [
+      "Kekuatan Super Saiyan mereka disegel permanen",
+      "Tubuh mereka berubah menjadi anak-anak akibat permohonan musuh",
+      "Planet Bumi terlempar ke dimensi lain",
+      "Shenron menolak mengabulkan permintaan selamanya"
+    ],
+    "answer": "Tubuh mereka berubah menjadi anak-anak akibat permohonan musuh",
+    "explanation": "Konspirasi musuh dari Dunia Iblis membuat fisik Goku dan rekan-rekannya menyusut kembali menjadi anak kecil."
+  },
+  {
+    "id": 29,
+    "category": "Anime Populer",
+    "anime": "Tougen Anki",
+    "question": "Pertarungan rahasia di dunia modern pada serial Tougen Anki melibatkan perseteruan darah antara dua kubu keturunan mitologi, yaitu...",
+    "options": [
+      "Keturunan Tengu dan kitsune",
+      "Keturunan Oni dan Momotaro",
+      "Keturunan Shinigami dan Quincy",
+      "Keturunan naga dan phoenix"
+    ],
+    "answer": "Keturunan Oni dan Momotaro",
+    "explanation": "Konflik utama mengangkat perselisihan darah klan Oni melawan agensi pembasmi dari klan Momotaro."
+  },
+  {
+    "id": 30,
+    "category": "Anime Populer",
+    "anime": "My Hero Academia: Final Season",
+    "question": "Apa nama Quirk legendaris yang diwariskan dari All Might kepada Izuku Midoriya?",
+    "options": [
+      "All For One",
+      "One For All",
+      "Explosion",
+      "Half-Cold Half-Hot"
+    ],
+    "answer": "One For All",
+    "explanation": "Izuku menerima estafet Quirk penimbun daya One For All dari sang mentor."
+  },
+  {
+    "id": 31,
+    "category": "Shounen Pillars & Classics",
+    "anime": "One Piece",
+    "question": "Nama laut legendaris yang menjadi impian Sanji untuk ditemukan bersama kru Topi Jerami adalah...",
+    "options": [
+      "All Blue",
+      "Grand Line",
+      "Calm Belt",
+      "New World"
+    ],
+    "answer": "All Blue",
+    "explanation": "Sanji bercita-cita menemukan All Blue, laut legendaris tempat bertemunya seluruh spesies ikan dari empat lautan."
+  },
+  {
+    "id": 32,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Naruto / Naruto Shippuden",
+    "question": "Siapakah nama entitas rubah berekor sembilan yang bersemayam di dalam tubuh Naruto Uzumaki?",
+    "options": [
+      "Shukaku",
+      "Gyuki",
+      "Kurama",
+      "Matatabi"
+    ],
+    "answer": "Kurama",
+    "explanation": "Monster berekor sembilan penyimpan cakra raksasa di tubuh Naruto bernama Kurama."
+  },
+  {
+    "id": 33,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Dragon Ball Z",
+    "question": "Di planet manakah Son Goku pertama kali bertransformasi menjadi Super Saiyan saat menghadapi Frieza?",
+    "options": [
+      "Planet Vegeta",
+      "Planet Namek",
+      "Planet Kaio",
+      "Planet Yardrat"
+    ],
+    "answer": "Planet Namek",
+    "explanation": "Kemarahan atas gugurnya Krillin di Planet Namek memicu kebangkitan wujud Super Saiyan pertama Goku."
+  },
+  {
+    "id": 34,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Bleach",
+    "question": "Kapten Divisi 5 yang melakukan pengkhianatan besar terhadap Soul Society dan mencuri Hogyoku adalah...",
+    "options": [
+      "Gin Ichimaru",
+      "Kaname Tosen",
+      "Sosuke Aizen",
+      "Mayuri Kurotsuchi"
+    ],
+    "answer": "Sosuke Aizen",
+    "explanation": "Sosuke Aizen memalsukan kematiannya sebelum mengungkap rencana kudeta terhadap Soul Society."
+  },
+  {
+    "id": 35,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Hunter x Hunter",
+    "question": "Nama Raja Semut Chimera yang terlibat pertempuran dahsyat melawan Ketua Isaac Netero adalah...",
+    "options": [
+      "Neferpitou",
+      "Shaiapouf",
+      "Menthuthuyoupi",
+      "Meruem"
+    ],
+    "answer": "Meruem",
+    "explanation": "Meruem adalah raja tertinggi koloni Semut Chimera yang dilawan Netero dalam duel penentuan."
+  },
+  {
+    "id": 36,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Attack on Titan",
+    "question": "Sebutkan urutan nama tiga dinding raksasa yang melindungi sisa umat manusia dari yang terluar hingga terdalam!",
+    "options": [
+      "Wall Sina, Wall Rose, Wall Maria",
+      "Wall Maria, Wall Rose, Wall Sina",
+      "Wall Rose, Wall Maria, Wall Sina",
+      "Wall Maria, Wall Sina, Wall Rose"
+    ],
+    "answer": "Wall Maria, Wall Rose, Wall Sina",
+    "explanation": "Dinding terluar adalah Maria, dinding tengah adalah Rose, dan dinding terdalam adalah Sina."
+  },
+  {
+    "id": 37,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Jujutsu Kaisen",
+    "question": "Gelar resmi yang disematkan kepada sosok Ryomen Sukuna dalam catatan sejarah dunia sihir adalah...",
+    "options": [
+      "God of Curses",
+      "King of Curses",
+      "Lord of Shadows",
+      "Master of Calamity"
+    ],
+    "answer": "King of Curses",
+    "explanation": "Sukuna ditakuti sebagai Raja Kutukan terkuat sejak era keemasan Heian."
+  },
+  {
+    "id": 38,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Demon Slayer: Kimetsu no Yaiba",
+    "question": "Bagaimana cara mengenali tanda hierarki dan peringkat kekuatan anggota Twelve Kizuki (Dua Belas Iblis Bulan)?",
+    "options": [
+      "Tato simbol di punggung tangan mereka",
+      "Ukiran angka peringkat pada bola mata mereka",
+      "Warna tanduk di kepala mereka",
+      "Jumlah taring di mulut mereka"
+    ],
+    "answer": "Ukiran angka peringkat pada bola mata mereka",
+    "explanation": "Peringkat iblis bulan atas dan bawah terukir langsung di dalam bola mata mereka oleh Muzan."
+  },
+  {
+    "id": 39,
+    "category": "Shounen Pillars & Classics",
+    "anime": "My Hero Academia",
+    "question": "Karakter siswa kelas 1-A SMA U.A. yang memiliki Quirk ganda 'Half-Cold Half-Hot' adalah...",
+    "options": [
+      "Katsuki Bakugo",
+      "Tenya Iida",
+      "Shoto Todoroki",
+      "Eijiro Kirishima"
+    ],
+    "answer": "Shoto Todoroki",
+    "explanation": "Shoto Todoroki mewarisi kekuatan es dari ibunya dan api dari ayahnya, Endeavor."
+  },
+  {
+    "id": 40,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Fullmetal Alchemist: Brotherhood",
+    "question": "Hukum paling mendasar dalam ilmu alkimia yang melarang manusia menciptakan sesuatu tanpa mengorbankan hal bernilai sepadan adalah...",
+    "options": [
+      "Hukum Entropi",
+      "Pertukaran Setara",
+      "Konservasi Energi Jiwa",
+      "Transmutasi Absolut"
+    ],
+    "answer": "Pertukaran Setara",
+    "explanation": "Seluruh proses alkimia terikat pada prinsip hukum Pertukaran Setara."
+  },
+  {
+    "id": 41,
+    "category": "Anime Umum",
+    "anime": "Doraemon",
+    "question": "Makanan pencuci mulut favorit Doraemon dan binatang yang paling membuatnya panik ketakutan berturut-turut adalah...",
+    "options": [
+      "Takoyaki dan kecoak",
+      "Dorayaki dan tikus",
+      "Taiyaki dan anjing",
+      "Mochi dan kucing"
+    ],
+    "answer": "Dorayaki dan tikus",
+    "explanation": "Doraemon sangat menyukai kue dorayaki dan mengalami fobia parah terhadap tikus."
+  },
+  {
+    "id": 42,
+    "category": "Anime Umum",
+    "anime": "Detective Conan",
+    "question": "Nama formula racun ciptaan Organisasi Hitam yang menyebabkan tubuh detektif SMA Shinichi Kudo menyusut menjadi anak kecil adalah...",
+    "options": [
+      "Compound V",
+      "Virus T-002",
+      "APTX 4869",
+      "Agen Orange 99"
+    ],
+    "answer": "APTX 4869",
+    "explanation": "Racun eksperimental Apoptoxin 4869 menyusutkan sel tubuh Shinichi tanpa membunuhnya."
+  },
+  {
+    "id": 43,
+    "category": "Anime Umum",
+    "anime": "Crayon Shin-chan",
+    "question": "Siapakah nama anjing putih peliharaan keluarga Nohara yang sering diajak jalan-jalan oleh Shin-chan?",
+    "options": [
+      "Kuro",
+      "Pochi",
+      "Shiro",
+      "Hachi"
+    ],
+    "answer": "Shiro",
+    "explanation": "Anjing keluarga Nohara dinamai Shiro yang berarti putih."
+  },
+  {
+    "id": 44,
+    "category": "Anime Umum",
+    "anime": "Pokémon",
+    "question": "Pasangan Pokemon milik Jessie dan James dalam komplotan Team Rocket yang selalu ikut dalam misi mereka adalah...",
+    "options": [
+      "Ekans dan Koffing",
+      "Arbok dan Weezing",
+      "Meowth dan Wobbuffet",
+      "Seviper dan Carnivine"
+    ],
+    "answer": "Ekans dan Koffing",
+    "explanation": "Jessie memiliki Ekans dan James memiliki Koffing sejak kemunculan awal mereka, sebelum keduanya berevolusi."
+  },
+  {
+    "id": 45,
+    "category": "Anime Umum",
+    "anime": "Captain Tsubasa",
+    "question": "Nama teknik tendangan melengkung jarak jauh yang menjadi senjata andalan Tsubasa Ozora adalah...",
+    "options": [
+      "Tiger Shot",
+      "Drive Shot",
+      "Fire Shot",
+      "Eagle Shot"
+    ],
+    "answer": "Drive Shot",
+    "explanation": "Drive Shot adalah tendangan khas Tsubasa yang menukik tajam ke gawang lawan."
+  },
+  {
+    "id": 46,
+    "category": "Anime Umum",
+    "anime": "Digimon Adventure",
+    "question": "Bentuk evolusi tingkat Champion dari Agumon milik Taichi adalah...",
+    "options": [
+      "MetalGreymon",
+      "WarGreymon",
+      "Greymon",
+      "GeoGreymon"
+    ],
+    "answer": "Greymon",
+    "explanation": "Agumon berevolusi pertama kali dari wujud Rookie menjadi Greymon."
+  },
+  {
+    "id": 47,
+    "category": "Anime Umum",
+    "anime": "Sailor Moon",
+    "question": "Kalimat pamungkas yang selalu diucapkan Usagi Tsukino sebelum menaklukkan musuh-musuhnya adalah...",
+    "options": [
+      "'Demi cinta dan kedamaian, musnahlah!'",
+      "'Dengan kekuatan bulan, aku akan menghukummu!'",
+      "'Bintang fajar akan melenyapkanmu!'",
+      "'Cahaya surga bersamaku selamanya!'"
+    ],
+    "answer": "'Dengan kekuatan bulan, aku akan menghukummu!'",
+    "explanation": "Kalimat 'In the name of the moon, I will punish you!' adalah deklarasi ikonik Sailor Moon."
+  },
+  {
+    "id": 48,
+    "category": "Anime Umum",
+    "anime": "Yu-Gi-Oh! Duel Monsters",
+    "question": "Kartu monster naga legendaris yang menjadi andalan utama rival Yugi Muto, Seto Kaiba, adalah...",
+    "options": [
+      "Red-Eyes Black Dragon",
+      "Blue-Eyes White Dragon",
+      "Slifer the Sky Dragon",
+      "Winged Dragon of Ra"
+    ],
+    "answer": "Blue-Eyes White Dragon",
+    "explanation": "Seto Kaiba mengoleksi tiga kartu naga putih bermata biru (Blue-Eyes White Dragon)."
+  },
+  {
+    "id": 49,
+    "category": "Anime Umum",
+    "anime": "Inuyasha",
+    "question": "Nama pedang taring pusaka milik Inuyasha yang diwariskan dari sang ayah adalah...",
+    "options": [
+      "Tensa Zangetsu",
+      "Tessaiga",
+      "Tenseiga",
+      "Bakusaiga"
+    ],
+    "answer": "Tessaiga",
+    "explanation": "Tessaiga adalah pedang pelindung manusia yang hanya bisa digunakan oleh Inuyasha."
+  },
+  {
+    "id": 50,
+    "category": "Anime Umum",
+    "anime": "Studio Ghibli",
+    "question": "Makhluk penunggu hutan berbadan tambun yang menjadi maskot dan ikon logo resmi Studio Ghibli adalah...",
+    "options": [
+      "No-Face",
+      "Jiji",
+      "Calcifer",
+      "Totoro"
+    ],
+    "answer": "Totoro",
+    "explanation": "Tokoh utama film My Neighbor Totoro diresmikan sebagai maskot dari Studio Ghibli."
+  },
+  {
+    "id": 51,
+    "category": "Anime Populer",
+    "anime": "Solo Leveling",
+    "question": "Di kuil bawah tanah Cartenon Temple, hukum mutlak pertama yang tertera pada loh batu pemujaan patung raksasa adalah...",
+    "options": [
+      "Buktikan kesetiaanmu dengan darah",
+      "Sembahlah Dewa (Smile and Pray)",
+      "Jangan menatap mata sang Penguasa",
+      "Tinggalkan semua senjatamu"
+    ],
+    "answer": "Sembahlah Dewa (Smile and Pray)",
+    "explanation": "Pada insiden Double Dungeon di kuil Cartenon Temple, para hunter yang melanggar aturan untuk menyembah dan memuji sang dewa langsung dibantai oleh patung raksasa."
+  },
+  {
+    "id": 52,
+    "category": "Anime Populer",
+    "anime": "Sakamoto Days",
+    "question": "Konsekuensi apa yang diancamkan oleh Aoi kepada Taro Sakamoto apabila ia kembali melanggar aturan keluarga dan membunuh seseorang?",
+    "options": [
+      "Toko kelontong keluarga akan dijual",
+      "Aoi akan mengajukan gugatan cerai",
+      "Sakamoto diusir dari kota selamanya",
+      "Identitas rahasianya dilaporkan ke Order"
+    ],
+    "answer": "Aoi akan mengajukan gugatan cerai",
+    "explanation": "Aoi mengetahui masa lalu Sakamoto sebagai pembunuh bayaran dan menetapkan aturan mutlak larangan membunuh dengan ancaman perceraian."
+  },
+  {
+    "id": 53,
+    "category": "Anime Populer",
+    "anime": "Kusuriya no Hitorigoto (The Apothecary Diaries)",
+    "question": "Latar belakang struktur kekaisaran dan istana dalam Kusuriya no Hitorigoto secara historis dimodelkan berdasarkan...",
+    "options": [
+      "Kekaisaran Jepang era Heian",
+      "Dinasti kekaisaran Tiongkok kuno",
+      "Kerajaan Joseon di Korea",
+      "Kesultanan Dinasti Utsmaniyah"
+    ],
+    "answer": "Dinasti kekaisaran Tiongkok kuno",
+    "explanation": "Dunia fiksi dan tatanan istana dalam kisah Maomao secara eksplisit dirancang menyerupai budaya kekaisaran Tiongkok kuno."
+  },
+  {
+    "id": 54,
+    "category": "Anime Populer",
+    "anime": "Kaoru Hana wa Rin to Saku",
+    "question": "Faktor utama yang membuat Rintaro Tsumugi sering ditakuti dan dijauhi orang di sekitarnya meski berkepribadian lembut adalah...",
+    "options": [
+      "Tindik dan perawakannya yang tampak mengintimidasi",
+      "Catatan kenakalan remajanya di masa lalu",
+      "Status keluarganya yang mengelola toko kue",
+      "Kebiasaannya berbicara kasar tanpa sengaja"
+    ],
+    "answer": "Tindik dan perawakannya yang tampak mengintimidasi",
+    "explanation": "Rintaro kerap disalahpahami oleh orang lain semata-mata karena penampilan fisiknya yang terlihat menyeramkan dan mengintimidasi."
+  },
+  {
+    "id": 55,
+    "category": "Anime Populer",
+    "anime": "Sono Bisque Doll wa Koi wo Suru",
+    "question": "Karakter fiksi dari gim eroge 'Slippery Girls 2' yang dibuatkan kostum cosplay perdananya oleh Gojo untuk Marin Kitagawa bernama...",
+    "options": [
+      "Black Lobelia",
+      "Shizuku Kuroe",
+      "Veronica",
+      "Liz-kyun"
+    ],
+    "answer": "Shizuku Kuroe",
+    "explanation": "Proyek kolaborasi cosplay pertama antara Wakana Gojo dan Marin Kitagawa adalah karakter Shizuku Kuroe."
+  },
+  {
+    "id": 56,
+    "category": "Anime Populer",
+    "anime": "Dandadan",
+    "question": "Lagu tema pembuka (OP) 'Otonoke' yang energik pada anime Dandadan dibawakan oleh duo musisi Jepang ternama...",
+    "options": [
+      "King Gnu",
+      "Creepy Nuts",
+      "MAN WITH A MISSION",
+      "Vaundy"
+    ],
+    "answer": "Creepy Nuts",
+    "explanation": "Lagu opening anime Dandadan berjudul 'Otonoke' diciptakan dan dinyanyikan oleh Creepy Nuts."
+  },
+  {
+    "id": 57,
+    "category": "Anime Populer",
+    "anime": "One Punch Man",
+    "question": "Siapakah nama kreator orisinal di balik komik web (webcomic) One Punch Man sebelum digambar ulang oleh Yusuke Murata?",
+    "options": [
+      "ONE",
+      "Boichi",
+      "Gege Akutami",
+      "Sui Ishida"
+    ],
+    "answer": "ONE",
+    "explanation": "One Punch Man berawal dari webcomic orisinal ciptaan komikus dengan nama pena ONE."
+  },
+  {
+    "id": 58,
+    "category": "Anime Populer",
+    "anime": "Dr. Stone",
+    "question": "Kalimat khas (catchphrase) yang selalu dilontarkan oleh Senku Ishigami setiap kali menguji eksperimen sains baru adalah...",
+    "options": [
+      "'Muda da!'",
+      "'Waku waku suru zo!'",
+      "'Yare yare daze!'",
+      "'Bakuhatsu da!'"
+    ],
+    "answer": "'Waku waku suru zo!'",
+    "explanation": "Senku selalu mengekspresikan antusiasmenya terhadap pembuktian ilmiah dengan seruan 'waku waku suru zo'."
+  },
+  {
+    "id": 59,
+    "category": "Anime Populer",
+    "anime": "Kaiju No. 8",
+    "question": "Berapa usia Kafka Hibino saat ia memutuskan kembali mengejar mimpinya mendaftar ke Pasukan Pertahanan bersama para pemuda?",
+    "options": [
+      "25 tahun",
+      "28 tahun",
+      "32 tahun",
+      "35 tahun"
+    ],
+    "answer": "32 tahun",
+    "explanation": "Kafka Hibino adalah protagonis veteran berusia 32 tahun yang mendaftar ke Defense Force sebelum batas usia pendaftaran ditutup."
+  },
+  {
+    "id": 60,
+    "category": "Anime Populer",
+    "anime": "Sousou no Frieren",
+    "question": "Lagu tema pembuka pertama anime Frieren: Beyond Journey's End yang berjudul 'Yuusha' dibawakan oleh...",
+    "options": [
+      "milet",
+      "YOASOBI",
+      "Aimer",
+      "ZUTOMAYO"
+    ],
+    "answer": "YOASOBI",
+    "explanation": "Lagu opening 'Yuusha' untuk serial anime Sousou no Frieren diciptakan dan dinyanyikan oleh duo YOASOBI."
+  },
+  {
+    "id": 61,
+    "category": "Anime Populer",
+    "anime": "Jujutsu Kaisen",
+    "question": "Apa nama teknik perluasan domain (Domain Expansion) milik Gojo Satoru yang mampu membanjiri target dengan informasi tak terhingga?",
+    "options": [
+      "Malevolent Shrine",
+      "Unlimited Void",
+      "Idle Transfiguration",
+      "Chimera Shadow Garden"
+    ],
+    "answer": "Unlimited Void",
+    "explanation": "Domain Expansion Gojo Satoru adalah Unlimited Void (Muryokusho), yang melumpuhkan otak lawan dengan aliran informasi tak terbatas."
+  },
+  {
+    "id": 62,
+    "category": "Anime Populer",
+    "anime": "Demon Slayer: Kimetsu no Yaiba",
+    "question": "Sebelum mampu menguasai Hinokami Kagura, gaya pernapasan dasar pertama yang dipelajari Tanjiro Kamado dari Sakonji Urokodaki adalah...",
+    "options": [
+      "Pernapasan Guntur",
+      "Pernapasan Air",
+      "Pernapasan Angin",
+      "Pernapasan Api"
+    ],
+    "answer": "Pernapasan Air",
+    "explanation": "Tanjiro pertama kali dilatih teknik Pernapasan Air (Water Breathing) oleh mantan Pilar Air, Sakonji Urokodaki."
+  },
+  {
+    "id": 63,
+    "category": "Anime Populer",
+    "anime": "Spy x Family",
+    "question": "Dalam organisasi pembunuh rahasia Garden, Yor Forger dikenal dan beroperasi di bawah nama sandi...",
+    "options": [
+      "Twilight",
+      "Thorn Princess",
+      "Nightfall",
+      "Crimson Rose"
+    ],
+    "answer": "Thorn Princess",
+    "explanation": "Yor Forger menjalankan misi eksekusi rahasia untuk Garden dengan menggunakan nama sandi Thorn Princess."
+  },
+  {
+    "id": 64,
+    "category": "Anime Populer",
+    "anime": "Chainsaw Man",
+    "question": "Sosok iblis berwujud anjing kecil dengan gergaji di kepalanya yang memberikan jantungnya kepada Denji bernama...",
+    "options": [
+      "Kon",
+      "Pochita",
+      "Beam",
+      "Bael"
+    ],
+    "answer": "Pochita",
+    "explanation": "Pochita merupakan Chainsaw Devil yang mengikat kontrak dan menyatu menjadi jantung Denji untuk menyelamatkan hidupnya."
+  },
+  {
+    "id": 65,
+    "category": "Anime Populer",
+    "anime": "Bleach: Thousand-Year Blood War",
+    "question": "Apa nama wujud Bankai Kapten Komandan Genryusai Shigekuni Yamamoto yang menyelimuti pedangnya dengan panas terik matahari?",
+    "options": [
+      "Daiguren Hyorinmaru",
+      "Zanka no Tachi",
+      "Katen Kyokotsu: Karamatsu Shinju",
+      "Senbonzakura Kageyoshi"
+    ],
+    "answer": "Zanka no Tachi",
+    "explanation": "Bankai dari pedang Ryuujin Jakka milik Yamamoto adalah Zanka no Tachi."
+  },
+  {
+    "id": 66,
+    "category": "Anime Populer",
+    "anime": "Re:Zero - Starting Life in Another World",
+    "question": "Senjata utama berupa bola besi berduri berantai yang digunakan oleh pelayan ras oni, Rem, adalah...",
+    "options": [
+      "Kusarigama",
+      "Morningstar (Flail)",
+      "Halberd",
+      "Zanbato"
+    ],
+    "answer": "Morningstar (Flail)",
+    "explanation": "Saat memasuki wujud bertarung dengan tanduk oni miliknya, Rem menggunakan senjata flail berduri berantai (morningstar)."
+  },
+  {
+    "id": 67,
+    "category": "Anime Populer",
+    "anime": "Mushoku Tensei: Jobless Reincarnation",
+    "question": "Studio animasi yang didirikan secara khusus melalui kemitraan Egg Firm dan White Fox demi menganimasikan serial Mushoku Tensei adalah...",
+    "options": [
+      "Studio Bind",
+      "CloverWorks",
+      "Passione",
+      "Silver Link"
+    ],
+    "answer": "Studio Bind",
+    "explanation": "Mushoku Tensei diproduksi oleh Studio Bind, studio yang sengaja didirikan untuk menggarap adaptasi waralaba tersebut."
+  },
+  {
+    "id": 68,
+    "category": "Anime Populer",
+    "anime": "That Time I Got Reincarnated as a Slime",
+    "question": "Keahlian unik (Unique Skill) milik Rimuru yang memungkinkannya melahap musuh, menganalisis struktur fisik, dan meniru wujudnya adalah...",
+    "options": [
+      "Degenerate",
+      "Predator",
+      "Severer",
+      "Usurper"
+    ],
+    "answer": "Predator",
+    "explanation": "Sebelum berevolusi menjadi Gluttony dan Beelzebuth, kemampuan konsumsi utama Rimuru adalah Unique Skill Predator."
+  },
+  {
+    "id": 69,
+    "category": "Anime Populer",
+    "anime": "Oshi no Ko",
+    "question": "Kelompok idola bentukan Strawberry Productions yang kembali dibangkitkan oleh Ruby Hoshino dan Kana Arima bernama...",
+    "options": [
+      "B-Komachi",
+      "Muse",
+      "Sunny Passion",
+      "First Love Monster"
+    ],
+    "answer": "B-Komachi",
+    "explanation": "Ruby menghidupkan kembali nama unit idol legendaris mendiang ibunya, yaitu B-Komachi."
+  },
+  {
+    "id": 70,
+    "category": "Anime Populer",
+    "anime": "Gachiakuta",
+    "question": "Nama jurang pembuangan bawah tanah tempat seluruh sampah dan manusia buangan dijatuhkan dari kota melayang adalah...",
+    "options": [
+      "The Abyss",
+      "The Pit",
+      "Tartarus",
+      "Underworld"
+    ],
+    "answer": "The Pit",
+    "explanation": "Rudo difitnah atas kejahatan pembunuhan dan dijatuhkan dari Sphere ke kawasan kumuh di bawah yang disebut The Pit."
+  },
+  {
+    "id": 71,
+    "category": "Anime Populer",
+    "anime": "Takopi's Original Sin (Takopi no Genzai)",
+    "question": "Siapakah nama komikus (mangaka) di balik pembuatan manga psikologis tragis Takopi's Original Sin?",
+    "options": [
+      "Tatsuki Fujimoto",
+      "Taizan 5",
+      "Inio Asano",
+      "Aka Akasaka"
+    ],
+    "answer": "Taizan 5",
+    "explanation": "Manga bertema drama psikologis gelap Takopi no Genzai ditulis dan diilustrasikan oleh Taizan 5."
+  },
+  {
+    "id": 72,
+    "category": "Anime Populer",
+    "anime": "DanMachi",
+    "question": "Kemampuan pasif langka milik Bell Cranel yang membuat status kekuatannya berkembang pesat berdasarkan keteguhan cintanya bernama...",
+    "options": [
+      "Firebolt",
+      "Liaris Freese",
+      "Ox Slayer",
+      "Argo Vesta"
+    ],
+    "answer": "Liaris Freese",
+    "explanation": "Liaris Freese adalah skill unik Bell yang mempercepat pertumbuhannya selama perasaannya kepada Ais Wallenstein tetap teguh."
+  },
+  {
+    "id": 73,
+    "category": "Anime Populer",
+    "anime": "Kingdom",
+    "question": "Raja muda dari negara Qin yang menjalin aliansi kuat dengan Shin demi mewujudkan mimpinya mempersatukan daratan Tiongkok bernama...",
+    "options": [
+      "Ryo Fui",
+      "Ei Sei",
+      "Kyou Kai",
+      "Sho Hei Kun"
+    ],
+    "answer": "Ei Sei",
+    "explanation": "Ei Sei (kelak menjadi Qin Shi Huang) adalah raja muda yang berjuang menyatukan tujuh negara bersama Shin."
+  },
+  {
+    "id": 74,
+    "category": "Anime Populer",
+    "anime": "Uma Musume",
+    "question": "Gadis kuda pacu yang menjadi tokoh utama dalam adaptasi manga 'Uma Musume: Cinderella Gray' adalah...",
+    "options": [
+      "Special Week",
+      "Oguri Cap",
+      "Tokai Teio",
+      "Silence Suzuka"
+    ],
+    "answer": "Oguri Cap",
+    "explanation": "Serial Cinderella Gray berfokus pada perjalanan karier kuda pacu legendaris dari daerah pedesaan Kasamatsu, Oguri Cap."
+  },
+  {
+    "id": 75,
+    "category": "Anime Populer",
+    "anime": "Blue Lock",
+    "question": "Kemampuan persepsi tingkat tinggi yang dikembangkan Yoichi Isagi untuk memprediksi pergerakan seluruh pemain di lapangan adalah...",
+    "options": [
+      "Zone Sense",
+      "Metavision",
+      "Emperor Eye",
+      "Future Sight"
+    ],
+    "answer": "Metavision",
+    "explanation": "Isagi menggabungkan kesadaran spasialnya dengan teknik pemindaian visual berkelanjutan yang disebut Metavision."
+  },
+  {
+    "id": 76,
+    "category": "Anime Populer",
+    "anime": "Mashle: Magic and Muscles",
+    "question": "Camilan manis yang menjadi obsesi mutlak Mash Burnedead dan kerap ia sembunyikan di dalam jubah sekolahnya adalah...",
+    "options": [
+      "Taiyaki",
+      "Kue sus (Cream puff)",
+      "Melonpan",
+      "Dorayaki"
+    ],
+    "answer": "Kue sus (Cream puff)",
+    "explanation": "Mash Burnedead sangat menyukai kue sus (cream puff) dan bahkan sering membuatnya saat jam pelajaran sihir."
+  },
+  {
+    "id": 77,
+    "category": "Anime Populer",
+    "anime": "Wind Breaker",
+    "question": "Organisasi patroli pelindung kota Makochi yang dibentuk oleh para siswa berandalan SMA Furin dikenal dengan sebutan...",
+    "options": [
+      "Bofurin",
+      "Shishitoren",
+      "Keel",
+      "Moebius"
+    ],
+    "answer": "Bofurin",
+    "explanation": "Para murid SMA Furin mendedikasikan kekuatan fisik mereka untuk menjaga ketenteraman kota di bawah nama kelompok Bofurin."
+  },
+  {
+    "id": 78,
+    "category": "Anime Populer",
+    "anime": "Dragon Ball Daima",
+    "question": "Siapakah nama Raja Dunia Iblis (Demon Realm) yang menjadi dalang di balik mantra penyusutan tubuh Goku dan kawan-kawan?",
+    "options": [
+      "Dabura",
+      "Gomah",
+      "Babidi",
+      "Towa"
+    ],
+    "answer": "Gomah",
+    "explanation": "Raja Gomah adalah tokoh dari Dunia Iblis yang menggunakan Dragon Ball untuk menyusutkan petarung Bumi."
+  },
+  {
+    "id": 79,
+    "category": "Anime Populer",
+    "anime": "Tougen Anki",
+    "question": "Protagonis utama berdarah siluman Oni yang dibimbing oleh Mudano untuk mengendalikan kekuatannya di Akademi Rakshasa bernama...",
+    "options": [
+      "Jin Kougasaki",
+      "Shiki Ichinose",
+      "Naito Mudano",
+      "Sakon Kusanagi"
+    ],
+    "answer": "Shiki Ichinose",
+    "explanation": "Tokoh utama Tougen Anki yang memiliki garis keturunan murni klan Oni adalah Shiki Ichinose."
+  },
+  {
+    "id": 80,
+    "category": "Anime Populer",
+    "anime": "My Hero Academia: Final Season",
+    "question": "Pemimpin League of Villains yang tubuhnya dimodifikasi dan mewarisi kekuatan All For One dalam Final War adalah...",
+    "options": [
+      "Dabi",
+      "Tomura Shigaraki",
+      "Overhaul",
+      "Re-Destro"
+    ],
+    "answer": "Tomura Shigaraki",
+    "explanation": "Tomura Shigaraki menjadi ancaman pamungkas setelah membangkitkan Quirk pembusukan dan menyerap kekuatan All For One."
+  },
+  {
+    "id": 81,
+    "category": "Shounen Pillars & Classics",
+    "anime": "One Piece",
+    "question": "Periode seratus tahun dalam sejarah masa lalu yang catatannya dihapus total dan dirahasiakan oleh Pemerintah Dunia disebut...",
+    "options": [
+      "Dark Century",
+      "Void Century",
+      "Forgotten Age",
+      "God Valley Era"
+    ],
+    "answer": "Void Century",
+    "explanation": "Abad Kekosongan (Void Century) adalah rentang waktu 800–900 tahun lalu yang kebenarannya hanya tercatat pada batu Poneglyph."
+  },
+  {
+    "id": 82,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Naruto / Naruto Shippuden",
+    "question": "Motif sesungguhnya di balik tindakan Itachi Uchiha membantai seluruh anggota klannya sendiri atas perintah petinggi Konoha adalah...",
+    "options": [
+      "Menguji batas kapasitas Mangekyo Sharingan miliknya",
+      "Mencegah perang saudara kudeta dan melindungi adiknya, Sasuke",
+      "Mengumpulkan cakra untuk membangkitkan Madara Uchiha",
+      "Mengambil alih kepemimpinan organisasi bayangan Akatsuki"
+    ],
+    "answer": "Mencegah perang saudara kudeta dan melindungi adiknya, Sasuke",
+    "explanation": "Itachi memilih menanggung aib pembelotan demi mencegah kudeta klan Uchiha dan memastikan Sasuke tetap hidup di Konoha."
+  },
+  {
+    "id": 83,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Dragon Ball Z",
+    "question": "Siapakah nama lahir Son Goku yang diberikan oleh orang tuanya di Planet Vegeta sebelum ia dikirim ke Bumi?",
+    "options": [
+      "Bardock",
+      "Kakarot",
+      "Raditz",
+      "Turles"
+    ],
+    "answer": "Kakarot",
+    "explanation": "Son Goku terlahir dari bangsa Saiyan dengan nama asli Kakarot."
+  },
+  {
+    "id": 84,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Death Note",
+    "question": "Siapakah nama lengkap asli dari detektif eksentrik berinisial L yang menjadi rival intelektual Light Yagami?",
+    "options": [
+      "Mail Jeevas",
+      "L Lawliet",
+      "Nate River",
+      "Mihael Keehl"
+    ],
+    "answer": "L Lawliet",
+    "explanation": "Identitas resmi dan nama asli dari detektif L adalah L Lawliet."
+  },
+  {
+    "id": 85,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Hunter x Hunter",
+    "question": "Sistem manipulasi energi aura spiritual yang menjadi fondasi seluruh pertarungan tingkat tinggi di Hunter x Hunter dinamakan...",
+    "options": [
+      "Chakra",
+      "Nen",
+      "Reiatsu",
+      "Haki"
+    ],
+    "answer": "Nen",
+    "explanation": "Nen adalah teknik mengendalikan dan memancarkan aura kehidupan yang terbagi dalam enam tipe afinitas alami."
+  },
+  {
+    "id": 86,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Attack on Titan",
+    "question": "Peristiwa bencana militer saat jutaan Colossal Titan di dalam dinding dibangunkan untuk meratakan daratan dunia disebut...",
+    "options": [
+      "The Great Titan War",
+      "The Rumbling",
+      "Eldian Liberation",
+      "Wall Eclipse"
+    ],
+    "answer": "The Rumbling",
+    "explanation": "Eren Yeager memicu peristiwa The Rumbling (Gemuruh) untuk menghancurkan musuh di luar pulau Paradis menggunakan titan dinding."
+  },
+  {
+    "id": 87,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Slam Dunk",
+    "question": "Berapakah nomor punggung permanen yang dikenakan oleh 'Raja Rebound' Hanamichi Sakuragi di tim basket SMA Shohoku?",
+    "options": [
+      "4",
+      "10",
+      "11",
+      "14"
+    ],
+    "answer": "10",
+    "explanation": "Nomor punggung resmi Hanamichi Sakuragi di tim inti Shohoku adalah nomor 10."
+  },
+  {
+    "id": 88,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Samurai X / Rurouni Kenshin",
+    "question": "Aliran ilmu pedang kuno berkecepatan dewa yang dipelajari Kenshin Himura dari sang guru, Hiko Seijuro XIII, adalah...",
+    "options": [
+      "Kamiya Kasshin-ryu",
+      "Hiten Mitsurugi-ryu",
+      "Shiranui-ryu",
+      "Oniwabanshu-ryu"
+    ],
+    "answer": "Hiten Mitsurugi-ryu",
+    "explanation": "Kenshin Himura adalah pewaris tunggal teknik pedang legendaris Hiten Mitsurugi-ryu."
+  },
+  {
+    "id": 89,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Fairy Tail",
+    "question": "Nama naga api legendaris yang merawat Natsu Dragneel sejak kecil dan mengajarinya sihir Dragon Slayer adalah...",
+    "options": [
+      "Acnologia",
+      "Igneel",
+      "Grandeeney",
+      "Metalicana"
+    ],
+    "answer": "Igneel",
+    "explanation": "Natsu dibesarkan dan dilatih langsung oleh Raja Naga Api yang bernama Igneel."
+  },
+  {
+    "id": 90,
+    "category": "Shounen Pillars & Classics",
+    "anime": "Fullmetal Alchemist: Brotherhood",
+    "question": "Larangan mutlak dalam dunia alkimia yang dilanggar oleh Elric bersaudara hingga tubuh Alphonse terenggut adalah...",
+    "options": [
+      "Pembuatan Batu Bertuah",
+      "Transmutasi Manusia",
+      "Peleburan Chimera Berakal",
+      "Transmutasi Emas Murni"
+    ],
+    "answer": "Transmutasi Manusia",
+    "explanation": "Ed dan Al melanggar tabu terbesar alkimia dengan melakukan Transmutasi Manusia demi menghidupkan kembali ibu mereka."
+  },
+  {
+    "id": 91,
+    "category": "Anime Umum",
+    "anime": "Doraemon",
+    "question": "Siapakah nama cicit Nobita dari abad ke-22 yang mengirimkan robot kucing Doraemon ke masa lalu?",
+    "options": [
+      "Nobisuke",
+      "Sewashi",
+      "Dekisugi",
+      "Sunetsugu"
+    ],
+    "answer": "Sewashi",
+    "explanation": "Doraemon dikirim ke masa lalu oleh keturunan generasi keempat Nobita yang bernama Sewashi Nobi."
+  },
+  {
+    "id": 92,
+    "category": "Anime Umum",
+    "anime": "Detective Conan",
+    "question": "Nama pena 'Edogawa' yang dipakai Shinichi Kudo saat menyamar sebagai anak kecil terinspirasi dari sastrawan misteri Jepang...",
+    "options": [
+      "Osamu Dazai",
+      "Edogawa Ranpo",
+      "Ryunosuke Akutagawa",
+      "Natsume Soseki"
+    ],
+    "answer": "Edogawa Ranpo",
+    "explanation": "Shinichi secara spontan menggabungkan nama Arthur Conan Doyle dan bapak fiksi detektif modern Jepang, Edogawa Ranpo."
+  },
+  {
+    "id": 93,
+    "category": "Anime Umum",
+    "anime": "Crayon Shin-chan",
+    "question": "Tokoh pahlawan super televisi yang menjadi panutan dan serial favorit yang selalu ditonton Shin-chan adalah...",
+    "options": [
+      "Kamen Rider",
+      "Action Kamen",
+      "Gundam Wing",
+      "Buri Buri Zaemon"
+    ],
+    "answer": "Action Kamen",
+    "explanation": "Pahlawan bertopeng fiksi di televisi yang selalu ditiru oleh Shinnosuke adalah Action Kamen."
+  },
+  {
+    "id": 94,
+    "category": "Anime Umum",
+    "anime": "Pokémon",
+    "question": "Karakter antagonis dari komplotan Team Rocket yang merupakan Pokémon berkaki empat namun mampu berbicara bahasa manusia adalah...",
+    "options": [
+      "Wobbuffet",
+      "Meowth",
+      "Psyduck",
+      "Arbok"
+    ],
+    "answer": "Meowth",
+    "explanation": "Meowth milik Team Rocket mendedikasikan hidupnya untuk belajar berjalan dengan dua kaki dan berbicara bahasa manusia."
+  },
+  {
+    "id": 95,
+    "category": "Anime Umum",
+    "anime": "Captain Tsubasa",
+    "question": "Sosok mentor dan mantan pesepak bola tim nasional Brasil yang membimbing perkembangan awal teknik sepak bola Tsubasa adalah...",
+    "options": [
+      "Carlos Santana",
+      "Roberto Hongo",
+      "Rivaul",
+      "Juan Diaz"
+    ],
+    "answer": "Roberto Hongo",
+    "explanation": "Roberto Hongo tinggal bersama keluarga Ozora dan mengasah bakat sepak bola Tsubasa sejak sekolah dasar."
+  },
+  {
+    "id": 96,
+    "category": "Anime Umum",
+    "anime": "Digimon Adventure",
+    "question": "Nama gawai portabel bercahaya yang berfungsi memicu evolusi para rekan monster milik Anak-Anak Terpilih adalah...",
+    "options": [
+      "D-Arc",
+      "Digivice",
+      "D-Terminal",
+      "D-Scanner"
+    ],
+    "answer": "Digivice",
+    "explanation": "Anak-Anak Terpilih (Chosen Children) memicu rantai evolusi Digimon mereka menggunakan perangkat Digivice."
+  },
+  {
+    "id": 97,
+    "category": "Anime Umum",
+    "anime": "Sailor Moon",
+    "question": "Benda pusaka berkekuatan kosmis murni yang dilindungi oleh para Sailor Guardian dari incaran Dark Kingdom adalah...",
+    "options": [
+      "Golden Crystal",
+      "Silver Crystal",
+      "Moon Scepter",
+      "Heart Brooch"
+    ],
+    "answer": "Silver Crystal",
+    "explanation": "Sumber kekuatan magis Kerajaan Bulan yang dicari dan dijaga oleh Usagi adalah Kristal Perak Legendaris (Silver Crystal)."
+  },
+  {
+    "id": 98,
+    "category": "Anime Umum",
+    "anime": "Yu-Gi-Oh! Duel Monsters",
+    "question": "Artefak emas peninggalan Mesir Kuno yang diselesaikan oleh Yugi Muto selama delapan tahun hingga membangkitkan Yami Yugi adalah...",
+    "options": [
+      "Millennium Eye",
+      "Millennium Puzzle",
+      "Millennium Ring",
+      "Millennium Rod"
+    ],
+    "answer": "Millennium Puzzle",
+    "explanation": "Yugi Muto menyusun kepingan liontin emas Millennium Puzzle yang membebaskan jiwa Firaun Atem."
+  },
+  {
+    "id": 99,
+    "category": "Anime Umum",
+    "anime": "Inuyasha",
+    "question": "Benda magis berbentuk bola permata yang hancur berkeping-keping akibat panah Kagome dan diperebutkan para siluman bernama...",
+    "options": [
+      "Hoshi no Tama",
+      "Shikon no Tama",
+      "Sacred Pearl",
+      "Demon Core"
+    ],
+    "answer": "Shikon no Tama",
+    "explanation": "Permata Empat Jiwa (Shikon no Tama / Shikon Jewel) adalah permata bertuah yang menjadi pusat pusaran konflik utama."
+  },
+  {
+    "id": 100,
+    "category": "Anime Umum",
+    "anime": "Studio Ghibli",
+    "question": "Film garapan Hayao Miyazaki yang mencatat sejarah sebagai film anime bioskop pertama yang memenangkan Piala Oscar (Academy Award) pada tahun 2003 adalah...",
+    "options": [
+      "Princess Mononoke",
+      "Spirited Away",
+      "Howl's Moving Castle",
+      "My Neighbor Totoro"
+    ],
+    "answer": "Spirited Away",
+    "explanation": "Film anime Spirited Away karya Studio Ghibli memenangkan Academy Award untuk kategori Best Animated Feature pada tahun 2003."
+  },
+  {
+    "id": 101,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Istilah 'wibu' di Indonesia diserap dari kata bahasa Inggris...",
+    "options": [
+      "Weeaboo",
+      "Wapanese",
+      "Otaku",
+      "Nihonjin"
+    ],
+    "answer": "Weeaboo",
+    "explanation": "Wibu berasal dari 'weeaboo', istilah slang yang muncul di komik The Perry Bible Fellowship karya Nicholas Gurewitch lalu dipopulerkan di forum 4chan sekitar 2005."
+  },
+  {
+    "id": 102,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Apa perbedaan paling tepat antara 'otaku' dan 'wibu'?",
+    "options": [
+      "Otaku mendalami hobi secara serius, wibu terobsesi budaya Jepang secara berlebihan",
+      "Otaku hanya menyukai anime, wibu menyukai manga",
+      "Otaku tinggal di Jepang, wibu tinggal di luar Jepang",
+      "Otaku adalah istilah lama, wibu istilah baru untuk hal yang sama"
+    ],
+    "answer": "Otaku mendalami hobi secara serius, wibu terobsesi budaya Jepang secara berlebihan",
+    "explanation": "Otaku menekuni suatu hobi secara mendalam (tidak harus anime), sedangkan wibu adalah orang non-Jepang yang terobsesi berlebihan pada budaya Jepang."
+  },
+  {
+    "id": 103,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Istilah 'seiyuu' dalam dunia anime merujuk pada...",
+    "options": [
+      "Pengisi suara Jepang",
+      "Sutradara animasi",
+      "Penulis skenario",
+      "Komposer soundtrack"
+    ],
+    "answer": "Pengisi suara Jepang",
+    "explanation": "Seiyuu berarti pengisi suara; istilah ini dipakai khusus untuk voice actor Jepang asli, bukan versi dubbing."
+  },
+  {
+    "id": 104,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Satu 'cour' dalam industri anime berarti sekitar...",
+    "options": [
+      "12-13 episode (seperempat tahun)",
+      "6 episode",
+      "24-26 episode",
+      "52 episode"
+    ],
+    "answer": "12-13 episode (seperempat tahun)",
+    "explanation": "Cour adalah blok siaran sekitar 3 bulan, biasanya 12-13 episode. Satu tahun terdiri dari empat cour."
+  },
+  {
+    "id": 105,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Apa arti istilah 'isekai' dalam anime?",
+    "options": [
+      "Tokoh terlempar atau terlahir kembali di dunia lain",
+      "Cerita tentang robot raksasa",
+      "Anime dengan latar sekolah",
+      "Kisah cinta segitiga"
+    ],
+    "answer": "Tokoh terlempar atau terlahir kembali di dunia lain",
+    "explanation": "Isekai berarti 'dunia lain'; genre ini menceritakan tokoh yang dipindahkan, terperangkap, atau bereinkarnasi ke dunia berbeda."
+  },
+  {
+    "id": 106,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Karakter yang awalnya bersikap dingin dan galak tetapi lama-lama menunjukkan sisi manis disebut...",
+    "options": [
+      "Tsundere",
+      "Yandere",
+      "Kuudere",
+      "Dandere"
+    ],
+    "answer": "Tsundere",
+    "explanation": "Tsundere gabungan 'tsun tsun' (menjauh karena kesal) dan 'dere dere' (mencair karena cinta). Contohnya Rin Tohsaka dan Taiga Aisaka."
+  },
+  {
+    "id": 107,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Karakter yang tampak manis dan penyayang tetapi berubah obsesif, posesif, dan berbahaya disebut...",
+    "options": [
+      "Yandere",
+      "Tsundere",
+      "Dandere",
+      "Deredere"
+    ],
+    "answer": "Yandere",
+    "explanation": "Yandere gabungan 'yanderu' (sakit/terganggu jiwa) dan 'dere dere'. Contoh klasiknya Yuno Gasai dari Mirai Nikki."
+  },
+  {
+    "id": 108,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Karakter yang pendiam dan pemalu, lalu membuka diri hanya kepada orang yang dipercaya, disebut...",
+    "options": [
+      "Dandere",
+      "Kuudere",
+      "Yandere",
+      "Tsundere"
+    ],
+    "answer": "Dandere",
+    "explanation": "Dandere gabungan 'danmari' (diam) dan 'dere dere'. Contohnya Hinata Hyuga dari Naruto dan Shoko Komi."
+  },
+  {
+    "id": 109,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Istilah 'sakuga' dalam komunitas anime dipakai untuk memuji...",
+    "options": [
+      "Potongan animasi dengan kualitas gambar luar biasa",
+      "Lagu tema pembuka",
+      "Desain karakter",
+      "Alur cerita"
+    ],
+    "answer": "Potongan animasi dengan kualitas gambar luar biasa",
+    "explanation": "Sakuga secara harfiah berarti 'gambar kerja'; di komunitas global istilah ini dipakai untuk adegan animasi yang sangat halus dan ekspresif."
+  },
+  {
+    "id": 110,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Apa perbedaan OVA dan ONA?",
+    "options": [
+      "OVA dirilis langsung ke video rumahan, ONA dirilis lewat internet",
+      "OVA untuk film, ONA untuk serial TV",
+      "OVA dibuat studio besar, ONA dibuat fan",
+      "OVA berdurasi panjang, ONA berdurasi pendek"
+    ],
+    "answer": "OVA dirilis langsung ke video rumahan, ONA dirilis lewat internet",
+    "explanation": "OVA = Original Video Animation (rilis langsung ke VHS/DVD/Blu-ray), ONA = Original Net Animation (rilis langsung ke internet)."
+  },
+  {
+    "id": 111,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Istilah 'chibi' menggambarkan gaya gambar karakter dengan...",
+    "options": [
+      "Kepala besar dan tubuh mungil",
+      "Mata besar dan rambut panjang",
+      "Warna neon menyala",
+      "Garis tebal dan kasar"
+    ],
+    "answer": "Kepala besar dan tubuh mungil",
+    "explanation": "Chibi adalah gaya super-deformed dengan proporsi kepala sangat besar dan tubuh kecil, sering dipakai untuk adegan lucu."
+  },
+  {
+    "id": 112,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Istilah 'iyashikei' merujuk pada anime yang bertujuan...",
+    "options": [
+      "Menenangkan dan menyembuhkan perasaan penonton",
+      "Membuat penonton ketakutan",
+      "Menyajikan pertarungan sengit",
+      "Mengajarkan sejarah Jepang"
+    ],
+    "answer": "Menenangkan dan menyembuhkan perasaan penonton",
+    "explanation": "Iyashikei berarti 'tipe penyembuh'; anime bergenre ini bertempo lambat, minim konflik, dan menenangkan."
+  },
+  {
+    "id": 113,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Blok program anime larut malam Fuji TV yang namanya merupakan kata 'Animation' dibaca terbalik adalah...",
+    "options": [
+      "noitaminA",
+      "Aniplex",
+      "Animax",
+      "Nippon Animation"
+    ],
+    "answer": "noitaminA",
+    "explanation": "noitaminA diluncurkan April 2005; namanya adalah 'Animation' yang ditulis terbalik sebagai simbol 'membalikkan' pandangan umum soal anime."
+  },
+  {
+    "id": 114,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Kata Jepang 'baka' yang sering dipakai karakter anime berarti...",
+    "options": [
+      "Bodoh",
+      "Hebat",
+      "Cepat",
+      "Kuat"
+    ],
+    "answer": "Bodoh",
+    "explanation": "Baka berarti bodoh atau goblok; sering dipakai sebagai makian ringan antarkarakter di anime."
+  },
+  {
+    "id": 115,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Kata Jepang 'sugoi' yang sering diucapkan saat kagum berarti...",
+    "options": [
+      "Hebat",
+      "Sedih",
+      "Lapar",
+      "Takut"
+    ],
+    "answer": "Hebat",
+    "explanation": "Sugoi berarti hebat atau keren, dipakai untuk menyatakan rasa kagum. Varian informalnya 'sugee'."
+  },
+  {
+    "id": 116,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Kata Jepang 'nakama' yang sering muncul di anime bertema petualangan berarti...",
+    "options": [
+      "Rekan atau sahabat seperjuangan",
+      "Musuh bebuyutan",
+      "Keluarga sedarah",
+      "Guru pembimbing"
+    ],
+    "answer": "Rekan atau sahabat seperjuangan",
+    "explanation": "Nakama berarti rekan atau sahabat seperjuangan; istilah ini sangat lekat dengan One Piece."
+  },
+  {
+    "id": 117,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Seruan Jepang 'ganbatte!' yang sering ditujukan ke tokoh anime berarti...",
+    "options": [
+      "Semangat, lakukan yang terbaik!",
+      "Selamat tinggal!",
+      "Maafkan aku!",
+      "Awas, bahaya!"
+    ],
+    "answer": "Semangat, lakukan yang terbaik!",
+    "explanation": "Ganbatte adalah ungkapan penyemangat, sering diterjemahkan 'semangat ya!' atau 'berjuanglah!'."
+  },
+  {
+    "id": 118,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Dalam cosplay, istilah 'gijinka' merujuk pada...",
+    "options": [
+      "Cosplay karakter non-manusia yang diwujudkan dalam bentuk manusia",
+      "Cosplay yang memakai kostum buatan sendiri",
+      "Cosplay dua karakter sekaligus",
+      "Cosplay dengan wajah tertutup masker"
+    ],
+    "answer": "Cosplay karakter non-manusia yang diwujudkan dalam bentuk manusia",
+    "explanation": "Gijinka berarti 'personifikasi'; dalam cosplay, ini adalah mewujudkan karakter non-manusia (misal Pokemon) menjadi versi manusia."
+  },
+  {
+    "id": 119,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Dalam cosplay, apa yang disebut 'prop'?",
+    "options": [
+      "Aksesori atau senjata yang dibawa untuk melengkapi kostum",
+      "Kostum cadangan",
+      "Teman sesama cosplayer",
+      "Lensa kontak berwarna"
+    ],
+    "answer": "Aksesori atau senjata yang dibawa untuk melengkapi kostum",
+    "explanation": "Prop adalah singkatan dari 'property' dalam dunia teater, yaitu aksesori seperti pedang atau tongkat yang dibawa cosplayer."
+  },
+  {
+    "id": 120,
+    "category": "Budaya Wibu & Istilah Otaku",
+    "anime": "Umum",
+    "question": "Istilah 'doujinshi' dalam budaya otaku merujuk pada...",
+    "options": [
+      "Karya yang diterbitkan sendiri oleh kreator secara independen",
+      "Majalah manga resmi terbitan penerbit besar",
+      "Anime yang diproduksi langsung oleh studio Jepang",
+      "Komentar penonton pada video anime"
+    ],
+    "answer": "Karya yang diterbitkan sendiri oleh kreator secara independen",
+    "explanation": "Doujinshi adalah karya terbitan sendiri (bukan terbitan industri resmi), umumnya komik atau novel buatan amatir maupun profesional. Di Indonesia, Comic Frontier (Comifuro) adalah konvensi doujinshi terbesarnya."
+  }
+]
