@@ -64,7 +64,8 @@ export type SoundEffectType =
   | 'buzzer'
   | 'woosh'
   | 'swoosh'
-  | 'reveal_all';
+  | 'reveal_all'
+  | 'click';
 
 export type WSMessage =
   | { type: 'STATE_SNAPSHOT'; state: QuizState; categories: QuizCategory[] }

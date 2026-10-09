@@ -1,12 +1,14 @@
 import React from 'react';
 import { QuizItem } from '../../types/quiz';
 import { FlipCard } from './FlipCard';
+import { audioService } from '../../services/audio';
 
 interface GameBoardProps {
   items: QuizItem[];
   revealedItemIds: number[];
   clueRollTimestamp?: number | null;
   clueRollTargetItemId?: number | null;
+  isCluePopupOpen?: boolean;
   onRollComplete?: () => void;
 }
 
@@ -15,6 +17,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   revealedItemIds,
   clueRollTimestamp,
   clueRollTargetItemId,
+  isCluePopupOpen,
   onRollComplete
 }) => {
   // Sort items by rank 1..10 (used as stable slot ordering)
@@ -42,6 +45,9 @@ export const GameBoard: React.FC<GameBoardProps> = ({
     const targetIdx = sortedItems.findIndex((it) => it.id === clueRollTargetItemId);
     const finalLandingIdx = targetIdx !== -1 ? targetIdx : unrevealedIndices[0];
 
+    // Preload click sound buffer for instant response
+    audioService.preloadClickSound().catch(() => {});
+
     // Roulette timing: 14 rapid hops -> 5 decelerating hops
     const delays: number[] = [];
     for (let i = 0; i < 14; i++) delays.push(70);
@@ -51,15 +57,22 @@ export const GameBoard: React.FC<GameBoardProps> = ({
     let timer: ReturnType<typeof setTimeout>;
 
     function runStep() {
+      if (!clueRollTargetItemId) {
+        setHighlightedSlotIndex(null);
+        return;
+      }
+
       if (step < delays.length) {
         const randomSlot = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
         setHighlightedSlotIndex(randomSlot);
+        audioService.playClickSound(0.75);
         const delay = delays[step];
         step++;
         timer = setTimeout(runStep, delay);
       } else {
         // Land cleanly on target slot
         setHighlightedSlotIndex(finalLandingIdx);
+        audioService.playClickSound(1.0);
         timer = setTimeout(() => {
           if (onRollComplete) onRollComplete();
         }, 550);
@@ -73,11 +86,22 @@ export const GameBoard: React.FC<GameBoardProps> = ({
     };
   }, [clueRollTimestamp, clueRollTargetItemId, revealedItemIds]);
 
+  // Remove highlight when clue is closed or target item is cleared
   React.useEffect(() => {
-    if (!clueRollTargetItemId) {
+    if (!clueRollTargetItemId || isCluePopupOpen === false) {
       setHighlightedSlotIndex(null);
     }
-  }, [clueRollTargetItemId]);
+  }, [clueRollTargetItemId, isCluePopupOpen]);
+
+  // Remove highlight if the highlighted item gets revealed
+  React.useEffect(() => {
+    if (highlightedSlotIndex !== null) {
+      const highlightedItem = sortedItems[highlightedSlotIndex];
+      if (highlightedItem && revealedItemIds.includes(highlightedItem.id)) {
+        setHighlightedSlotIndex(null);
+      }
+    }
+  }, [revealedItemIds, highlightedSlotIndex, sortedItems]);
 
   return (
     <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-3.5 lg:gap-4.5 px-2 sm:px-4">

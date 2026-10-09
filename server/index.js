@@ -422,6 +422,8 @@ export function startServer(preferredPort = 3001) {
           }
           case 'DISMISS_CLUE': {
             currentState.isCluePopupOpen = false;
+            currentState.clueRollTargetItemId = null;
+            currentState.clueRollTimestamp = null;
             broadcastState();
             break;
           }

@@ -94,6 +94,7 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
     const handleGesture = () => {
       setAudioUnlocked(true);
       audioService.ensureBgmPlaying();
+      audioService.preloadClickSound().catch(() => {});
       window.removeEventListener('click', handleGesture);
       window.removeEventListener('keydown', handleGesture);
     };
@@ -138,6 +139,9 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
         case 'reveal_all':
           lastRevealAllTimeRef.current = Date.now();
           audioService.playRevealAllSound();
+          break;
+        case 'click':
+          audioService.playClickSound();
           break;
       }
     });
@@ -280,6 +284,7 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
               revealedItemIds={state.revealedItemIds}
               clueRollTimestamp={state.clueRollTimestamp}
               clueRollTargetItemId={state.clueRollTargetItemId}
+              isCluePopupOpen={state.isCluePopupOpen}
               onRollComplete={handleRollComplete}
             />
           </div>

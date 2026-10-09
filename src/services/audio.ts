@@ -26,6 +26,8 @@ class AudioService {
   };
 
   private ctx: AudioContext | null = null;
+  private clickBuffer: AudioBuffer | null = null;
+  private clickBufferLoading: boolean = false;
   private introAudio: HTMLAudioElement | null = null;
   private applauseAudio: HTMLAudioElement | null = null;
   private bgmAudio: HTMLAudioElement | null = null;
@@ -274,6 +276,71 @@ class AudioService {
     // Layer swoosh.mp3 with single reveal sound (correct.mp3)
     this.playSwooshSound();
     this.playCorrectSound();
+  }
+
+  public async preloadClickSound(): Promise<void> {
+    if (typeof window === 'undefined') return;
+    if (this.clickBuffer || this.clickBufferLoading) return;
+    const ctx = this.getAudioContext();
+    if (!ctx) return;
+    try {
+      this.clickBufferLoading = true;
+      const res = await fetch('/audio/click-short.wav');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const arrayBuf = await res.arrayBuffer();
+      this.clickBuffer = await ctx.decodeAudioData(arrayBuf);
+    } catch (err) {
+      console.warn('Failed to preload click-short.wav buffer:', err);
+    } finally {
+      this.clickBufferLoading = false;
+    }
+  }
+
+  public playClickSound(volumeScale = 0.85): void {
+    if (typeof window === 'undefined') return;
+    if (!this.settings.soundEnabled || this.settings.soundVolume <= 0) return;
+
+    const ctx = this.getAudioContext();
+    if (ctx && this.clickBuffer) {
+      try {
+        const source = ctx.createBufferSource();
+        source.buffer = this.clickBuffer;
+        const gainNode = ctx.createGain();
+        gainNode.gain.setValueAtTime(
+          Math.max(0, Math.min(this.settings.soundVolume * volumeScale, 1)),
+          ctx.currentTime
+        );
+        source.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        source.start(0);
+        return;
+      } catch (err) {
+        console.warn('WebAudio click playback failed:', err);
+      }
+    }
+
+    // Fallback using HTMLAudioElement
+    this.playAudioFile('/audio/click-short.wav', volumeScale);
+    if (!this.clickBuffer) {
+      this.preloadClickSound().catch(() => {});
+    }
+  }
+
+  private playSynthesizedClick(): void {
+    const ctx = this.getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(800, now);
+    osc.frequency.exponentialRampToValueAtTime(120, now + 0.03);
+    gain.gain.setValueAtTime(this.settings.soundVolume * 0.4, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.03);
   }
 
   private fadeTimers: Map<HTMLAudioElement, ReturnType<typeof setInterval>> = new Map();

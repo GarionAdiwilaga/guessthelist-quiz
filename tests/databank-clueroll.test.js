@@ -56,7 +56,9 @@ async function run() {
     const dismissedState = await dismissPromise;
 
     assert.strictEqual(dismissedState.state.isCluePopupOpen, false);
-    console.log('✅ DISMISS_CLUE successfully closed clue popup');
+    assert.strictEqual(dismissedState.state.clueRollTargetItemId, null, 'clueRollTargetItemId must be reset to null');
+    assert.strictEqual(dismissedState.state.clueRollTimestamp, null, 'clueRollTimestamp must be reset to null');
+    console.log('✅ DISMISS_CLUE successfully closed clue popup and cleared target item');
 
     // Test 3: REST API GET /api/database
     console.log('Testing GET /api/database...');

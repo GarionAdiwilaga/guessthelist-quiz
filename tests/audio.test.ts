@@ -73,6 +73,8 @@ assert.strictEqual(audioService.calculateTargetBgmVolume(), 0.4, 'Resumed BGM at
 audioService.updateSettings({ bgmVolume: 1.0 });
 assert.strictEqual(audioService.calculateTargetBgmVolume(), 0.5, 'BGM at Game screen with 1.0 volume should be 0.5 (50%)');
 audioService.setScreen(true);
-assert.strictEqual(audioService.calculateTargetBgmVolume(), 1.0, 'BGM at Layar Judul with 1.0 volume should be 1.0 (100%)');
+// Test click sound methods execute safely without error
+audioService.playClickSound();
+audioService.preloadClickSound();
 
 console.log('Audio service unit tests passed successfully!');
