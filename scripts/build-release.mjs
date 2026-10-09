@@ -163,7 +163,8 @@ const prodPkg = {
   type: 'module',
   description: 'Guess The List Quiz - Standalone Portable Server',
   scripts: {
-    start: 'node server/index.js'
+    start: 'node server/index.js',
+    server: 'node server/index.js'
   },
   dependencies: {
     express: '^4.21.2',
