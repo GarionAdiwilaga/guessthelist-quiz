@@ -10,7 +10,7 @@
     "server": "node server/index.js",
     "start": "node server/index.js",
     "build:release": "node scripts/build-release.mjs",
-    "test": "node tests/server.test.js && node tests/buzzer-strike-sync.test.js && tsx tests/database.test.ts && tsx tests/audio.test.ts && tsx tests/flipcard-text.test.ts && tsx tests/e2e-sync.test.ts && node tests/databank-clueroll.test.js && node tests/millionaire-sync.test.js && node tests/persistence.test.js"
+    "test": "node tests/server.test.js && node tests/buzzer-strike-sync.test.js && tsx tests/database.test.ts && tsx tests/audio.test.ts && tsx tests/flipcard-text.test.ts && tsx tests/e2e-sync.test.ts && node tests/databank-clueroll.test.js && node tests/millionaire-sync.test.js && node tests/persistence.test.js && tsx tests/millionaire-board.test.ts && tsx tests/millionaire-controller.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

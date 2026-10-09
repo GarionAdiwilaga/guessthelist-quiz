@@ -5,6 +5,7 @@ import { CategorySelector } from './CategorySelector';
 import { AnswerRoster } from './AnswerRoster';
 import { StrikeControls } from './StrikeControls';
 import { BoardControls } from './BoardControls';
+import { MillionaireController } from './MillionaireController';
 import { SettingsModal } from './SettingsModal';
 import { DataEditorModal } from './DataEditorModal';
 
@@ -178,24 +179,73 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
 
   return (
     <div className="min-h-screen bg-[#070A1E] text-white p-4 md:p-6 max-w-7xl mx-auto flex flex-col space-y-5">
-      {/* Header Bar */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#1E2656] gap-3">
-        <div>
-          <div className="flex items-center space-x-2">
-            <span className="text-xl text-[#00F0FF]">🎮</span>
-            <h1 className="text-xl md:text-2xl font-black text-[#00F0FF] tracking-wide font-['Outfit',sans-serif]">
-              HOST CONTROLLER • FAMILY WIBU 100
-            </h1>
+      {/* Header Bar with Round Switcher */}
+      <header className="flex flex-col lg:flex-row lg:items-center justify-between pb-3 border-b border-[#1E2656] gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+          <div>
+            <div className="flex items-center space-x-2">
+              <span className="text-xl text-[#00F0FF]">🎮</span>
+              <h1 className="text-xl md:text-2xl font-black text-[#00F0FF] tracking-wide font-['Outfit',sans-serif]">
+                HOST CONTROLLER
+              </h1>
+            </div>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Layar Pengendali: Pilihan ronde, kendali soal, audio, dan display OBS.
+            </p>
           </div>
-          <p className="text-xs text-gray-400 mt-0.5">
-            Layar Pengendali: Transisi judul, buka jawaban, buzzer salah, dan pengaturan OBS.
-          </p>
+
+          {/* Round Switcher */}
+          <div className="flex items-center bg-[#0B0F2F] p-1 rounded-xl border border-[#1E2656] gap-1 self-start sm:self-auto">
+            <button
+              onClick={() => sendMessage({ type: 'SET_GAME_MODE', mode: 'quiz' })}
+              className={`px-3 py-1.5 rounded-lg text-xs font-black transition cursor-pointer flex items-center space-x-1.5 ${
+                state.gameMode === 'quiz'
+                  ? 'bg-gradient-to-r from-[#00F0FF] to-[#00A3FF] text-[#050B20] shadow-[0_0_12px_rgba(0,240,255,0.5)]'
+                  : 'text-gray-400 hover:text-white hover:bg-[#141B4A]'
+              }`}
+            >
+              <span>Ronde 1: Quiz Wibu</span>
+            </button>
+            <button
+              onClick={() => sendMessage({ type: 'SET_GAME_MODE', mode: 'family' })}
+              className={`px-3 py-1.5 rounded-lg text-xs font-black transition cursor-pointer flex items-center space-x-1.5 ${
+                state.gameMode === 'family' || !state.gameMode
+                  ? 'bg-gradient-to-r from-[#FF2E93] to-[#FF007A] text-white shadow-[0_0_12px_rgba(255,46,147,0.5)]'
+                  : 'text-gray-400 hover:text-white hover:bg-[#141B4A]'
+              }`}
+            >
+              <span>Ronde 2: Family Wibu 100</span>
+            </button>
+          </div>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Header Status Badge */}
           <span className="text-xs px-3 py-1.5 rounded-lg bg-[#0E1540] border border-[#00F0FF]/40 text-[#00F0FF] font-black">
-            {state.showTitleScreen ? '📺 Layar Judul (Pause)' : '🎮 Layar Game (Board)'}
+            {state.showTitleScreen
+              ? '📺 Layar Judul (Pause)'
+              : state.gameMode === 'quiz'
+              ? '🎮 Quiz Wibu (Millionaire)'
+              : '🎮 Layar Game (Board)'}
           </span>
+          <button
+            onClick={handleToggleTitleScreen}
+            className={`text-xs px-3 py-1.5 rounded-lg border font-bold transition cursor-pointer ${
+              state.showTitleScreen
+                ? 'bg-[#00F0FF] text-[#0A0D26] border-white shadow-[0_0_10px_rgba(0,240,255,0.4)]'
+                : 'bg-[#1C2555] hover:bg-[#2A377D] text-gray-300 border-[#304192]'
+            }`}
+            title={state.showTitleScreen ? 'Kembali ke Layar Game' : 'Transisi ke Layar Judul'}
+          >
+            {state.showTitleScreen ? '▶ Buka Board' : '📺 Title Screen'}
+          </button>
+          <button
+            onClick={() => setIsSettingsOpen(true)}
+            className="text-xs px-3 py-1.5 rounded-lg bg-[#141B4A] border border-[#2B3980] text-gray-300 hover:text-white font-bold transition cursor-pointer"
+            title="Pengaturan Tampilan & Audio"
+          >
+            ⚙️ Pengaturan
+          </button>
           <button
             onClick={() => setIsDataEditorOpen(true)}
             className="text-xs px-3 py-1.5 rounded-lg bg-[#00F0FF]/15 border border-[#00F0FF]/50 text-[#00F0FF] hover:text-white font-bold transition cursor-pointer"
@@ -214,7 +264,7 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         </div>
       </header>
 
-      {/* Strike & Buzzer Action Panel */}
+      {/* Soundboard & Audio Action Panel (Accessible in all game modes) */}
       <StrikeControls
         strikeSlotsEnabled={state.strikeSlotsEnabled}
         maxStrikeSlots={state.maxStrikeSlots}
@@ -229,36 +279,50 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
         bgmVolume={state.bgmVolume}
         onToggleBgm={handleToggleBgm}
         onSetBgmVolume={handleSetBgmVolume}
+        hideStrikes={state.gameMode === 'quiz'}
       />
 
-      {/* Board Utility Actions Bar (Includes Title Screen Toggle) */}
-      <BoardControls
-        showClue={state.showClue}
-        showTitleScreen={state.showTitleScreen}
-        isCluePopupOpen={state.isCluePopupOpen}
-        onRevealAll={handleRevealAll}
-        onHideAll={handleHideAll}
-        onToggleClue={handleToggleClue}
-        onToggleTitleScreen={handleToggleTitleScreen}
-        onRollClue={handleRollClue}
-        onDismissClue={handleDismissClue}
-        onOpenDataEditor={() => setIsDataEditorOpen(true)}
-        onOpenSettings={() => setIsSettingsOpen(true)}
-      />
+      {/* Conditional Round Panel Rendering */}
+      {state.gameMode === 'quiz' ? (
+        <MillionaireController
+          millionaireState={state.millionaireState}
+          millionaireQuestions={millionaireQuestions}
+          sendMessage={sendMessage}
+          showTitleScreen={state.showTitleScreen}
+          onToggleTitleScreen={handleToggleTitleScreen}
+        />
+      ) : (
+        <>
+          {/* Board Utility Actions Bar (Includes Clue & Board Controls) */}
+          <BoardControls
+            showClue={state.showClue}
+            showTitleScreen={state.showTitleScreen}
+            isCluePopupOpen={state.isCluePopupOpen}
+            onRevealAll={handleRevealAll}
+            onHideAll={handleHideAll}
+            onToggleClue={handleToggleClue}
+            onToggleTitleScreen={handleToggleTitleScreen}
+            onRollClue={handleRollClue}
+            onDismissClue={handleDismissClue}
+            onOpenDataEditor={() => setIsDataEditorOpen(true)}
+            onOpenSettings={() => setIsSettingsOpen(true)}
+          />
 
-      {/* Category Tabs */}
-      <CategorySelector
-        categories={categories}
-        activeCategoryId={state.categoryId}
-        onSelectCategory={handleSelectCategory}
-      />
+          {/* Category Tabs */}
+          <CategorySelector
+            categories={categories}
+            activeCategoryId={state.categoryId}
+            onSelectCategory={handleSelectCategory}
+          />
 
-      {/* Top 10 Answer Roster with Live Search Filter */}
-      <AnswerRoster
-        items={currentCategory?.items || []}
-        revealedItemIds={state.revealedItemIds}
-        onToggleReveal={handleToggleReveal}
-      />
+          {/* Top 10 Answer Roster with Live Search Filter */}
+          <AnswerRoster
+            items={currentCategory?.items || []}
+            revealedItemIds={state.revealedItemIds}
+            onToggleReveal={handleToggleReveal}
+          />
+        </>
+      )}
 
       {/* Settings Modal */}
       <SettingsModal

@@ -132,4 +132,11 @@ export type WSMessage =
   | { type: 'UPDATE_DATABANK'; database: QuizDatabase }
   | { type: 'SAVE_CATEGORIES'; categories: QuizCategory[] }
   | { type: 'SET_THEME_MODE'; mode: 'stage' | 'transparent' }
-  | { type: 'RESET_ROUND' };
+  | { type: 'RESET_ROUND' }
+  | { type: 'SET_GAME_MODE'; mode: GameMode }
+  | { type: 'SELECT_MILLIONAIRE_QUESTION'; questionId: number }
+  | { type: 'HIGHLIGHT_MILLIONAIRE_OPTION'; optionIndex: number | null }
+  | { type: 'LOCK_MILLIONAIRE_ANSWER' }
+  | { type: 'REVEAL_MILLIONAIRE_ANSWER' }
+  | { type: 'TOGGLE_MILLIONAIRE_HINT'; show?: boolean }
+  | { type: 'RESET_MILLIONAIRE_QUESTION' };
