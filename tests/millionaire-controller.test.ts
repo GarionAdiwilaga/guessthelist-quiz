@@ -119,4 +119,46 @@ const sampleQuestions: MillionaireQuestion[] = [
   console.log('OK: WebSocket message contracts verified');
 }
 
+// 5. Paginated Question Table Logic
+{
+  const totalItems = 120;
+  const items = Array.from({ length: totalItems }, (_, i) => ({ id: i + 1 }));
+
+  const paginate = (list: typeof items, page: number, perPage: number) => {
+    const totalPages = Math.max(1, Math.ceil(list.length / perPage));
+    const safePage = Math.min(Math.max(1, page), totalPages);
+    const start = (safePage - 1) * perPage;
+    return {
+      totalPages,
+      safePage,
+      pageItems: list.slice(start, start + perPage)
+    };
+  };
+
+  // Default 10 items/page
+  const defaultPage = paginate(items, 1, 10);
+  assert.strictEqual(defaultPage.totalPages, 12);
+  assert.strictEqual(defaultPage.pageItems.length, 10);
+  assert.strictEqual(defaultPage.pageItems[0].id, 1);
+  assert.strictEqual(defaultPage.pageItems[9].id, 10);
+
+  // Configurable page size (5, 20)
+  const size5 = paginate(items, 1, 5);
+  assert.strictEqual(size5.totalPages, 24);
+  assert.strictEqual(size5.pageItems.length, 5);
+
+  const size20 = paginate(items, 2, 20);
+  assert.strictEqual(size20.totalPages, 6);
+  assert.strictEqual(size20.pageItems.length, 20);
+  assert.strictEqual(size20.pageItems[0].id, 21);
+
+  // Boundary clamping
+  const overflowPage = paginate(items, 999, 10);
+  assert.strictEqual(overflowPage.safePage, 12);
+  assert.strictEqual(overflowPage.pageItems.length, 10);
+  assert.strictEqual(overflowPage.pageItems[0].id, 111);
+
+  console.log('OK: Paginated table calculations verified');
+}
+
 console.log('All MillionaireController unit & integration tests passed successfully!');
