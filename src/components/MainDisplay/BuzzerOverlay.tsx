@@ -10,10 +10,14 @@ export const BuzzerOverlay: React.FC<BuzzerOverlayProps> = ({
   durationMs = 1200
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const lastHandledRef = useRef<number>(Date.now());
+  const lastHandledRef = useRef<number>(Math.max(Date.now(), triggerTimestamp || 0));
 
   useEffect(() => {
-    if (!triggerTimestamp || triggerTimestamp <= lastHandledRef.current) return;
+    if (!triggerTimestamp) {
+      setIsVisible(false);
+      return;
+    }
+    if (triggerTimestamp <= lastHandledRef.current) return;
     lastHandledRef.current = triggerTimestamp;
 
     setIsVisible(true);

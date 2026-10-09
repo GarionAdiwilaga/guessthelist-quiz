@@ -141,6 +141,39 @@ async function run() {
     assert.strictEqual(setBgmVolMsg.type, 'STATE_SNAPSHOT');
     assert.strictEqual(setBgmVolMsg.state.bgmVolume, 0.65, 'BGM volume should update to 0.65');
 
+    // Test 13: SET_SHOW_TITLE_SCREEN clears quickBuzzerTriggerTime
+    const triggerBuzzer1Promise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'TRIGGER_QUICK_BUZZER' }));
+    const buzzer1Msg = await triggerBuzzer1Promise;
+    assert.ok(buzzer1Msg.state.quickBuzzerTriggerTime !== null, 'Buzzer trigger time should be set');
+
+    const titleScreenPromise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'SET_SHOW_TITLE_SCREEN', show: true }));
+    const titleScreenMsg = await titleScreenPromise;
+    assert.strictEqual(titleScreenMsg.state.quickBuzzerTriggerTime, null, 'SET_SHOW_TITLE_SCREEN must clear quickBuzzerTriggerTime');
+
+    // Test 14: TRIGGER_WIPE clears quickBuzzerTriggerTime
+    const triggerBuzzer2Promise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'TRIGGER_QUICK_BUZZER' }));
+    const buzzer2Msg = await triggerBuzzer2Promise;
+    assert.ok(buzzer2Msg.state.quickBuzzerTriggerTime !== null, 'Buzzer trigger time should be set again');
+
+    const wipePromise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'TRIGGER_WIPE' }));
+    const wipeMsg = await wipePromise;
+    assert.strictEqual(wipeMsg.state.quickBuzzerTriggerTime, null, 'TRIGGER_WIPE must clear quickBuzzerTriggerTime');
+
+    // Test 15: SELECT_CATEGORY clears quickBuzzerTriggerTime
+    const triggerBuzzer3Promise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'TRIGGER_QUICK_BUZZER' }));
+    const buzzer3Msg = await triggerBuzzer3Promise;
+    assert.ok(buzzer3Msg.state.quickBuzzerTriggerTime !== null, 'Buzzer trigger time should be set for category transition test');
+
+    const selectCatPromise = waitForSingleMessage(ws);
+    ws.send(JSON.stringify({ type: 'SELECT_CATEGORY', categoryId: initial.categories[1].id }));
+    const selectCatMsg = await selectCatPromise;
+    assert.strictEqual(selectCatMsg.state.quickBuzzerTriggerTime, null, 'SELECT_CATEGORY must clear quickBuzzerTriggerTime');
+
     ws.close();
     await serverInstance.close();
     console.log('✅ Buzzer & Strike State Synchronization, Soundboard, and BGM test passed!');

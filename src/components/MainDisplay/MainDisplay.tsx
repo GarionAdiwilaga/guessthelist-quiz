@@ -179,18 +179,6 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
     }
   }, [state.quickBuzzerTriggerTime]);
 
-  const prevStrikesRef = useRef(state.currentStrikes);
-  const [strikeOverlayTime, setStrikeOverlayTime] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (state.currentStrikes > prevStrikesRef.current) {
-      audioService.playBuzzerSound();
-      setStrikeOverlayTime(Date.now());
-    }
-    prevStrikesRef.current = state.currentStrikes;
-  }, [state.currentStrikes]);
-
-  const activeBuzzerTime = state.quickBuzzerTriggerTime || strikeOverlayTime;
 
   // Clue roll modal state & synchronization
   const [showClueModal, setShowClueModal] = useState(false);
@@ -310,7 +298,7 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
       />
 
       {/* Fullscreen Buzzer Overlay (Persists across view swaps without unmounting) */}
-      <BuzzerOverlay triggerTimestamp={activeBuzzerTime} />
+      <BuzzerOverlay triggerTimestamp={state.quickBuzzerTriggerTime} />
 
       {/* Holographic Wipe Transition (Midpoint swap callback) */}
       <TransitionWipe

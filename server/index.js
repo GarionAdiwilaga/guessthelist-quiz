@@ -253,6 +253,7 @@ export function startServer(preferredPort = 3001) {
           }
           case 'TRIGGER_WIPE': {
             currentState.transitionWipeTimestamp = Date.now();
+            currentState.quickBuzzerTriggerTime = null;
             broadcastState();
             break;
           }
