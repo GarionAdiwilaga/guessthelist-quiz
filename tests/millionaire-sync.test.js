@@ -1,4 +1,4 @@
-import { startServer } from '../server/index.js';
+import { startServer, getCorrectOptionIndex, millionaireQuestions } from '../server/index.js';
 import WebSocket from 'ws';
 import assert from 'node:assert';
 import fs from 'node:fs';
@@ -158,6 +158,40 @@ async function run() {
     const hintState2 = await hintPromise2;
     assert.strictEqual(hintState2.state.millionaireState.showHint, false);
     console.log('OK: TOGGLE_MILLIONAIRE_HINT verified');
+
+    // 9. Letter answer resolution parity (e.g. answer: "B")
+    console.log('Testing REVEAL_MILLIONAIRE_ANSWER with letter answer "B"...');
+    const letterQ = {
+      id: 9999,
+      category: 'Test',
+      anime: 'Test Anime',
+      question: 'Testing letter B answer resolution',
+      options: ['Option A', 'Option B', 'Option C', 'Option D'],
+      answer: 'B'
+    };
+    assert.strictEqual(
+      getCorrectOptionIndex(letterQ),
+      1,
+      'Question with answer "B" should resolve to option index 1'
+    );
+
+    millionaireQuestions.push(letterQ);
+    ws1.send(JSON.stringify({ type: 'SELECT_MILLIONAIRE_QUESTION', questionId: 9999 }));
+    await waitForMessage(ws2, (m) => m.type === 'STATE_SNAPSHOT' && m.state.millionaireState.currentQuestionId === 9999);
+
+    ws1.send(JSON.stringify({ type: 'HIGHLIGHT_MILLIONAIRE_OPTION', optionIndex: 1 }));
+    await waitForMessage(ws2, (m) => m.type === 'STATE_SNAPSHOT' && m.state.millionaireState.selectedOptionIndex === 1);
+
+    const letterSoundPromise = waitForMessage(ws2, (m) => m.type === 'PLAY_SOUND' && m.sound === 'correct');
+    ws1.send(JSON.stringify({ type: 'REVEAL_MILLIONAIRE_ANSWER' }));
+    const letterSoundMsg = await letterSoundPromise;
+    assert.strictEqual(letterSoundMsg.sound, 'correct');
+
+    const injectedIdx = millionaireQuestions.findIndex((q) => q.id === 9999);
+    if (injectedIdx !== -1) {
+      millionaireQuestions.splice(injectedIdx, 1);
+    }
+    console.log('OK: Question with answer "B" resolved to index 1 and broadcasted correct sound verified');
 
     ws1.close();
     ws2.close();

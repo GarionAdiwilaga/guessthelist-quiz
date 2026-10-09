@@ -66,7 +66,27 @@ try {
 }
 let categories = database.categories;
 
-let millionaireQuestions = [];
+export let millionaireQuestions = [];
+
+export function getCorrectOptionIndex(question) {
+  if (!question || !Array.isArray(question.options) || question.answer === undefined || question.answer === null) {
+    return -1;
+  }
+  const exactIdx = question.options.indexOf(question.answer);
+  if (exactIdx !== -1) {
+    return exactIdx;
+  }
+  const trimmed = String(question.answer).trim().toUpperCase();
+  const letterMap = { A: 0, B: 1, C: 2, D: 3 };
+  if (Object.prototype.hasOwnProperty.call(letterMap, trimmed)) {
+    return letterMap[trimmed];
+  }
+  const numTrimmed = String(question.answer).trim();
+  if (/^[0-3]$/.test(numTrimmed)) {
+    return parseInt(numTrimmed, 10);
+  }
+  return -1;
+}
 function loadMillionaireDatabase() {
   try {
     if (fs.existsSync(millionaireDbPath)) {
@@ -430,13 +450,7 @@ export function startServer(preferredPort = 3001) {
               (q) => q.id === currentState.millionaireState.currentQuestionId
             );
             const selectedIdx = currentState.millionaireState.selectedOptionIndex;
-            const isMatch = Boolean(
-              currentQ &&
-              selectedIdx !== null &&
-              selectedIdx >= 0 &&
-              selectedIdx < currentQ.options.length &&
-              currentQ.answer === currentQ.options[selectedIdx]
-            );
+            const isMatch = selectedIdx !== null && getCorrectOptionIndex(currentQ) === selectedIdx;
             currentState.millionaireState.isRevealed = true;
             broadcastState();
             broadcast({ type: 'PLAY_SOUND', sound: isMatch ? 'correct' : 'buzzer' });

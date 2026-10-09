@@ -393,7 +393,7 @@ export const MillionaireController: React.FC<MillionaireControllerProps> = ({
               ) : state.selectedOptionIndex !== null ? (
                 <span className="px-2.5 py-1 rounded-lg bg-[#00F0FF]/20 border border-[#00F0FF]/50 text-[#00F0FF] font-bold text-xs">
                   Pilihan Kontestan: [
-                  {OPTION_LETTERS[state.selectedOptionIndex]}]
+                  {OPTION_LETTERS[state.selectedOptionIndex] || String.fromCharCode(65 + state.selectedOptionIndex)}]
                 </span>
               ) : (
                 <span className="px-2.5 py-1 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 text-xs">
@@ -413,7 +413,7 @@ export const MillionaireController: React.FC<MillionaireControllerProps> = ({
           {/* 4 Option Buttons (A, B, C, D) with Cheat Sheet Badge */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {activeQuestion.options.map((opt, idx) => {
-              const letter = OPTION_LETTERS[idx];
+              const letter = OPTION_LETTERS[idx] || String.fromCharCode(65 + idx);
               const isCorrect = idx === correctOptionIndex;
               const isSelected = state.selectedOptionIndex === idx;
 
@@ -614,7 +614,7 @@ export const MillionaireController: React.FC<MillionaireControllerProps> = ({
                   <span>Kunci Jawaban & Fakta Trivia</span>
                 </div>
                 <span className="text-[10px] px-2 py-0.5 rounded font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-                  {OPTION_LETTERS[correctOptionIndex]}: {activeQuestion.answer}
+                  {OPTION_LETTERS[correctOptionIndex] || (correctOptionIndex >= 0 ? String.fromCharCode(65 + correctOptionIndex) : '?')}: {activeQuestion.answer}
                 </span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed">
