@@ -13,10 +13,16 @@ console.log('🚀 Building production frontend bundle (Vite)...');
 execSync('npm run build', { cwd: rootDir, stdio: 'inherit' });
 
 console.log('📦 Preparing release directory...');
-if (fs.existsSync(releaseDir)) {
-  fs.rmSync(releaseDir, { recursive: true, force: true });
+if (!fs.existsSync(releaseDir)) {
+  fs.mkdirSync(releaseDir, { recursive: true });
 }
-fs.mkdirSync(targetDir, { recursive: true });
+if (fs.existsSync(targetDir)) {
+  for (const item of fs.readdirSync(targetDir)) {
+    fs.rmSync(path.join(targetDir, item), { recursive: true, force: true });
+  }
+} else {
+  fs.mkdirSync(targetDir, { recursive: true });
+}
 
 // Helper to copy directory recursively
 function copyDirSync(src, dest) {
