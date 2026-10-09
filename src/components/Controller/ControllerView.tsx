@@ -192,7 +192,7 @@ export const ControllerView: React.FC<ControllerViewProps> = ({
 
         <div className="flex items-center space-x-2">
           <span className="text-xs px-3 py-1.5 rounded-lg bg-[#0E1540] border border-[#00F0FF]/40 text-[#00F0FF] font-black">
-            {state.showTitleScreen ? '📺 Layar Judul (Pause)' : `🎮 Ronde: ${state.revealedItemIds.length}/10`}
+            {state.showTitleScreen ? '📺 Layar Judul (Pause)' : '🎮 Layar Game (Board)'}
           </span>
           <button
             onClick={() => setIsDataEditorOpen(true)}
