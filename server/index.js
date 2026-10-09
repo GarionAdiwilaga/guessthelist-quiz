@@ -12,8 +12,8 @@ const rootDir = path.resolve(__dirname, '..');
 // Load database
 const dbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.json');
 const defaultDbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.default.json');
-const millionaireDbPath = path.resolve(rootDir, 'anime-quiz-database-v3.json');
-const millionaireDefaultDbPath = path.resolve(rootDir, 'anime-quiz-database-v3.default.json');
+const millionaireDbPath = path.resolve(rootDir, 'anime-quiz-database-v4.json');
+const millionaireDefaultDbPath = path.resolve(rootDir, 'anime-quiz-database-v4.default.json');
 
 function getConfigPath() {
   return process.env.QUIZ_CONFIG_PATH
@@ -94,6 +94,8 @@ function loadMillionaireDatabase() {
     } else if (fs.existsSync(millionaireDefaultDbPath)) {
       millionaireQuestions = JSON.parse(fs.readFileSync(millionaireDefaultDbPath, 'utf8'));
       fs.writeFileSync(millionaireDbPath, JSON.stringify(millionaireQuestions, null, 2), 'utf8');
+    } else if (fs.existsSync(path.resolve(rootDir, 'anime-quiz-database-v3.json'))) {
+      millionaireQuestions = JSON.parse(fs.readFileSync(path.resolve(rootDir, 'anime-quiz-database-v3.json'), 'utf8'));
     } else {
       millionaireQuestions = [];
     }

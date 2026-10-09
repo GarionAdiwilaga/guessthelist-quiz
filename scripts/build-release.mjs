@@ -84,18 +84,27 @@ fs.writeFileSync(
   'utf8'
 );
 
-// Copy Millionaire database files
-const millionaireDbSrc = path.join(rootDir, 'anime-quiz-database-v3.json');
-const millionaireDefaultDbSrc = path.join(rootDir, 'anime-quiz-database-v3.default.json');
+// Copy Millionaire database files (v4 primary, v3 legacy fallback)
+const millionaireDbV4Src = path.join(rootDir, 'anime-quiz-database-v4.json');
+const millionaireDefaultDbV4Src = path.join(rootDir, 'anime-quiz-database-v4.default.json');
+const millionaireDbV3Src = path.join(rootDir, 'anime-quiz-database-v3.json');
+const millionaireDefaultDbV3Src = path.join(rootDir, 'anime-quiz-database-v3.default.json');
 
-if (fs.existsSync(millionaireDbSrc)) {
-  fs.copyFileSync(millionaireDbSrc, path.join(targetDir, 'anime-quiz-database-v3.json'));
-} else if (fs.existsSync(millionaireDefaultDbSrc)) {
-  fs.copyFileSync(millionaireDefaultDbSrc, path.join(targetDir, 'anime-quiz-database-v3.json'));
+if (fs.existsSync(millionaireDbV4Src)) {
+  fs.copyFileSync(millionaireDbV4Src, path.join(targetDir, 'anime-quiz-database-v4.json'));
+} else if (fs.existsSync(millionaireDefaultDbV4Src)) {
+  fs.copyFileSync(millionaireDefaultDbV4Src, path.join(targetDir, 'anime-quiz-database-v4.json'));
 }
 
-if (fs.existsSync(millionaireDefaultDbSrc)) {
-  fs.copyFileSync(millionaireDefaultDbSrc, path.join(targetDir, 'anime-quiz-database-v3.default.json'));
+if (fs.existsSync(millionaireDefaultDbV4Src)) {
+  fs.copyFileSync(millionaireDefaultDbV4Src, path.join(targetDir, 'anime-quiz-database-v4.default.json'));
+}
+
+if (fs.existsSync(millionaireDbV3Src)) {
+  fs.copyFileSync(millionaireDbV3Src, path.join(targetDir, 'anime-quiz-database-v3.json'));
+}
+if (fs.existsSync(millionaireDefaultDbV3Src)) {
+  fs.copyFileSync(millionaireDefaultDbV3Src, path.join(targetDir, 'anime-quiz-database-v3.default.json'));
 }
 
 // Clean default persistent configuration for portable release
@@ -129,8 +138,8 @@ fs.writeFileSync(
 const RUNTIME_FILES = [
   'anime-family-database-ranked-top10.json',
   'anime-family-database-ranked-top10.default.json',
-  'anime-quiz-database-v3.json',
-  'anime-quiz-database-v3.default.json',
+  'anime-quiz-database-v4.json',
+  'anime-quiz-database-v4.default.json',
   'quiz-config.json',
   'public/audio/spacebar.mp3'
 ];
