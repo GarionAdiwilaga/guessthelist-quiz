@@ -29,8 +29,8 @@ function waitForMessage(ws, predicate = () => true, timeoutMs = 2000) {
 
 async function run() {
   const rootDir = process.cwd();
-  const configPath = path.resolve(rootDir, 'quiz-config.json');
-  const backupConfig = fs.existsSync(configPath) ? fs.readFileSync(configPath, 'utf8') : null;
+  const configPath = path.resolve(rootDir, 'quiz-config.test-persistence.json');
+  process.env.QUIZ_CONFIG_PATH = configPath;
 
   let server1 = null;
   let server2 = null;
@@ -38,7 +38,6 @@ async function run() {
   let ws2 = null;
 
   try {
-    // Clean existing config before test to verify creation
     if (fs.existsSync(configPath)) {
       fs.unlinkSync(configPath);
     }
@@ -147,10 +146,8 @@ async function run() {
     if (server2) await server2.close().catch(() => {});
     process.exit(1);
   } finally {
-    // Restore or remove config to prevent polluting other test runs
-    if (backupConfig !== null) {
-      fs.writeFileSync(configPath, backupConfig, 'utf8');
-    } else if (fs.existsSync(configPath)) {
+    delete process.env.QUIZ_CONFIG_PATH;
+    if (fs.existsSync(configPath)) {
       fs.unlinkSync(configPath);
     }
   }

@@ -14,7 +14,12 @@ const dbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.json');
 const defaultDbPath = path.resolve(rootDir, 'anime-family-database-ranked-top10.default.json');
 const millionaireDbPath = path.resolve(rootDir, 'anime-quiz-database-v3.json');
 const millionaireDefaultDbPath = path.resolve(rootDir, 'anime-quiz-database-v3.default.json');
-const configPath = path.resolve(rootDir, 'quiz-config.json');
+
+function getConfigPath() {
+  return process.env.QUIZ_CONFIG_PATH
+    ? path.resolve(process.env.QUIZ_CONFIG_PATH)
+    : path.resolve(rootDir, 'quiz-config.json');
+}
 
 const starterTemplate = {
   quizType: 'top10_list',
@@ -102,10 +107,11 @@ function getDefaultConfig() {
 }
 
 function loadConfig() {
+  const filePath = getConfigPath();
   const defaults = getDefaultConfig();
   try {
-    if (fs.existsSync(configPath)) {
-      const data = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    if (fs.existsSync(filePath)) {
+      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
       return {
         ...defaults,
         ...data,
@@ -122,6 +128,7 @@ function loadConfig() {
 }
 
 function saveConfig() {
+  const filePath = getConfigPath();
   try {
     const configData = {
       gameMode: currentState.gameMode,
@@ -138,7 +145,7 @@ function saveConfig() {
       titleLogoUrl: currentState.titleLogoUrl,
       customAudio: currentState.customAudio
     };
-    fs.writeFileSync(configPath, JSON.stringify(configData, null, 2), 'utf8');
+    fs.writeFileSync(filePath, JSON.stringify(configData, null, 2), 'utf8');
   } catch (err) {
     console.error('[Quiz Server] Error writing quiz-config.json:', err.message);
   }
@@ -461,6 +468,7 @@ export function startServer(preferredPort = 3001) {
               currentState.isCluePopupOpen = false;
               currentState.clueRollTargetItemId = null;
               currentState.clueRollTimestamp = null;
+              saveConfig();
               broadcastState();
             }
             break;

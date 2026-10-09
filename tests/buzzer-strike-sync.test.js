@@ -1,6 +1,8 @@
 import { startServer } from '../server/index.js';
 import WebSocket from 'ws';
 import assert from 'node:assert';
+import fs from 'node:fs';
+import path from 'node:path';
 
 function waitForSingleMessage(ws) {
   return new Promise((resolve) => {
@@ -177,12 +179,21 @@ async function run() {
     ws.close();
     await serverInstance.close();
     console.log('✅ Buzzer & Strike State Synchronization, Soundboard, and BGM test passed!');
-    process.exit(0);
   } catch (err) {
     console.error('Test failed:', err);
     await serverInstance.close();
     process.exit(1);
+  } finally {
+    const configPath = process.env.QUIZ_CONFIG_PATH || path.resolve(process.cwd(), 'quiz-config.json');
+    if (fs.existsSync(configPath)) {
+      try {
+        fs.unlinkSync(configPath);
+      } catch {
+        // Ignore unlink error if already removed
+      }
+    }
   }
+  process.exit(0);
 }
 
 run();

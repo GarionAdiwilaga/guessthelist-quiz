@@ -13,3 +13,8 @@ scratch/
 /*.mp3
 /*.wav
 /logo.png
+
+# Persistent runtime configuration
+quiz-config.json
+quiz-config*.json
+

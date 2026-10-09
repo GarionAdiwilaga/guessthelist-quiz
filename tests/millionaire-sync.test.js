@@ -29,8 +29,8 @@ function waitForMessage(ws, predicate = () => true, timeoutMs = 2000) {
 
 async function run() {
   const rootDir = process.cwd();
-  const configPath = path.resolve(rootDir, 'quiz-config.json');
-  const backupConfig = fs.existsSync(configPath) ? fs.readFileSync(configPath, 'utf8') : null;
+  const configPath = path.resolve(rootDir, 'quiz-config.test-millionaire.json');
+  process.env.QUIZ_CONFIG_PATH = configPath;
 
   const testPort = 3499;
   const serverInstance = await startServer(testPort);
@@ -170,9 +170,8 @@ async function run() {
     await serverInstance.close();
     process.exit(1);
   } finally {
-    if (backupConfig !== null) {
-      fs.writeFileSync(configPath, backupConfig, 'utf8');
-    } else if (fs.existsSync(configPath)) {
+    delete process.env.QUIZ_CONFIG_PATH;
+    if (fs.existsSync(configPath)) {
       fs.unlinkSync(configPath);
     }
   }

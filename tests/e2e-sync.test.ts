@@ -1,6 +1,8 @@
 import { startServer } from '../server/index.js';
 import WebSocket from 'ws';
 import assert from 'node:assert';
+import fs from 'node:fs';
+import path from 'node:path';
 
 function waitForSnapshot(ws: WebSocket): Promise<any> {
   return new Promise((resolve) => {
@@ -84,12 +86,21 @@ async function testE2E() {
     controllerWs.close();
     await instance.close();
     console.log('✅ End-to-end WebSocket synchronization test passed successfully!');
-    process.exit(0);
   } catch (err) {
     console.error('❌ E2E sync test failed:', err);
     await instance.close();
     process.exit(1);
+  } finally {
+    const configPath = process.env.QUIZ_CONFIG_PATH || path.resolve(process.cwd(), 'quiz-config.json');
+    if (fs.existsSync(configPath)) {
+      try {
+        fs.unlinkSync(configPath);
+      } catch {
+        // Ignore unlink error if already removed
+      }
+    }
   }
+  process.exit(0);
 }
 
 testE2E();
