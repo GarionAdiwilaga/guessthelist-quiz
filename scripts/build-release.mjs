@@ -84,6 +84,64 @@ fs.writeFileSync(
   'utf8'
 );
 
+// Copy Millionaire database files
+const millionaireDbSrc = path.join(rootDir, 'anime-quiz-database-v3.json');
+const millionaireDefaultDbSrc = path.join(rootDir, 'anime-quiz-database-v3.default.json');
+
+if (fs.existsSync(millionaireDbSrc)) {
+  fs.copyFileSync(millionaireDbSrc, path.join(targetDir, 'anime-quiz-database-v3.json'));
+} else if (fs.existsSync(millionaireDefaultDbSrc)) {
+  fs.copyFileSync(millionaireDefaultDbSrc, path.join(targetDir, 'anime-quiz-database-v3.json'));
+}
+
+if (fs.existsSync(millionaireDefaultDbSrc)) {
+  fs.copyFileSync(millionaireDefaultDbSrc, path.join(targetDir, 'anime-quiz-database-v3.default.json'));
+}
+
+// Clean default persistent configuration for portable release
+const cleanDefaultConfig = {
+  gameMode: 'quiz',
+  currentMillionaireQuestionId: 1,
+  familyCategoryId: 1,
+  soundEnabled: true,
+  soundVolume: 0.8,
+  bgmEnabled: true,
+  bgmVolume: 0.8,
+  bgmOffsetMs: 0,
+  strikeSlotsEnabled: false,
+  maxStrikeSlots: 3,
+  themeMode: 'stage',
+  titleLogoUrl: null,
+  customAudio: {
+    useCustomSound: false,
+    correctAudioDataUrl: null,
+    wrongAudioDataUrl: null
+  }
+};
+
+fs.writeFileSync(
+  path.join(targetDir, 'quiz-config.json'),
+  JSON.stringify(cleanDefaultConfig, null, 2),
+  'utf8'
+);
+
+// Ensure all required runtime files are packaged
+const RUNTIME_FILES = [
+  'anime-family-database-ranked-top10.json',
+  'anime-family-database-ranked-top10.default.json',
+  'anime-quiz-database-v3.json',
+  'anime-quiz-database-v3.default.json',
+  'quiz-config.json',
+  'public/audio/spacebar.mp3'
+];
+
+for (const relPath of RUNTIME_FILES) {
+  const filePath = path.join(targetDir, relPath);
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Missing expected runtime file in release bundle: ${relPath}`);
+  }
+}
+
 if (fs.existsSync(path.join(rootDir, 'LICENSE'))) {
   fs.copyFileSync(path.join(rootDir, 'LICENSE'), path.join(targetDir, 'LICENSE'));
 }
