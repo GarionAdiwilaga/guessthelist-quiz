@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { QuizState, QuizCategory, WSMessage } from './types/quiz';
+import { QuizState, QuizCategory, WSMessage, MillionaireQuestion } from './types/quiz';
 import { socketClient } from './services/socket';
 import { MainDisplay } from './components/MainDisplay/MainDisplay';
 import { ControllerView } from './components/Controller/ControllerView';
 
 export default function App() {
   const [categories, setCategories] = useState<QuizCategory[]>([]);
+  const [millionaireQuestions, setMillionaireQuestions] = useState<MillionaireQuestion[]>([]);
   const [state, setState] = useState<QuizState | null>(null);
   const [currentPath, setCurrentPath] = useState(
     window.location.pathname + window.location.hash
@@ -28,6 +29,9 @@ export default function App() {
     const unsubscribe = socketClient.subscribe((snapshot) => {
       setState(snapshot.state);
       setCategories(snapshot.categories);
+      if (snapshot.millionaireQuestions) {
+        setMillionaireQuestions(snapshot.millionaireQuestions);
+      }
     });
 
     return () => {
@@ -58,10 +62,17 @@ export default function App() {
       <ControllerView
         state={state}
         categories={categories}
+        millionaireQuestions={millionaireQuestions}
         sendMessage={handleSendMessage}
       />
     );
   }
 
-  return <MainDisplay state={state} categories={categories} />;
+  return (
+    <MainDisplay
+      state={state}
+      categories={categories}
+      millionaireQuestions={millionaireQuestions}
+    />
+  );
 }

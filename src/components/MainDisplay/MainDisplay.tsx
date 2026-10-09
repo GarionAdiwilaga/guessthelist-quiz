@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { QuizState, QuizCategory } from '../../types/quiz';
+import { QuizState, QuizCategory, MillionaireQuestion } from '../../types/quiz';
 import { HeaderBanner } from './HeaderBanner';
 import { GameBoard } from './GameBoard';
 import { StrikeSlots } from './StrikeSlots';
@@ -7,6 +7,7 @@ import { BuzzerOverlay } from './BuzzerOverlay';
 import { TitleScreen } from './TitleScreen';
 import { TransitionWipe } from './TransitionWipe';
 import { CluePopupModal } from './CluePopupModal';
+import { MillionaireBoard } from './MillionaireBoard';
 import { audioService } from '../../services/audio';
 import { socketClient } from '../../services/socket';
 import { Volume2 } from 'lucide-react';
@@ -14,22 +15,36 @@ import { Volume2 } from 'lucide-react';
 interface MainDisplayProps {
   state: QuizState;
   categories: QuizCategory[];
+  millionaireQuestions?: MillionaireQuestion[];
 }
 
-export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) => {
+export const MainDisplay: React.FC<MainDisplayProps> = ({
+  state,
+  categories,
+  millionaireQuestions = []
+}) => {
+  const targetGameMode = state.gameMode || 'quiz';
+  const targetQuestionId = state.millionaireState?.currentQuestionId ?? 1;
+
   // Buffered screen state for seamless wipe transitions
   const [displayedCategoryState, setDisplayedCategoryState] = useState({
     categoryId: state.categoryId,
-    showTitleScreen: state.showTitleScreen
+    showTitleScreen: state.showTitleScreen,
+    gameMode: targetGameMode,
+    currentQuestionId: targetQuestionId
   });
 
   const pendingStateRef = useRef({
     categoryId: state.categoryId,
-    showTitleScreen: state.showTitleScreen
+    showTitleScreen: state.showTitleScreen,
+    gameMode: targetGameMode,
+    currentQuestionId: targetQuestionId
   });
   pendingStateRef.current = {
     categoryId: state.categoryId,
-    showTitleScreen: state.showTitleScreen
+    showTitleScreen: state.showTitleScreen,
+    gameMode: targetGameMode,
+    currentQuestionId: targetQuestionId
   };
 
   const prevWipeTimestampRef = useRef<number | null>(state.transitionWipeTimestamp);
@@ -39,11 +54,19 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
     if (state.transitionWipeTimestamp === prevWipeTimestampRef.current) {
       setDisplayedCategoryState({
         categoryId: state.categoryId,
-        showTitleScreen: state.showTitleScreen
+        showTitleScreen: state.showTitleScreen,
+        gameMode: targetGameMode,
+        currentQuestionId: targetQuestionId
       });
     }
     prevWipeTimestampRef.current = state.transitionWipeTimestamp;
-  }, [state.categoryId, state.showTitleScreen, state.transitionWipeTimestamp]);
+  }, [
+    state.categoryId,
+    state.showTitleScreen,
+    state.transitionWipeTimestamp,
+    targetGameMode,
+    targetQuestionId
+  ]);
 
   const handleWipeCovered = useCallback(() => {
     setDisplayedCategoryState(pendingStateRef.current);
@@ -55,6 +78,11 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
   const revealedCount = state.revealedItemIds.length;
   const isTransparent = state.themeMode === 'transparent';
   const [audioUnlocked, setAudioUnlocked] = useState(false);
+
+  const activeQuestion =
+    millionaireQuestions.find((q) => q.id === displayedCategoryState.currentQuestionId) ||
+    millionaireQuestions[0] ||
+    null;
 
   // Audio settings sync
   useEffect(() => {
@@ -95,6 +123,7 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
       setAudioUnlocked(true);
       audioService.ensureBgmPlaying();
       audioService.preloadClickSound().catch(() => {});
+      audioService.preloadLockSound().catch(() => {});
       window.removeEventListener('click', handleGesture);
       window.removeEventListener('keydown', handleGesture);
     };
@@ -142,6 +171,9 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
           break;
         case 'click':
           audioService.playClickSound();
+          break;
+        case 'lock':
+          audioService.playLockSound();
           break;
       }
     });
@@ -254,6 +286,12 @@ export const MainDisplay: React.FC<MainDisplayProps> = ({ state, categories }) =
           titleLogoUrl={state.titleLogoUrl}
           isTransparent={isTransparent}
           bgmOffsetMs={state.bgmOffsetMs || 0}
+        />
+      ) : displayedCategoryState.gameMode === 'quiz' ? (
+        <MillionaireBoard
+          question={activeQuestion}
+          state={state.millionaireState}
+          isTransparent={isTransparent}
         />
       ) : (
         <div className="h-full w-full flex flex-col justify-between pt-6 sm:pt-8 md:pt-10 pb-6 sm:pb-8 px-4 sm:px-8 lg:px-12 relative z-10">

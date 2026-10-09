@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { QuizState, QuizCategory, WSMessage, QuizDatabase } from '../../types/quiz';
+import { QuizState, QuizCategory, WSMessage, QuizDatabase, MillionaireQuestion } from '../../types/quiz';
 import { socketClient } from '../../services/socket';
 import { CategorySelector } from './CategorySelector';
 import { AnswerRoster } from './AnswerRoster';
@@ -12,12 +12,14 @@ interface ControllerViewProps {
   state: QuizState;
   categories: QuizCategory[];
   sendMessage: (msg: WSMessage) => void;
+  millionaireQuestions?: MillionaireQuestion[];
 }
 
 export const ControllerView: React.FC<ControllerViewProps> = ({
   state,
   categories,
-  sendMessage
+  sendMessage,
+  millionaireQuestions
 }) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isDataEditorOpen, setIsDataEditorOpen] = useState(false);

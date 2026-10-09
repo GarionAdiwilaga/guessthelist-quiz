@@ -108,7 +108,7 @@ export type SoundEffectType =
   | 'lock';
 
 export type WSMessage =
-  | { type: 'STATE_SNAPSHOT'; state: QuizState; categories: QuizCategory[] }
+  | { type: 'STATE_SNAPSHOT'; state: QuizState; categories: QuizCategory[]; millionaireQuestions?: MillionaireQuestion[] }
   | { type: 'CLIENT_HELLO' }
   | { type: 'SELECT_CATEGORY'; categoryId: number; transitionViaTitle?: boolean }
   | { type: 'SET_SHOW_TITLE_SCREEN'; show: boolean }

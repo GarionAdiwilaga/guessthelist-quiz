@@ -30,6 +30,11 @@ async function testE2E() {
     assert.strictEqual(ctrlInit.type, 'STATE_SNAPSHOT');
     assert.strictEqual(dispInit.state.categoryId, dispInit.categories[0].id);
     assert.ok(dispInit.categories.length >= 2);
+    assert.ok(dispInit.state.gameMode === 'family' || dispInit.state.gameMode === 'quiz');
+    assert.ok(dispInit.state.millionaireState !== undefined);
+    assert.ok(typeof dispInit.state.millionaireState.currentQuestionId === 'number');
+    assert.ok(Array.isArray(dispInit.millionaireQuestions));
+    assert.ok(dispInit.millionaireQuestions.length > 0);
 
     // 1. Controller selects second Category
     const targetCat = dispInit.categories[1];
@@ -81,6 +86,14 @@ async function testE2E() {
     updated = await nextSnap;
     assert.strictEqual(updated.state.revealedItemIds.length, 0);
     assert.strictEqual(updated.state.currentStrikes, 0);
+
+    // 7. Controller switches game mode
+    const targetMode = updated.state.gameMode === 'quiz' ? 'family' : 'quiz';
+    nextSnap = waitForSnapshot(displayWs);
+    controllerWs.send(JSON.stringify({ type: 'SET_GAME_MODE', mode: targetMode }));
+    updated = await nextSnap;
+    assert.strictEqual(updated.state.gameMode, targetMode);
+    assert.ok(typeof updated.state.transitionWipeTimestamp === 'number');
 
     displayWs.close();
     controllerWs.close();

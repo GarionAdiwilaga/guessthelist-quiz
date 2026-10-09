@@ -1,8 +1,9 @@
-import { QuizState, QuizCategory, WSMessage, SoundEffectType } from '../types/quiz';
+import { QuizState, QuizCategory, WSMessage, SoundEffectType, MillionaireQuestion } from '../types/quiz';
 
 type SnapshotCallback = (snapshot: {
   state: QuizState;
   categories: QuizCategory[];
+  millionaireQuestions?: MillionaireQuestion[];
 }) => void;
 
 type SoundCallback = (sound: SoundEffectType) => void;
@@ -48,7 +49,11 @@ class SocketClient {
           const data = JSON.parse(event.data);
           if (data.type === 'STATE_SNAPSHOT') {
             for (const listener of this.listeners) {
-              listener({ state: data.state, categories: data.categories });
+              listener({
+                state: data.state,
+                categories: data.categories,
+                millionaireQuestions: data.millionaireQuestions
+              });
             }
           } else if (data.type === 'PLAY_SOUND') {
             for (const listener of this.soundListeners) {
