@@ -12,7 +12,7 @@ scratch/
 # Loose root audio copies (canonical files are in public/audio/)
 /*.mp3
 /*.wav
-/logo*.png
+/logo.png
 
 # Persistent runtime configuration
 quiz-config.json

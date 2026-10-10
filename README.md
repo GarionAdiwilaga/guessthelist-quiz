@@ -146,7 +146,11 @@ npm run build:release
 │   │   ├── spacebar.mp3
 │   │   ├── swoosh.mp3
 │   │   └── woosh.mp3
-│   └── logo.png
+│   ├── logo.png
+│   └── logo2.png
+├── samples/
+│   ├── anime-family-databank.sample.json
+│   └── anime-family-database-clued.json            # Clued Family 100 sample with spoiler-free clues
 ├── server/
 │   └── index.js                                    # Express & WebSocket authoritative server
 ├── src/

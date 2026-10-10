@@ -49,6 +49,9 @@ if (fs.existsSync(path.join(rootDir, 'public/audio'))) {
 if (fs.existsSync(path.join(rootDir, 'public/logo.png'))) {
   fs.copyFileSync(path.join(rootDir, 'public/logo.png'), path.join(targetDir, 'public/logo.png'));
 }
+if (fs.existsSync(path.join(rootDir, 'public/logo2.png'))) {
+  fs.copyFileSync(path.join(rootDir, 'public/logo2.png'), path.join(targetDir, 'public/logo2.png'));
+}
 
 // Clean default starter databank for portable release (sample database is kept in GitHub repo)
 const cleanStarterDb = {
